@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoLabBlockCiphers", "CryptoLabBlockCyphers\CryptoLabBlockCiphers.csproj", "{46244D14-DB5D-47D3-B1BC-0015B53C1B38}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoLabBlockCiphersClient", "CryptoLabBlockCyphersClient\CryptoLabBlockCiphersClient.csproj", "{F887E5DD-EEC9-4B6D-860F-22AC93D7352A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoLabsService", "CryptoLabsService\CryptoLabsService.csproj", "{37B01CD7-A9F9-44F8-8C17-5D29E372D421}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{46244D14-DB5D-47D3-B1BC-0015B53C1B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46244D14-DB5D-47D3-B1BC-0015B53C1B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{46244D14-DB5D-47D3-B1BC-0015B53C1B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{46244D14-DB5D-47D3-B1BC-0015B53C1B38}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F887E5DD-EEC9-4B6D-860F-22AC93D7352A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F887E5DD-EEC9-4B6D-860F-22AC93D7352A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F887E5DD-EEC9-4B6D-860F-22AC93D7352A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F887E5DD-EEC9-4B6D-860F-22AC93D7352A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37B01CD7-A9F9-44F8-8C17-5D29E372D421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37B01CD7-A9F9-44F8-8C17-5D29E372D421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37B01CD7-A9F9-44F8-8C17-5D29E372D421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37B01CD7-A9F9-44F8-8C17-5D29E372D421}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

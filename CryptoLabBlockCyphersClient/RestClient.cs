@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace CryptoLabBlockCyphersClient
 {
@@ -19,18 +20,15 @@ namespace CryptoLabBlockCyphersClient
         {
             this.client.DefaultRequestHeaders.Accept.Clear();
 
-            var stringTask = this.client.GetStringAsync("htpp://localhost/api/values");
+            var stringTask = await this.client.GetStringAsync("http://localhost/CryptoLabs/api/values");
 
-            var content = new FormUrlEncodedContent(
-                new[]
-                {
-                    new KeyValuePair<string, string>("", "login")
-                });
+            var content = new StringContent(JsonConvert.SerializeObject(Convert.ToBase64String(Encoding.UTF8.GetBytes("qwerty"))), Encoding.UTF8, "application/json");
 
-            await this.client.PostAsync("htpp://localhost/api/values", content); 
+            var res = await this.client.PostAsync("http://localhost/CryptoLabs/api/EncryptionModeOracle/alice/1/noentropy", content);
+            var result = await res.Content.ReadAsStringAsync();
 
-            var msg = await stringTask;
-            Console.Write(msg);
+            Console.WriteLine(stringTask);
+            Console.WriteLine(result);
         }
     }
 }
