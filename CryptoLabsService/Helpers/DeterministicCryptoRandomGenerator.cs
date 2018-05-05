@@ -9,6 +9,7 @@ namespace CryptoLabsService.Helpers
         RandomNumberGenerator trueRng;
         Aes aes;
         bool useEntropy;
+        long currentcounter;
 
         public DeterministicCryptoRandomGenerator(byte[] seed, bool useEntropy)
         {
@@ -50,7 +51,7 @@ namespace CryptoLabsService.Helpers
                 {
                     using (var swEncrypt = new StreamWriter(csEncrypt))
                     {
-                        for (long i = 0; i < iterationCount; i++)
+                        for (long i = this.currentcounter; i < iterationCount + this.currentcounter; i++, this.currentcounter++)
                         {
                             //Write all data to the stream.
                             swEncrypt.Write(BitConverter.GetBytes(i));
