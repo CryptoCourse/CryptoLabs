@@ -7,16 +7,21 @@ namespace CryptoLabBlockCyphersClient
     {
         static void Main(string[] args)
         {
+            int i = 0;
             while (true)
             {
-                Console.WriteLine("Hello World!");
-                Console.ReadLine();
+                i++;
+                try
+                {
+                    Console.WriteLine("NewIteration");
+                    Console.ReadLine();
 
-                RestClient client = new RestClient();
-                client.ProcessRepositories().GetAwaiter().GetResult();
-
-                Console.ReadLine();
-                
+                    RestClient client = new RestClient();
+                    client.ProcessRepositories(i).GetAwaiter().GetResult();
+                }
+                catch (Exception)
+                {
+                }
             }
         }
     }

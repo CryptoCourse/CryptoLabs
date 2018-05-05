@@ -42,25 +42,30 @@ namespace CryptoLabsService.Helpers
                 throw new InvalidOperationException();
             }
 
-            var iterationCount = offset / (this.aes.KeySize / 8);
+            var iterationCount = (count / (this.aes.KeySize / 8)) + 1;
 
-            var encryptor = this.aes.CreateEncryptor();
-            using (var msEncrypt = new MemoryStream())
+            using (var aesEncryptor = this.aes.CreateEncryptor())
             {
-                using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                long i;
+                for (i = this.currentcounter; i < iterationCount + this.currentcounter; i++)
                 {
-                    using (var swEncrypt = new StreamWriter(csEncrypt))
-                    {
-                        for (long i = this.currentcounter; i < iterationCount + this.currentcounter; i++, this.currentcounter++)
-                        {
-                            //Write all data to the stream.
-                            swEncrypt.Write(BitConverter.GetBytes(i));
+                    byte[] encrypted = new byte[this.aes.BlockSize/8];
+                    byte[] rawBlock = new byte[this.aes.BlockSize / 8];
+                    byte[] encodedCounter = BitConverter.GetBytes(i);
+                    Array.Copy(encodedCounter, rawBlock, encodedCounter.Length);
+                    // Transform one block
+                    aesEncryptor.TransformBlock(rawBlock, 0, 16, encrypted, 0);
 
-                            var encrypted = msEncrypt.ToArray();
-                            Array.Copy(data, 0, encrypted, i * this.aes.BlockSize, this.aes.BlockSize);
-                        }
+                    if (count - (i+1 - this.currentcounter) * this.aes.BlockSize/8 > 0)
+                    {
+                        Array.Copy(encrypted, 0, data, (i - this.currentcounter) * this.aes.BlockSize/8 + offset, this.aes.BlockSize/8);
+                    }
+                    else
+                    {
+                        Array.Copy(encrypted, 0, data, (i - this.currentcounter) * this.aes.BlockSize/8 + offset, count - (i - this.currentcounter) * this.aes.BlockSize/8);
                     }
                 }
+                this.currentcounter += i;
             }
         }
 

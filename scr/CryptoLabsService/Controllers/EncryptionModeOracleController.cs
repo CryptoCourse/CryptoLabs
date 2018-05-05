@@ -40,11 +40,28 @@ namespace CryptoLabBlockCyphers.Controllers
             return Convert.ToBase64String(result);
         }
 
+        [HttpGet]
+        [Route("{userId}/{challengeId}/verify")]
+        public string GetVerify(
+           [FromRoute] string userId,
+           [FromRoute] string challengeId)
+        {
+            SHA256 hash = SHA256.Create();
+            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+            if (seed[seed.Length - 1] % 2 == 0)
+            {
+                return "ECB";
+            }
+            return "CBC";
+        }
+
+
+
         [HttpPost]
-        [Route("{userid}/{id}/noentropy")]
+        [Route("{userId}/{challengeId}/noentropy")]
         public string PostNoEnctropy(
-            [FromQuery] string userId,
-            [FromQuery] string challengeId,
+            [FromRoute] string userId,
+            [FromRoute] string challengeId,
             [FromBody] string value)
         {
             SHA256 hash = SHA256.Create();

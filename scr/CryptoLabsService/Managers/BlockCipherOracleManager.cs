@@ -16,8 +16,8 @@ namespace CryptoLabBlockCyphers.Interfaces
 
             using (Aes aesAlg = Aes.Create())
             {
-                var keyBytes = new byte[aesAlg.KeySize/8];
-                rand.GetBytes(keyBytes, 0, aesAlg.KeySize/8);
+                var keyBytes = new byte[aesAlg.KeySize / 8];
+                rand.GetBytes(keyBytes, 0, aesAlg.KeySize / 8);
                 aesAlg.Key = keyBytes;
 
                 if (useEntropy)
@@ -26,34 +26,31 @@ namespace CryptoLabBlockCyphers.Interfaces
                 }
                 else
                 {
-                    aesAlg.IV = new byte[aesAlg.BlockSize/8];
-                    if (seed.Length < aesAlg.BlockSize/8)
+                    aesAlg.IV = new byte[aesAlg.BlockSize / 8];
+                    if (seed.Length < aesAlg.BlockSize / 8)
                     {
                         Array.Copy(seed, aesAlg.IV, seed.Length);
                     }
                     else
                     {
-                        Array.Copy(seed, aesAlg.IV, aesAlg.BlockSize/8);
+                        Array.Copy(seed, aesAlg.IV, aesAlg.BlockSize / 8);
                     }
                 }
 
                 IV = aesAlg.IV;
                 aesAlg.Mode = CipherMode.CBC;
 
-                var encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
-
                 // Create the streams used for encryption. 
-                using (var msEncrypt = new MemoryStream())
+                // Open a new memory stream to write the encrypted data to
+                using (MemoryStream ms = new MemoryStream())
                 {
-                    using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                    // Create a crypto stream to perform encryption
+                    using (CryptoStream cs = new CryptoStream(ms, aesAlg.CreateEncryptor(), CryptoStreamMode.Write))
                     {
-                        using (var swEncrypt = new StreamWriter(csEncrypt))
-                        {
-                            //Write all data to the stream.
-                            swEncrypt.Write(data);
-                        }
-                        cipherTest = msEncrypt.ToArray();
+                        // write encrypted bytes to memory
+                        cs.Write(data, 0, data.Length);
                     }
+                    cipherTest = ms.ToArray();
                 }
             }
             if (!includeIv)
@@ -85,17 +82,15 @@ namespace CryptoLabBlockCyphers.Interfaces
                 var encryptor = aesAlg.CreateEncryptor(aesAlg.Key, new byte[aesAlg.BlockSize/8]);
 
                 // Create the streams used for encryption. 
-                using (var msEncrypt = new MemoryStream())
+                using (MemoryStream ms = new MemoryStream())
                 {
-                    using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                    // Create a crypto stream to perform encryption
+                    using (CryptoStream cs = new CryptoStream(ms, aesAlg.CreateEncryptor(), CryptoStreamMode.Write))
                     {
-                        using (var swEncrypt = new StreamWriter(csEncrypt))
-                        {
-                            //Write all data to the stream.
-                            swEncrypt.Write(data);
-                        }
-                        cipherTest = msEncrypt.ToArray();
+                        // write encrypted bytes to memory
+                        cs.Write(data, 0, data.Length);
                     }
+                    cipherTest = ms.ToArray();
                 }
             }
             return cipherTest;
@@ -108,11 +103,11 @@ namespace CryptoLabBlockCyphers.Interfaces
             var coinFlip = seed[seed.Length - 1] % 2 == 0;
             if (coinFlip)
             {
-                 return this.EncryptEcb(data, seed);
+                 return this.EncryptEcb(paddedData, seed, useEntropy);
             }
             else
             {
-                return this.EncryptCbc(data, seed, useEntropy, false);
+                return this.EncryptCbc(paddedData, seed, useEntropy, false);
             }
         }
 
