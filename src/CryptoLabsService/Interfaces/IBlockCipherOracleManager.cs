@@ -1,4 +1,4 @@
-﻿namespace CryptoLabBlockCiphers.Interfaces
+﻿namespace CryptoLabsService.Interfaces
 {
     public interface IBlockCipherOracleManager
     {

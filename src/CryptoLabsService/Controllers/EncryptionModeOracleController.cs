@@ -1,25 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using CryptoLabBlockCiphers.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-
-namespace CryptoLabBlockCyphers.Controllers
+﻿namespace CryptoLabsService.Controllers
 {
+    using System;
+    using System.Security.Cryptography;
+    using System.Text;
+
+    using CryptoLabsService.Interfaces;
+
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/EncryptionModeOracle")]
     public class EncryptionModeOracleController : Controller
     {
-        IBlockCipherOracleManager blockCipherOracleManager;
+        private readonly IBlockCipherOracleManager blockCipherOracleManager;
 
         public EncryptionModeOracleController(IBlockCipherOracleManager blockCipherOracleManager)
         {
             this.blockCipherOracleManager = blockCipherOracleManager;
         }
 
-        // GET api/values
+        // GET api/
         [HttpGet]
         public string Get()
         {
@@ -33,7 +32,7 @@ namespace CryptoLabBlockCyphers.Controllers
             [FromQuery] string challengeId,
             [FromBody] string value)
         {
-            SHA256 hash = SHA256.Create();
+            var hash = SHA256.Create();
             var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
             var data = Convert.FromBase64String(value);
             var result = this.blockCipherOracleManager.EncryptOracle(data, seed);
@@ -46,7 +45,7 @@ namespace CryptoLabBlockCyphers.Controllers
            [FromRoute] string userId,
            [FromRoute] string challengeId)
         {
-            SHA256 hash = SHA256.Create();
+            var hash = SHA256.Create();
             var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
             if (seed[seed.Length - 1] % 2 == 0)
             {
@@ -64,7 +63,7 @@ namespace CryptoLabBlockCyphers.Controllers
             [FromRoute] string challengeId,
             [FromBody] string value)
         {
-            SHA256 hash = SHA256.Create();
+            var hash = SHA256.Create();
             var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
             var data = Convert.FromBase64String(value);
             var result = this.blockCipherOracleManager.EncryptOracle(data, seed, false);

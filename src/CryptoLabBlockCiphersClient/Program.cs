@@ -1,8 +1,7 @@
-﻿using System;
-using System.Net.Http;
-
-namespace CryptoLabBlockCyphersClient
+﻿namespace CryptoLabBlockCiphersClient
 {
+    using System;
+
     class Program
     {
         static void Main(string[] args)

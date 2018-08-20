@@ -1,15 +1,17 @@
 ﻿using System;
-using System.IO;
 using System.Security.Cryptography;
 
 namespace CryptoLabsService.Helpers
 {
     public class DeterministicCryptoRandomGenerator : RandomNumberGenerator
     {
-        RandomNumberGenerator trueRng;
-        Aes aes;
-        bool useEntropy;
-        long currentcounter;
+        private readonly RandomNumberGenerator trueRng;
+
+        private readonly Aes aes;
+
+        private readonly bool useEntropy;
+
+        public long Currentcounter { get; private set; }
 
         public DeterministicCryptoRandomGenerator(byte[] seed, bool useEntropy)
         {
@@ -21,6 +23,11 @@ namespace CryptoLabsService.Helpers
             else
             {
                 this.aes = Aes.Create();
+                if (this.aes == null)
+                {
+                    throw new NullReferenceException(nameof(this.aes));
+                }
+
                 if (seed.Length != this.aes.KeySize / 8)
                 {
                     throw new InvalidOperationException();
@@ -37,6 +44,7 @@ namespace CryptoLabsService.Helpers
                 this.trueRng.GetBytes(data, offset, count);
                 return;
             }
+
             if (data.Length - offset < count)
             {
                 throw new InvalidOperationException();
@@ -47,25 +55,36 @@ namespace CryptoLabsService.Helpers
             using (var aesEncryptor = this.aes.CreateEncryptor())
             {
                 long i;
-                for (i = this.currentcounter; i < iterationCount + this.currentcounter; i++)
+                for (i = this.Currentcounter; i < iterationCount + this.Currentcounter; i++)
                 {
-                    byte[] encrypted = new byte[this.aes.BlockSize/8];
+                    byte[] encrypted = new byte[this.aes.BlockSize / 8];
                     byte[] rawBlock = new byte[this.aes.BlockSize / 8];
                     byte[] encodedCounter = BitConverter.GetBytes(i);
                     Array.Copy(encodedCounter, rawBlock, encodedCounter.Length);
                     // Transform one block
                     aesEncryptor.TransformBlock(rawBlock, 0, 16, encrypted, 0);
 
-                    if (count - (i+1 - this.currentcounter) * this.aes.BlockSize/8 > 0)
+                    if (count - (i + 1 - this.Currentcounter) * this.aes.BlockSize / 8 > 0)
                     {
-                        Array.Copy(encrypted, 0, data, (i - this.currentcounter) * this.aes.BlockSize/8 + offset, this.aes.BlockSize/8);
+                        Array.Copy(
+                            encrypted,
+                            0,
+                            data,
+                            (i - this.Currentcounter) * this.aes.BlockSize / 8 + offset,
+                            this.aes.BlockSize / 8);
                     }
                     else
                     {
-                        Array.Copy(encrypted, 0, data, (i - this.currentcounter) * this.aes.BlockSize/8 + offset, count - (i - this.currentcounter) * this.aes.BlockSize/8);
+                        Array.Copy(
+                            encrypted,
+                            0,
+                            data,
+                            (i - this.Currentcounter) * this.aes.BlockSize / 8 + offset,
+                            count - (i - this.Currentcounter) * this.aes.BlockSize / 8);
                     }
                 }
-                this.currentcounter += i;
+
+                this.Currentcounter += i;
             }
         }
 
