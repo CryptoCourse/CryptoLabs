@@ -15,27 +15,27 @@ namespace CryptoLabsService.Controllers
         }
 
         // GET api/5
-        [HttpGet("{id}")]
+        [HttpGet("values/{id}")]
         public string Get(string id)
         {
             return $"GET request for id = {id}";
         }
 
         // POST api/
-        [HttpPost]
+        [HttpPost("values")]
         public string Post([FromBody]string value)
         {
             return $"POST requst for value = {value}";
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
+        [HttpPut("values/{id}")]
         public void Put(string id, [FromBody]string value)
         {
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
+        [HttpDelete("values/{id}")]
         public void Delete(int id)
         {
         }

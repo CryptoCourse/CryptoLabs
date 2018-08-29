@@ -1,66 +1,46 @@
-﻿using CryptoLabsService.Helpers;
-using System;
-using System.IO;
-using System.Security.Cryptography;
-
-namespace CryptoLabBlockCyphers.Interfaces
+﻿namespace CryptoLabsService.Managers
 {
-    using CryptoLabsService.Interfaces;
+    using System;
+    using System.IO;
+    using System.Security.Cryptography;
 
-    public class BlockCipherOracleManager : IBlockCipherOracleManager
+    using CryptoLabsService.Helpers;
+
+    public class BlockCipherOracleManager 
     {
         public byte[] EncryptCbc(byte[] data, byte[] seed, bool useEntropy = true, bool includeIv = true)
         {
-            byte[] cipherTest;
-            byte[] IV;
-            DeterministicCryptoRandomGenerator rand = new DeterministicCryptoRandomGenerator(seed, useEntropy);
+            byte[] ciphertext;
+            byte[] iv = new byte[16];
+            var rand = new DeterministicCryptoRandomGenerator(seed, useEntropy);
 
-            using (Aes aesAlg = Aes.Create())
+            using (var aesAlg = Aes.Create())
             {
                 var keyBytes = new byte[aesAlg.KeySize / 8];
                 rand.GetBytes(keyBytes, 0, aesAlg.KeySize / 8);
                 aesAlg.Key = keyBytes;
 
-                if (useEntropy)
-                {
-                    aesAlg.GenerateIV();
-                }
-                else
-                {
-                    aesAlg.IV = new byte[aesAlg.BlockSize / 8];
-                    if (seed.Length < aesAlg.BlockSize / 8)
-                    {
-                        Array.Copy(seed, aesAlg.IV, seed.Length);
-                    }
-                    else
-                    {
-                        Array.Copy(seed, aesAlg.IV, aesAlg.BlockSize / 8);
-                    }
-                }
+                rand.GetBytes(iv);
 
-                IV = aesAlg.IV;
+                aesAlg.IV = iv;
                 aesAlg.Mode = CipherMode.CBC;
 
                 // Create the streams used for encryption. 
                 // Open a new memory stream to write the encrypted data to
-                using (MemoryStream ms = new MemoryStream())
+                // Create a crypto stream to perform encryption
+                using (ICryptoTransform ecryptor = aesAlg.CreateEncryptor())
                 {
-                    // Create a crypto stream to perform encryption
-                    using (CryptoStream cs = new CryptoStream(ms, aesAlg.CreateEncryptor(), CryptoStreamMode.Write))
-                    {
-                        // write encrypted bytes to memory
-                        cs.Write(data, 0, data.Length);
-                    }
-                    cipherTest = ms.ToArray();
+                    // write encrypted bytes to memory
+                    ciphertext = TransformHelper.PerformCryptography(ecryptor, data);
                 }
             }
             if (!includeIv)
             {
-                return cipherTest;                
+                return ciphertext;                
             }
-            var result = new byte[IV.Length + cipherTest.Length];
-            Array.Copy(IV, 0, result, 0, IV.Length);
-            Array.Copy(cipherTest, 0, result, IV.Length, cipherTest.Length);
+            var result = new byte[iv.Length + ciphertext.Length];
+            Array.Copy(iv, 0, result, 0, iv.Length);
+            Array.Copy(ciphertext, 0, result, iv.Length, ciphertext.Length);
 
             // Return the encrypted bytes from the memory stream. 
             return result;
@@ -69,10 +49,10 @@ namespace CryptoLabBlockCyphers.Interfaces
 
         public byte[] EncryptEcb(byte[] data, byte[] seed, bool useEntropy = true)
         {
-            byte[] cipherTest;
+            byte[] ciphertext;
             using (var rand = new DeterministicCryptoRandomGenerator(seed, useEntropy))
             {
-                using (Aes aesAlg = Aes.Create())
+                using (var aesAlg = Aes.Create())
                 {
                     var keyBytes = new byte[aesAlg.KeySize / 8];
                     rand.GetBytes(keyBytes, 0, aesAlg.KeySize / 8);
@@ -80,23 +60,16 @@ namespace CryptoLabBlockCyphers.Interfaces
 
                     aesAlg.Mode = CipherMode.ECB;
 
-                    var encryptor = aesAlg.CreateEncryptor(aesAlg.Key, new byte[aesAlg.BlockSize/8]);
-
-                    // Create the streams used for encryption. 
-                    using (MemoryStream ms = new MemoryStream())
+                    // Create a crypto stream to perform encryption
+                    using (ICryptoTransform ecryptor = aesAlg.CreateEncryptor())
                     {
-                        // Create a crypto stream to perform encryption
-                        using (CryptoStream cs = new CryptoStream(ms, aesAlg.CreateEncryptor(), CryptoStreamMode.Write))
-                        {
-                            // write encrypted bytes to memory
-                            cs.Write(data, 0, data.Length);
-                        }
-                        cipherTest = ms.ToArray();
+                        // write encrypted bytes to memory
+                        ciphertext = TransformHelper.PerformCryptography(ecryptor, data);
                     }
                 }
             }
 
-            return cipherTest;
+            return ciphertext;
         }
 
         public byte[] EncryptOracle(byte[] data, byte[] seed, bool useEntropy = true)

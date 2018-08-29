@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using CryptoLabBlockCyphers.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -13,7 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace CryptoLabsService
 {
-    using CryptoLabsService.Interfaces;
+    using CryptoLabsService.Managers;
 
     public class Startup
     {
@@ -29,7 +28,8 @@ namespace CryptoLabsService
         {
             services.AddMvc();
 
-            services.AddTransient<IBlockCipherOracleManager, BlockCipherOracleManager>();
+            services.AddTransient<BlockCipherOracleManager>();
+            services.AddTransient<StreamCipherIntegrityManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

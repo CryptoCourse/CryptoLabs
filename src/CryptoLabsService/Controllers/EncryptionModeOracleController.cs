@@ -4,16 +4,16 @@
     using System.Security.Cryptography;
     using System.Text;
 
-    using CryptoLabsService.Interfaces;
+    using CryptoLabsService.Managers;
 
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/EncryptionModeOracle")]
     public class EncryptionModeOracleController : Controller
     {
-        private readonly IBlockCipherOracleManager blockCipherOracleManager;
+        private readonly BlockCipherOracleManager blockCipherOracleManager;
 
-        public EncryptionModeOracleController(IBlockCipherOracleManager blockCipherOracleManager)
+        public EncryptionModeOracleController(BlockCipherOracleManager blockCipherOracleManager)
         {
             this.blockCipherOracleManager = blockCipherOracleManager;
         }
@@ -28,8 +28,8 @@
         [HttpPost]
         [Route("{userId}/{challengeId}")]
         public string Post(
-            [FromQuery] string userId,
-            [FromQuery] string challengeId,
+            [FromRoute] string userId,
+            [FromRoute] string challengeId,
             [FromBody] string value)
         {
             var hash = SHA256.Create();
