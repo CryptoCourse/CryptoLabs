@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-
-using Microsoft.AspNetCore.Mvc;
-
-namespace CryptoLabsService.Controllers
+﻿namespace CryptoLabsService.Controllers
 {
+    using System.Collections.Generic;
+
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/")]
     public class ValuesController : Controller
     {
@@ -11,7 +11,7 @@ namespace CryptoLabsService.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "Api is working!" };
+            return new[] { "Api is working!" };
         }
 
         // GET api/5
@@ -23,14 +23,14 @@ namespace CryptoLabsService.Controllers
 
         // POST api/
         [HttpPost("values")]
-        public string Post([FromBody]string value)
+        public string Post([FromBody] string value)
         {
-            return $"POST requst for value = {value}";
+            return $"POST request for value = {value}";
         }
 
         // PUT api/values/5
         [HttpPut("values/{id}")]
-        public void Put(string id, [FromBody]string value)
+        public void Put(string id, [FromBody] string value)
         {
         }
 

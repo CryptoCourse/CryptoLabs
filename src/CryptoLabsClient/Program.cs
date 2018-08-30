@@ -1,4 +1,4 @@
-﻿namespace CryptoLabBlockCiphersClient
+﻿namespace CryptoLabsClient
 {
     using System;
 
@@ -16,10 +16,11 @@
                     Console.ReadLine();
 
                     RestClient client = new RestClient();
-                    client.ProcessRepositories(i).GetAwaiter().GetResult();
+                    client.TestConnection("http://192.168.13.128").GetAwaiter().GetResult();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex.ToString());
                 }
             }
         }
