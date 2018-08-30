@@ -2,6 +2,8 @@
 
 Расшифрусте последний шифртекст.
 
+Подстазка - что будет когда пробел ксортися с буквами из `[A-Za-z]`?
+
 ()
 
 f9e4d9bff5bac624e2ce1bb3c4cce85336d650082caa9037eb48f6a5aedf9ff6f8f4daa2a3e358a783321dd0d09ffa57f9528f4551c65a726620117c81ff867786c50dfaed6056c670a8103b4dab6fe7cfae8bfb71803aa04023e0271b2bc012e10e09901d58c2d654d34004109da5ec79e55f8b42c624ce6c6befeb44edb8f36229c19e32fe40e7596bca
