@@ -13,12 +13,15 @@
         public byte[] EncryptCrt(byte[] data, byte[] seed, bool useEntropy = true, bool includeCtr = true)
         {
             byte[] ciphertext;
-            byte[] ctr = new byte[16];
+            byte[] ctrInit = new byte[16];
 
             var rand = new DeterministicCryptoRandomGenerator(seed, useEntropy);
             var keyRand = new DeterministicCryptoRandomGenerator(seed, false);
 
-            rand.GetBytes(ctr);
+            rand.GetBytes(ctrInit);
+
+            byte[] ctr = new byte[ctrInit.Length];
+            ctrInit.CopyTo(ctr, 0);
 
             using (var aesAlg = new Aes128CounterMode(ctr))
             {
@@ -38,9 +41,9 @@
             {
                 return ciphertext;
             }
-            var result = new byte[ctr.Length + ciphertext.Length];
-            Array.Copy(ctr, 0, result, 0, ctr.Length);
-            Array.Copy(ciphertext, 0, result, ctr.Length, ciphertext.Length);
+            var result = new byte[ctrInit.Length + ciphertext.Length];
+            Array.Copy(ctrInit, 0, result, 0, ctrInit.Length);
+            Array.Copy(ciphertext, 0, result, ctrInit.Length, ciphertext.Length);
 
             // Return the encrypted bytes from the memory stream. 
             return result;

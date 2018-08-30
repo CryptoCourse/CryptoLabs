@@ -13,7 +13,7 @@
     public class StreamIntegrityController : Controller
     {
 
-        private readonly string stringData = "Here is some data to encrypt";
+        private readonly string stringData = "Here is some data to encrypt for you";
 
         private readonly string secretToken = "Token: 8ce08ad2d48d7d356db43";
 
@@ -81,7 +81,7 @@
             }
 
             var plaintext = this.streamCipherIntegrityManager.DecryptCtr(
-                Encoding.ASCII.GetBytes(this.stringData),
+                ciphertext,
                 seed);
 
             var secretHash = hash.ComputeHash(Encoding.ASCII.GetBytes(this.secretToken));
@@ -93,7 +93,7 @@
                 return "Wellcome to secretNet!";
             }
 
-            return $"Your decryptedData is [{plaintext}]";
+            return $"Your decryptedData is [{Encoding.ASCII.GetString(plaintext)}]";
         }
     }
 }

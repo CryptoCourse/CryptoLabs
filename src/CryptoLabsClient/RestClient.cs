@@ -74,6 +74,11 @@
                 throw new Exception("Nothing to return");
             }
 
+            if (typeof(T) == typeof(string))
+            {
+                return (T)(object)resultedContent;
+            }
+
             var resultedObject = JsonConvert.DeserializeObject<T>(resultedContent);
             return resultedObject;
         }
