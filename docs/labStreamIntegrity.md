@@ -36,7 +36,7 @@ Rest запросы, в заголовке выстален Content-Type: applic
 
 ## `GET <host>/api/StreamIntegrity`
 
-Проверка работоспособности контроллера. Возращает `operating`.
+Проверка работоспособности контроллера. Возращает `operating`. Ответ не кодируется в BASE64.
 
 | Парметр| Описание| 
 | --- | --- 
@@ -44,7 +44,7 @@ Rest запросы, в заголовке выстален Content-Type: applic
 
 ## `GET <host>/api/StreamIntegrity/<userId>/<challengeId>`
 
-Возаращает зашированную строку "Here is some data to encrypt for you" на фиксированном для пары (userId, challengeId) ключе со случайным счётчиком.
+Возаращает зашифрованную строку "Here is some data to encrypt for you" на фиксированном для пары (userId, challengeId) ключе со случайным счётчиком.
 
 | Парметр| Описание| 
 | --- | --- 
