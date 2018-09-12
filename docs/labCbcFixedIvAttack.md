@@ -44,10 +44,11 @@
 
 1. Проверить работоспособность контроллера с помощью метода `GET <host>/api/IvIsTime`
 2. Получить зашифрованный пин-код с помощью метода `GET <host>/api/EncryptionModeOracle/<userId>/<challengeId>/encryptedpin`
-3. Получить пин код, используя метод `POST <host>/api/EncryptionModeOracle/<userId>/<challengeId>/noentropy`
+3. Получить пин-код, используя метод `POST <host>/api/EncryptionModeOracle/<userId>/<challengeId>/noentropy`
+4. Проверить пин-код, используя метод `GET <host>/api/IvIsTime/<userId>/<challengeId>/validate`
 
 ### Сдача лабы
-шаги 1 - 3 этапа тестирования аналогично для 50 различных `<challengeId>`.
+шаги 1 - 3 этапа тестирования аналогично для 20 различных `<challengeId>`.
 
 ## Описание API
 
@@ -87,6 +88,16 @@ Rest запросы, в заголовке выстален Content-Type: applic
 ## `GET <host>/api/IvIsTime/time`
 
 текущее время в формате unix time (секунды), используется в качестве IV.
+
+| Парметр| Описание| 
+| --- | --- 
+| `<host>` | имя хоста веб службы
+| `<userId>` | идентификатор студента
+| `<challengeId>` | идентификатор задания
+
+## `GET <host>/api/IvIsTime/<userId>/<challengeId>/validate`
+
+Возвращает пин-код, используемый в задании.
 
 | Парметр| Описание| 
 | --- | --- 
