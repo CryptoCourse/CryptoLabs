@@ -71,7 +71,7 @@ Rest запросы, в заголовке выстален Content-Type: applic
 ## `GET <host>/api/EncryptionModeOracle/<userId>/<challengeId>/verify`
 
 Возвращает, какой режим использует метод `POST <host>/api/EncryptionModeOracle/<userId>/<challengeId>/noentropy`
-в указанном задании.
+в указанном задании. Ответ не кодируется в BASE64. Возвращает "ECB" или "CBC"
 
 | Парметр| Описание| 
 | --- | --- 
