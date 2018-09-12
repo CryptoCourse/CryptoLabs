@@ -61,7 +61,7 @@ Rest запросы, в заголовке выстален Content-Type: applic
 | `<host>` | имя хоста веб службы
 
 
-## `POST <host>/api/EncryptionModeOracle/<userId>/<challengeId>/noentropy`
+## `POST <host>/api/IvIsTime/<userId>/<challengeId>/noentropy`
 
 Зашифровывает данные в режиме CBC на фиксированном для задания для задания ключе.
 
@@ -71,7 +71,7 @@ Rest запросы, в заголовке выстален Content-Type: applic
 | `<userId>` | идентификатор студента
 | `<challengeId>` | идентификатор задания
 
-## `GET <host>/api/EncryptionModeOracle/<userId>/<challengeId>/encryptedpin`
+## `GET <host>/api/IvIsTime/<userId>/<challengeId>/encryptedpin`
 
 Возвращает зашифрованный пин код, на фиксированном для задания ключе
 
@@ -81,7 +81,7 @@ Rest запросы, в заголовке выстален Content-Type: applic
 | `<userId>` | идентификатор студента
 | `<challengeId>` | идентификатор задания
 
-## `GET <host>/api/EncryptionModeOracle/time`
+## `GET <host>/api/IvIsTime/time`
 
 текущее время в формате unix time, используется в качестве IV.
 
