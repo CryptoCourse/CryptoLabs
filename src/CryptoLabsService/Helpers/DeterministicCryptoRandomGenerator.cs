@@ -50,7 +50,7 @@ namespace CryptoLabsService.Helpers
                 throw new InvalidOperationException();
             }
 
-            var iterationCount = (count / (this.aes.KeySize / 8)) + 1;
+            var iterationCount = (count / (this.aes.BlockSize / 8)) + 1;
 
             using (var aesEncryptor = this.aes.CreateEncryptor())
             {

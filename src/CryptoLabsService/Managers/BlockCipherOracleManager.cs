@@ -1,7 +1,6 @@
 ﻿namespace CryptoLabsService.Managers
 {
     using System;
-    using System.IO;
     using System.Security.Cryptography;
 
     using CryptoLabsService.Helpers;
@@ -10,41 +9,43 @@
     {
         public byte[] EncryptCbc(byte[] data, byte[] seed, bool useEntropy = true, bool includeIv = true)
         {
-            byte[] ciphertext;
             byte[] iv = new byte[16];
-            var rand = new DeterministicCryptoRandomGenerator(seed, useEntropy);
-
-            using (var aesAlg = Aes.Create())
+            using (var rand = new DeterministicCryptoRandomGenerator(seed, useEntropy))
             {
-                var keyBytes = new byte[aesAlg.KeySize / 8];
-                rand.GetBytes(keyBytes, 0, aesAlg.KeySize / 8);
-                aesAlg.Key = keyBytes;
-
-                rand.GetBytes(iv);
-
-                aesAlg.IV = iv;
-                aesAlg.Mode = CipherMode.CBC;
-
-                // Create the streams used for encryption. 
-                // Open a new memory stream to write the encrypted data to
-                // Create a crypto stream to perform encryption
-                using (ICryptoTransform ecryptor = aesAlg.CreateEncryptor())
+                byte[] ciphertext;
+                using (var aesAlg = Aes.Create())
                 {
-                    // write encrypted bytes to memory
-                    ciphertext = TransformHelper.PerformCryptography(ecryptor, data);
+                    var keyBytes = new byte[aesAlg.KeySize / 8];
+                    rand.GetBytes(keyBytes, 0, aesAlg.KeySize / 8);
+                    aesAlg.Key = keyBytes;
+
+                    rand.GetBytes(iv);
+
+                    aesAlg.IV = iv;
+                    aesAlg.Mode = CipherMode.CBC;
+
+                    // Create the streams used for encryption. 
+                    // Open a new memory stream to write the encrypted data to
+                    // Create a crypto stream to perform encryption
+                    using (ICryptoTransform ecryptor = aesAlg.CreateEncryptor())
+                    {
+                        // write encrypted bytes to memory
+                        ciphertext = TransformHelper.PerformCryptography(ecryptor, data);
+                    }
                 }
-            }
-            if (!includeIv)
-            {
-                return ciphertext;                
-            }
-            var result = new byte[iv.Length + ciphertext.Length];
-            Array.Copy(iv, 0, result, 0, iv.Length);
-            Array.Copy(ciphertext, 0, result, iv.Length, ciphertext.Length);
 
-            // Return the encrypted bytes from the memory stream. 
-            return result;
+                if (!includeIv)
+                {
+                    return ciphertext;
+                }
 
+                var result = new byte[iv.Length + ciphertext.Length];
+                Array.Copy(iv, 0, result, 0, iv.Length);
+                Array.Copy(ciphertext, 0, result, iv.Length, ciphertext.Length);
+
+                // Return the encrypted bytes from the memory stream. 
+                return result;
+            }
         }
 
         public byte[] EncryptEcb(byte[] data, byte[] seed, bool useEntropy = true)

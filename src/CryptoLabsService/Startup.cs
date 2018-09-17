@@ -31,6 +31,7 @@ namespace CryptoLabsService
             services.AddTransient<BlockCipherOracleManager>();
             services.AddTransient<StreamCipherIntegrityManager>();
             services.AddTransient<CbcIvIsTimeManager>();
+            services.AddTransient<CbcIvIsKeyManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

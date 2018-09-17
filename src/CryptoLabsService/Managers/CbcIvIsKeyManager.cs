@@ -5,19 +5,21 @@
 
     using CryptoLabsService.Helpers;
 
-    public class CbcIvIsTimeManager
+    public class CbcIvIsKeyManager
     {
-        public byte[] EncryptCbc(byte[] data, byte[] seed, bool useEntropy = true, bool includeIv = true)
+        public byte[] EncryptCbc(byte[] data, byte[] seed, bool useEntropy = false, bool includeIv = false)
         {
-            byte[] ciphertext;
-            var iv = this.GetIv();
-
             using (var rand = new DeterministicCryptoRandomGenerator(seed, useEntropy))
             {
+                byte[] iv;
+                byte[] ciphertext;
                 using (var aesAlg = Aes.Create())
                 {
                     var keyBytes = new byte[aesAlg.KeySize / 8];
                     rand.GetBytes(keyBytes, 0, aesAlg.KeySize / 8);
+
+                    iv = keyBytes;
+
                     aesAlg.Key = keyBytes;
 
                     aesAlg.IV = iv;
@@ -47,22 +49,33 @@
             }
         }
 
-        /// <summary>
-        /// Get iv based on unix time
-        /// </summary>
-        /// <returns></returns>
-        public byte[] GetIv()
+        public byte[] DecryptCbc(byte[] ciphertext, byte[] seed)
         {
-            var iv = new byte[16];
+            using (var rand = new DeterministicCryptoRandomGenerator(seed, false))
+            {
+                byte[] iv;
+                using (var aesAlg = Aes.Create())
+                {
+                    var keyBytes = new byte[aesAlg.KeySize / 8];
+                    rand.GetBytes(keyBytes, 0, aesAlg.KeySize / 8);
 
-            var unixTimestamp = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+                    iv = keyBytes;
 
-            var unixTimeBytes = BitConverter.GetBytes(unixTimestamp);
+                    aesAlg.Key = keyBytes;
 
-            // Copy to the end
-            unixTimeBytes.CopyTo(iv, iv.Length - unixTimeBytes.Length);
+                    aesAlg.IV = iv;
+                    aesAlg.Mode = CipherMode.CBC;
 
-            return iv;
+                    // Create the streams used for encryption. 
+                    // Open a new memory stream to write the encrypted data to
+                    // Create a crypto stream to perform encryption
+                    using (var ecryptor = aesAlg.CreateDecryptor())
+                    {
+                        // write encrypted bytes to memory
+                        return TransformHelper.PerformCryptography(ecryptor, ciphertext);
+                    }
+                }
+            }
         }
     }
 }
