@@ -10,10 +10,12 @@
 
     public class StreamCipherIntegrityManager 
     {
+        private const int AesBlockSize = 16;
+
         public byte[] EncryptCrt(byte[] data, byte[] seed, bool useEntropy = true, bool includeCtr = true)
         {
             byte[] ciphertext;
-            byte[] ctrInit = new byte[16];
+            byte[] ctrInit = new byte[AesBlockSize];
 
             using (var rand = new DeterministicCryptoRandomGenerator(seed, useEntropy))
             {
@@ -53,14 +55,14 @@
 
         public byte[] DecryptCtr(byte[] ciphertext, byte[] seed, byte[] ctr = null)
         {
-            if (ciphertext.Length < 16 && ctr == null)
+            if (ciphertext.Length < AesBlockSize && ctr == null)
             {
-                throw new Exception("CT len should be >= 16 bytes!");
+                throw new Exception($"CT len should be >= {AesBlockSize} bytes!");
             }
 
             if (ctr != null && ctr.Length != 16)
             {
-                throw new Exception("CTR shoul be 16 bytes!");
+                throw new Exception($"CTR shoul be {AesBlockSize} bytes!");
             }
 
             byte[] encrypted;

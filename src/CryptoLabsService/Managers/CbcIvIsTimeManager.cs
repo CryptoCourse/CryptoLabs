@@ -22,6 +22,7 @@
 
                     aesAlg.IV = iv;
                     aesAlg.Mode = CipherMode.CBC;
+                    aesAlg.Padding = PaddingMode.Zeros;
 
                     // Create the streams used for encryption. 
                     // Open a new memory stream to write the encrypted data to

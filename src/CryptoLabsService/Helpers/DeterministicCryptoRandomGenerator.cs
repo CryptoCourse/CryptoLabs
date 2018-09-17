@@ -62,7 +62,7 @@ namespace CryptoLabsService.Helpers
                     byte[] encodedCounter = BitConverter.GetBytes(i);
                     Array.Copy(encodedCounter, rawBlock, encodedCounter.Length);
                     // Transform one block
-                    aesEncryptor.TransformBlock(rawBlock, 0, 16, encrypted, 0);
+                    aesEncryptor.TransformBlock(rawBlock, 0, this.aes.BlockSize / 8, encrypted, 0);
 
                     if (count - (i + 1 - this.Currentcounter) * this.aes.BlockSize / 8 > 0)
                     {

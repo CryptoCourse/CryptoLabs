@@ -28,6 +28,8 @@
 
     public class Aes128CounterMode : SymmetricAlgorithm
     {
+        private const int AesBlockSize = 16;
+
         private readonly AesManaged aes;
 
         private readonly byte[] counter;
@@ -39,13 +41,13 @@
                 throw new ArgumentNullException("counter");
             }
 
-            if (counter.Length != 16)
+            if (counter.Length != AesBlockSize)
             {
                 throw new ArgumentException(
                     string.Format(
                         "Counter size must be same as block size (actual: {0}, expected: {1})",
                         counter.Length,
-                        16));
+                        AesBlockSize));
             }
 
             this.aes = new AesManaged { Mode = CipherMode.ECB, Padding = PaddingMode.None };

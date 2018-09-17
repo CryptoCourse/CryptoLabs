@@ -7,6 +7,8 @@
 
     public class CbcIvIsKeyManager
     {
+        private const int AesKeySize = 128;
+
         public byte[] EncryptCbc(byte[] data, byte[] seed, bool useEntropy = false, bool includeIv = false)
         {
             using (var rand = new DeterministicCryptoRandomGenerator(seed, useEntropy))
@@ -15,15 +17,18 @@
                 byte[] ciphertext;
                 using (var aesAlg = Aes.Create())
                 {
+                    aesAlg.KeySize = AesKeySize;
                     var keyBytes = new byte[aesAlg.KeySize / 8];
                     rand.GetBytes(keyBytes, 0, aesAlg.KeySize / 8);
 
                     iv = keyBytes;
 
                     aesAlg.Key = keyBytes;
+                    aesAlg.Padding = PaddingMode.None;
 
                     aesAlg.IV = iv;
                     aesAlg.Mode = CipherMode.CBC;
+                    aesAlg.Padding = PaddingMode.Zeros;
 
                     // Create the streams used for encryption. 
                     // Open a new memory stream to write the encrypted data to
@@ -56,6 +61,7 @@
                 byte[] iv;
                 using (var aesAlg = Aes.Create())
                 {
+                    aesAlg.KeySize = AesKeySize;
                     var keyBytes = new byte[aesAlg.KeySize / 8];
                     rand.GetBytes(keyBytes, 0, aesAlg.KeySize / 8);
 
@@ -65,6 +71,7 @@
 
                     aesAlg.IV = iv;
                     aesAlg.Mode = CipherMode.CBC;
+                    aesAlg.Padding = PaddingMode.Zeros;
 
                     // Create the streams used for encryption. 
                     // Open a new memory stream to write the encrypted data to

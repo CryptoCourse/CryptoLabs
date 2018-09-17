@@ -15,6 +15,9 @@
     {
         private const int AesBlockSize = 16;
 
+        // need 3 blocks for attack, extra - for fun
+        private const int BlockCount = 4;
+
         const string AvailableTokenChars = "0123456789abcdefghijklmnopqrstuvwxyz-";
 
         private readonly CbcIvIsKeyManager cbcIvIsKeyManager;
@@ -69,7 +72,7 @@
 
             var data = Encoding.ASCII.GetBytes(token);
             var result = this.cbcIvIsKeyManager.EncryptCbc(
-                data.Concat(new byte[16 - data.Length]).ToArray(),
+                data.Concat(new byte[BlockCount * AesBlockSize - data.Length]).ToArray(),
                 seed,
                 false);
             return BitConverter.ToString(result).Replace("-", "");
@@ -86,13 +89,31 @@
             var hash = SHA256.Create();
             var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
-            var encryptedTokenBytes = this.StringToByteArray(encryptedToken);
-            var decryptedTokenBytes = this.cbcIvIsKeyManager.DecryptCbc(encryptedTokenBytes, seed);
+            byte[] encryptedTokenBytes;
+            try
+            {
+                encryptedTokenBytes = this.StringToByteArray(encryptedToken);
+            }
+            catch (Exception)
+            {
+                return $"Invalid token format! Can not deformat token!";
+            }
+
+            byte[] decryptedTokenBytes;
+            try
+            {
+                decryptedTokenBytes = this.cbcIvIsKeyManager.DecryptCbc(encryptedTokenBytes, seed);
+            }
+            catch (Exception)
+            {
+                return $"Invalid token format! Can not decrypt token!";
+            }
+
             var token = Encoding.ASCII.GetString(decryptedTokenBytes);
 
             if (!this.ValidateTokenString(token))
             {
-                return $"Invalid token format! Received token [{token}] contains invalid characters!";
+                return $"Invalid token format! Received token [{token}] contains invalid characters!. Raw token is [{BitConverter.ToString(decryptedTokenBytes).Replace("-", "")}]";
             }
 
             if (!this.ValidateTokenUser(token, seed))
@@ -119,7 +140,7 @@
 
             if (!this.ValidateTokenString(token))
             {
-                return $"Invalid token format! Received token [{token}] contains invalid characters!";
+                return $"Invalid token format! Received token [{token}] contains invalid characters! Raw token is [{BitConverter.ToString(decryptedTokenBytes).Replace("-", "")}]";
             }
 
             if (!this.ValidateTokenAdmin(token, seed))
@@ -150,8 +171,7 @@
 
             using (var generator = new DeterministicCryptoRandomGenerator(seed, false))
             {
-                // need 3 blocks for attack, extra - for fun
-                var bytes = new byte[AesBlockSize * 4];
+                var bytes = new byte[AesBlockSize * BlockCount];
                 generator.GetBytes(bytes);
                 var chars = bytes
                     .Select(b => AvailableTokenChars[b % AvailableTokenChars.Length]);
