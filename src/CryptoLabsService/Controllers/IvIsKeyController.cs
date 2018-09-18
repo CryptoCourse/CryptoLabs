@@ -148,16 +148,15 @@
                 return "Access denied";
             }
 
-            return $"Wellcome to secterNet!";
+            return $"Wellcome to secretNet!";
         }
 
         private string GetSecretTokenUser(byte[] seed)
         {
-            
+
             using (var generator = new DeterministicCryptoRandomGenerator(seed, false))
             {
-                // need 3 blocks for attack, extra - for fun
-                var bytes = new byte[AesBlockSize * 4];
+                var bytes = new byte[AesBlockSize * BlockCount];
                 generator.GetBytes(bytes);
                 var chars = bytes
                     .Select(b => AvailableTokenChars[b % AvailableTokenChars.Length]);
@@ -168,8 +167,8 @@
 
         private string GetSecretTokenAdmin(byte[] seed)
         {
-
-            using (var generator = new DeterministicCryptoRandomGenerator(seed, false))
+            var hash = SHA256.Create();
+            using (var generator = new DeterministicCryptoRandomGenerator(hash.ComputeHash(seed), false))
             {
                 var bytes = new byte[AesBlockSize * BlockCount];
                 generator.GetBytes(bytes);
