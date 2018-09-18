@@ -12,19 +12,19 @@
 используются зашифрованные токены (cookie). 
 
 Токены получаются из имени пользователя по известному детерминированному алгоритму 
-(эмулируется методом `GET <host>/api/IvIsTime/{userId}/{challengeId}/User/Token/`). 
+(эмулируется методом `GET <host>/api/IvIsKey/{userId}/{challengeId}/User/Token/`). 
 
 Токены администраторов
-получаются по другому известному алгоритму (эмулируется методом `GET <host>/api/IvIsTime/{userId}/{challengeId}/Admin/Token/`). 
+получаются по другому известному алгоритму (эмулируется методом `GET <host>/api/IvIsKey/{userId}/{challengeId}/Admin/Token/`). 
 После получения токенов они зашифровываются на симметричном ключе в режиме CBC с 
 IV = key. Зашифрованный токен передаётся пользователю. 
 
 Используя зашифрованный токен пользователь может аутентифицироваться
-через метод `GET <host>/api/IvIsTime/{userId}/{challengeId}/authenticate/user/encryptedtoken={encryptedToken}`, передавая 
+через метод `GET <host>/api/IvIsKey/{userId}/{challengeId}/authenticate/user/encryptedtoken={encryptedToken}`, передавая 
 токен. Для аутентификации администраторов служит метод 
-`GET <host>/api/IvIsTime/{userId}/{challengeId}/authenticate/admin/encryptedtoken={encryptedToken}`.
+`GET <host>/api/IvIsKey/{userId}/{challengeId}/authenticate/admin/encryptedtoken={encryptedToken}`.
 
-Задача - получить от метода `GET <host>/api/IvIsTime/{userId}/{challengeId}/authenticate/admin/encryptedtoken={encryptedToken}` 
+Задача - получить от метода `GET <host>/api/IvIsKey/{userId}/{challengeId}/authenticate/admin/encryptedtoken={encryptedToken}` 
 строку Wellcome to secterNet!, т.е. успешно пройти аутентификацию как администратор.
 
 **ВАЖНО!** Все строки кодируется с использование кодировки ASCII.
@@ -51,7 +51,7 @@ Rest запросы, в заголовке выстален Content-Type: applic
 
 ### Описание методов
 
-## `GET <host>/api/IvIsTime`
+## `GET <host>/api/IvIsKey`
 
 Проверка работоспособности контроллера. Возращает `operating`. Ответ не кодируется в BASE64.
 
@@ -59,7 +59,7 @@ Rest запросы, в заголовке выстален Content-Type: applic
 | --- | --- 
 | `<host>` | имя хоста веб службы
 
-## `GET <host>/api/IvIsTime/{userId}/{challengeId}/User/Token/`
+## `GET <host>/api/IvIsKey/{userId}/{challengeId}/User/Token/`
 
 Возвращает сырой (незашифрованный) токен для пользователя в виде строки. Ответ не кодируется в BASE64.
 
@@ -69,7 +69,7 @@ Rest запросы, в заголовке выстален Content-Type: applic
 | `<userId>` | идентификатор студента
 | `<challengeId>` | идентификатор задания
 
-## `GET <host>/api/IvIsTime/{userId}/{challengeId}/Admin/Token/`
+## `GET <host>/api/IvIsKey/{userId}/{challengeId}/Admin/Token/`
 
 Возвращает сырой (незашифрованный) токен для администратора в виде строки. Ответ не кодируется в BASE64.
 
@@ -79,10 +79,10 @@ Rest запросы, в заголовке выстален Content-Type: applic
 | `<userId>` | идентификатор студента
 | `<challengeId>` | идентификатор задания
 
-## `GET <host>/api/IvIsTime/{userId}/{challengeId}/User/encryptedToken/hex`
+## `GET <host>/api/IvIsKey/{userId}/{challengeId}/User/encryptedToken/hex`
 
 Возвращает зашифрованный токен для пользователя в виде hex строки. Может быть использован для аутентификации в 
-методе `GET <host>/api/IvIsTime/{userId}/{challengeId}/authenticate/user/encryptedtoken={encryptedToken}`. 
+методе `GET <host>/api/IvIsKey/{userId}/{challengeId}/authenticate/user/encryptedtoken={encryptedToken}`. 
 Ответ не кодируется в BASE64.
 
 | Парметр| Описание| 
@@ -91,7 +91,7 @@ Rest запросы, в заголовке выстален Content-Type: applic
 | `<userId>` | идентификатор студента
 | `<challengeId>` | идентификатор задания
 
-## `GET <host>/api/IvIsTime/{userId}/{challengeId}/authenticate/user/encryptedtoken={encryptedToken}`
+## `GET <host>/api/IvIsKey/{userId}/{challengeId}/authenticate/user/encryptedtoken={encryptedToken}`
 
 Аутентифицирует пользователя по зашифрованному токену. В случае некорретности токена возвращает ошибку. 
 Ответ не кодируется в BASE64.
@@ -103,7 +103,7 @@ Rest запросы, в заголовке выстален Content-Type: applic
 | `<challengeId>` | идентификатор задания
 | `<encryptedToken>` | hex строка, представляющая зашифрованный токен
 
-## `GET <host>/api/IvIsTime/{userId}/{challengeId}/authenticate/admin/encryptedtoken={encryptedToken}`
+## `GET <host>/api/IvIsKey/{userId}/{challengeId}/authenticate/admin/encryptedtoken={encryptedToken}`
 
 Аутентифицирует администротора по зашифрованному токену. В случае некорретности токена возвращает ошибку. 
 Ответ не кодируется в BASE64.
