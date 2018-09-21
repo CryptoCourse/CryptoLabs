@@ -1,5 +1,5 @@
 **ВАЖНО!** Перед данной работой рекомендуется выполнить 
-[лабораторную на распознание режимов шфирования.](https://github.com/CryptoCourse/CryptoLabs/blob/master/docs/labEncryptionModeDist.md)
+[лабораторную на распознание режимов шифрования.](https://github.com/CryptoCourse/CryptoLabs/blob/master/docs/labEncryptionModeDist.md)
 
 Дана REST служба с API указанным ниже.
 
