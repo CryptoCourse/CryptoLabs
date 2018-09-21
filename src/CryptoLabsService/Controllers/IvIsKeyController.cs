@@ -153,7 +153,7 @@
 
         private string GetSecretTokenUser(byte[] seed)
         {
-
+            
             using (var generator = new DeterministicCryptoRandomGenerator(seed, false))
             {
                 var bytes = new byte[AesBlockSize * BlockCount];

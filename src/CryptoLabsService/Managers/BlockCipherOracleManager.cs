@@ -64,6 +64,7 @@
                     aesAlg.Key = keyBytes;
 
                     aesAlg.Mode = CipherMode.ECB;
+                    aesAlg.Padding = PaddingMode.Zeros;
 
                     // Create a crypto stream to perform encryption
                     using (ICryptoTransform ecryptor = aesAlg.CreateEncryptor())
@@ -77,16 +78,36 @@
             return ciphertext;
         }
 
-        public byte[] EncryptOracle(byte[] data, byte[] seed, bool useEntropy = true)
+        public byte[] EncryptOracle(byte[] data, byte[] seed, bool useEntropy = true, bool useSmallRandomPadding = true)
         {
-            var paddedData = this.PadData(data, seed, useEntropy);
+            byte[] paddedData;
+            if (useSmallRandomPadding)
+            {
+                paddedData = this.PadData(data, seed, useEntropy);
+            }
+            else
+            {
+                paddedData = data;
+            }
 
             var coinFlip = seed[seed.Length - 1] % 2 == 0;
             if (coinFlip)
             {
-                 return this.EncryptEcb(paddedData, seed, useEntropy);
+                return this.EncryptEcb(paddedData, seed, useEntropy);
             }
+
             return this.EncryptCbc(paddedData, seed, useEntropy, false);
+        }
+
+        public byte[] GetRandomString(int length, byte[] seed, bool useEntropy)
+        {
+            var result = new byte[length];
+            using (var rand = new DeterministicCryptoRandomGenerator(seed, useEntropy))
+            {
+                rand.GetBytes(result);
+            }
+
+            return result;
         }
 
         private byte[] PadData(byte[] data, byte[] seed, bool useEntropy = true)
