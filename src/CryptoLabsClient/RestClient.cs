@@ -125,16 +125,16 @@
                     {
                         result = await response.Content.ReadAsStringAsync();
                         var message = JObject.Parse(result).GetValue("Message").Value<string>();
-                        return new Exception($"Произошла ошибка при работе с DSS: {message}");
+                        return new Exception($"Произошла ошибка при работе с Сервером: {message}");
                     }
                     catch (Exception)
                     {
-                        return new Exception($"Произошла ошибка при работе с DSS: {response.StatusCode}: {result}");
+                        return new Exception($"Произошла ошибка при работе с Сервером: {response.StatusCode}: {result}");
                     }
                 }
                 default:
                 {
-                    return new Exception($"Произошла ошибка при работе с DSS: {response.StatusCode}");
+                    return new Exception($"Произошла ошибка при работе с Сервером: {response.StatusCode}");
                 }
             }
         }
