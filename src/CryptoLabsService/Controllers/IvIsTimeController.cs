@@ -30,29 +30,32 @@
         [Route("{userId}/{challengeId}/encryptedpin")]
         public string GetEncryptedPin([FromRoute] string userId, [FromRoute] string challengeId)
         {
-            var hash = SHA256.Create();
+            using (var hash = SHA256.Create())
+            {
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+                var pin = this.GetPin(seed);
 
-            var pin = this.GetPin(seed);
-
-            var data = Encoding.ASCII.GetBytes(pin.ToString());
-            var result = this.cbcIvIsTimeManager.EncryptCbc(
-                data.Concat(new byte[16 - data.Length]).ToArray(),
-                seed,
-                false);
-            return Convert.ToBase64String(result);
+                var data = Encoding.ASCII.GetBytes(pin.ToString());
+                var result = this.cbcIvIsTimeManager.EncryptCbc(
+                    data.Concat(new byte[16 - data.Length]).ToArray(),
+                    seed,
+                    false);
+                return Convert.ToBase64String(result);
+            }
         }
 
         [HttpPost]
         [Route("{userId}/{challengeId}/noentropy")]
         public string PostNoEnctropy([FromRoute] string userId, [FromRoute] string challengeId, [FromBody] string value)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
-            var data = Convert.FromBase64String(value);
-            var result = this.cbcIvIsTimeManager.EncryptCbc(data, seed, false);
-            return Convert.ToBase64String(result);
+            using (var hash = SHA256.Create())
+            {
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+                var data = Convert.FromBase64String(value);
+                var result = this.cbcIvIsTimeManager.EncryptCbc(data, seed, false);
+                return Convert.ToBase64String(result);
+            }
         }
 
         [HttpGet]
@@ -67,14 +70,16 @@
         [Route("{userId}/{challengeId}/validate")]
         public string GetVerify([FromRoute] string userId, [FromRoute] string challengeId)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+            using (var hash = SHA256.Create())
+            {
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
-            var pin = this.GetPin(seed);
+                var pin = this.GetPin(seed);
 
-            var data = Encoding.ASCII.GetBytes(pin.ToString());
+                var data = Encoding.ASCII.GetBytes(pin.ToString());
 
-            return Convert.ToBase64String(data.Concat(new byte[16 - data.Length]).ToArray());
+                return Convert.ToBase64String(data.Concat(new byte[16 - data.Length]).ToArray());
+            }
         }
 
         private int GetPin(byte[] seed)

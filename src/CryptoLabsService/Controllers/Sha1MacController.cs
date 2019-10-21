@@ -76,18 +76,20 @@
 
         private byte[] GetSecretKey(string userId, string challengeId)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+            using (var hash = SHA256.Create())
+            {
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
-            var prg = new DeterministicCryptoRandomGenerator(seed, false);
+                var prg = new DeterministicCryptoRandomGenerator(seed, false);
 
-            var keyLengthBytes = new byte[4];
-            prg.GetBytes(keyLengthBytes);
-            var keyLength = BitConverter.ToUInt32(keyLengthBytes, 0) % 64 + 1;
+                var keyLengthBytes = new byte[4];
+                prg.GetBytes(keyLengthBytes);
+                var keyLength = BitConverter.ToUInt32(keyLengthBytes, 0) % 64 + 1;
 
-            var key = new byte[keyLength];
-            prg.GetBytes(key);
-            return key;
+                var key = new byte[keyLength];
+                prg.GetBytes(key);
+                return key;
+            }
         }
     }
 }

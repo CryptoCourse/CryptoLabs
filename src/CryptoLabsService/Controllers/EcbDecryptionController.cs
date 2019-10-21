@@ -34,16 +34,18 @@
             [FromRoute] string challengeId,
             [FromBody] string value)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+            using (var hash = SHA256.Create())
+            {
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
-            var userData = Convert.FromBase64String(value);
-            var targetData = this.GetTargetData(seed);
-            var paddingData = this.GetPaddingData(seed, targetData);
-            var dataToEncrypt = paddingData.Concat(userData).Concat(targetData).ToArray();
+                var userData = Convert.FromBase64String(value);
+                var targetData = this.GetTargetData(seed);
+                var paddingData = this.GetPaddingData(seed, targetData);
+                var dataToEncrypt = paddingData.Concat(userData).Concat(targetData).ToArray();
 
-            var result = this.blockCipherOracleManager.EncryptOracle(dataToEncrypt, seed, true, false);
-            return Convert.ToBase64String(result);
+                var result = this.blockCipherOracleManager.EncryptOracle(dataToEncrypt, seed, true, false);
+                return Convert.ToBase64String(result);
+            }
         }
 
         [HttpPost]
@@ -53,16 +55,18 @@
             [FromRoute] string challengeId,
             [FromBody] string value)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+            using (var hash = SHA256.Create())
+            {
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
-            var userData = Convert.FromBase64String(value);
-            var targetData = this.GetTargetData(seed);
-            var paddingData = this.GetPaddingData(seed, targetData);
-            var dataToEncrypt = paddingData.Concat(userData).Concat(targetData).ToArray();
+                var userData = Convert.FromBase64String(value);
+                var targetData = this.GetTargetData(seed);
+                var paddingData = this.GetPaddingData(seed, targetData);
+                var dataToEncrypt = paddingData.Concat(userData).Concat(targetData).ToArray();
 
-            var result = this.blockCipherOracleManager.EncryptOracle(dataToEncrypt, seed, false, false);
-            return Convert.ToBase64String(result);
+                var result = this.blockCipherOracleManager.EncryptOracle(dataToEncrypt, seed, false, false);
+                return Convert.ToBase64String(result);
+            }
         }
 
         [HttpGet]
@@ -71,15 +75,17 @@
             [FromRoute] string userId,
             [FromRoute] string challengeId)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
-            if (seed[seed.Length - 1] % 2 == 0)
+            using (var hash = SHA256.Create())
             {
-                var targetData = this.GetTargetData(seed);
-                return Convert.ToBase64String(targetData);
-            }
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+                if (seed[seed.Length - 1] % 2 == 0)
+                {
+                    var targetData = this.GetTargetData(seed);
+                    return Convert.ToBase64String(targetData);
+                }
 
-            return "CBC";
+                return "CBC";
+            }
         }
 
 
@@ -89,22 +95,26 @@
             {
                 1,2,3,4,5,6
             };
-            var hash = SHA256.Create();
-            return baseB.Concat(this.blockCipherOracleManager.GetRandomString(
-                //16,
-                seed[0] * AesBlockSize + seed[3],
-                hash.ComputeHash(seed),
-                false)).ToArray();
+            using (var hash = SHA256.Create())
+            {
+                return baseB.Concat(this.blockCipherOracleManager.GetRandomString(
+                    //16,
+                    seed[0] * AesBlockSize + seed[3],
+                    hash.ComputeHash(seed),
+                    false)).ToArray();
+            }
         }
 
         private byte[] GetPaddingData(byte[] seed, byte[] targetData)
         {
             //return new byte[1]{250};
-            var hash = SHA256.Create();
-            return this.blockCipherOracleManager.GetRandomString(
-                seed[1] * AesBlockSize + seed[4],
-                hash.ComputeHash(targetData),
-                false);
+            using (var hash = SHA256.Create())
+            {
+                return this.blockCipherOracleManager.GetRandomString(
+                    seed[1] * AesBlockSize + seed[4],
+                    hash.ComputeHash(targetData),
+                    false);
+            }
         }
     }
 }

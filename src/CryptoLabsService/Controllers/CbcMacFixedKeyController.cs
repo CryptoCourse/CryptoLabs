@@ -37,26 +37,27 @@
             [FromRoute] string mac)
         {
 
-            var hash = SHA256.Create();
-
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
-
-            var decodedData = Convert.FromBase64String(data);
-            var decodedMac = HexHelper.StringToByteArray(mac);
-
-            var targetMac = this.cbcMacManager.ConputeMacWithKey(decodedData, seed)
-                .Skip(AesBlockSize / 2)
-                .ToArray();
-
-            if (CompareHelper.CompareArrays(targetMac, decodedMac))
+            using (var hash = SHA256.Create())
             {
-                return Convert.ToBase64String(
-                    Encoding.ASCII.GetBytes(
-                        $"{Encoding.ASCII.GetString(decodedData)} have valid mac = {BitConverter.ToString(decodedMac).Replace("-", "")}"));
-            }
-            else
-            {
-                return Convert.ToBase64String(Encoding.ASCII.GetBytes($"{Encoding.ASCII.GetString(decodedData)} have invalid mac"));
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+
+                var decodedData = Convert.FromBase64String(data);
+                var decodedMac = HexHelper.StringToByteArray(mac);
+
+                var targetMac = this.cbcMacManager.ConputeMacWithKey(decodedData, seed)
+                    .Skip(AesBlockSize / 2)
+                    .ToArray();
+
+                if (CompareHelper.CompareArrays(targetMac, decodedMac))
+                {
+                    return Convert.ToBase64String(
+                        Encoding.ASCII.GetBytes(
+                            $"{Encoding.ASCII.GetString(decodedData)} have valid mac = {BitConverter.ToString(decodedMac).Replace("-", "")}"));
+                }
+                else
+                {
+                    return Convert.ToBase64String(Encoding.ASCII.GetBytes($"{Encoding.ASCII.GetString(decodedData)} have invalid mac"));
+                }
             }
         }
 
@@ -96,11 +97,11 @@
         [Route("{userId}/{challengeId}/Key")]
         public string GetKey([FromRoute] string userId, [FromRoute] string challengeId)
         {
-            var hash = SHA256.Create();
-
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
-
-            return Convert.ToBase64String(this.cbcMacManager.GetKey(seed));
+            using (var hash = SHA256.Create())
+            {
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+                return Convert.ToBase64String(this.cbcMacManager.GetKey(seed));
+            }
         }
     }
 }

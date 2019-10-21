@@ -32,11 +32,13 @@
             [FromRoute] string challengeId,
             [FromBody] string value)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
-            var data = Convert.FromBase64String(value);
-            var result = this.blockCipherOracleManager.EncryptOracle(data, seed);
-            return Convert.ToBase64String(result);
+            using (var hash = SHA256.Create())
+            {
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+                var data = Convert.FromBase64String(value);
+                var result = this.blockCipherOracleManager.EncryptOracle(data, seed);
+                return Convert.ToBase64String(result);
+            }
         }
 
         [HttpGet]
@@ -45,13 +47,16 @@
            [FromRoute] string userId,
            [FromRoute] string challengeId)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
-            if (seed[seed.Length - 1] % 2 == 0)
+            using (var hash = SHA256.Create())
             {
-                return "ECB";
+
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+                if (seed[seed.Length - 1] % 2 == 0)
+                {
+                    return "ECB";
+                }
+                return "CBC";
             }
-            return "CBC";
         }
 
 
@@ -63,11 +68,13 @@
             [FromRoute] string challengeId,
             [FromBody] string value)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
-            var data = Convert.FromBase64String(value);
-            var result = this.blockCipherOracleManager.EncryptOracle(data, seed, false);
-            return Convert.ToBase64String(result);
+            using (var hash = SHA256.Create())
+            {
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+                var data = Convert.FromBase64String(value);
+                var result = this.blockCipherOracleManager.EncryptOracle(data, seed, false);
+                return Convert.ToBase64String(result);
+            }
         }
     }
 }

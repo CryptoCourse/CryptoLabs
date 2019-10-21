@@ -31,44 +31,45 @@
         [Route("{userId}/{challengeId}/User/Token/")]
         public string GetTokenHex([FromRoute] string userId, [FromRoute] string challengeId)
         {
-            var hash = SHA256.Create();
-
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
-
-            var token = TokenHelper.GetSecretTokenUser(seed);
-
-            return token;
+            using (var hash = SHA256.Create())
+            {
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+                var token = TokenHelper.GetSecretTokenUser(seed);
+                return token;
+            }
         }
 
         [HttpGet]
         [Route("{userId}/{challengeId}/Admin/Token/")]
         public string GetAdminTokenHex([FromRoute] string userId, [FromRoute] string challengeId)
         {
-            var hash = SHA256.Create();
+            using (var hash = SHA256.Create())
+            {
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+                var token = TokenHelper.GetSecretTokenAdmin(seed);
 
-            var token = TokenHelper.GetSecretTokenAdmin(seed);
-
-            return token;
+                return token;
+            }
         }
 
         [HttpGet]
         [Route("{userId}/{challengeId}/User/encryptedToken/hex")]
         public string GetEncryptedTokenHex([FromRoute] string userId, [FromRoute] string challengeId)
         {
-            var hash = SHA256.Create();
+            using (var hash = SHA256.Create())
+            {
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+                var token = TokenHelper.GetSecretTokenUser(seed);
 
-            var token = TokenHelper.GetSecretTokenUser(seed);
-
-            var data = Encoding.ASCII.GetBytes(token);
-            var result = this.cbcIvIsKeyManager.EncryptCbc(
-                data.Concat(new byte[TokenHelper.BlockCount * TokenHelper.AesBlockSize - data.Length]).ToArray(),
-                seed,
-                false);
-            return BitConverter.ToString(result).Replace("-", "");
+                var data = Encoding.ASCII.GetBytes(token);
+                var result = this.cbcIvIsKeyManager.EncryptCbc(
+                    data.Concat(new byte[TokenHelper.BlockCount * TokenHelper.AesBlockSize - data.Length]).ToArray(),
+                    seed,
+                    false);
+                return BitConverter.ToString(result).Replace("-", "");
+            }
         }
 
 
@@ -79,42 +80,44 @@
             [FromRoute] string challengeId,
             [FromRoute] string encryptedToken)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
-
-            byte[] encryptedTokenBytes;
-            try
+            using (var hash = SHA256.Create())
             {
-                encryptedTokenBytes = HexHelper.StringToByteArray(encryptedToken);
-            }
-            catch (Exception)
-            {
-                return $"Invalid token format! Can not deformat token!";
-            }
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
-            byte[] decryptedTokenBytes;
-            try
-            {
-                decryptedTokenBytes = this.cbcIvIsKeyManager.DecryptCbc(encryptedTokenBytes, seed);
-            }
-            catch (Exception)
-            {
-                return $"Invalid token format! Can not decrypt token!";
-            }
+                byte[] encryptedTokenBytes;
+                try
+                {
+                    encryptedTokenBytes = HexHelper.StringToByteArray(encryptedToken);
+                }
+                catch (Exception)
+                {
+                    return $"Invalid token format! Can not deformat token!";
+                }
 
-            var token = Encoding.ASCII.GetString(decryptedTokenBytes);
+                byte[] decryptedTokenBytes;
+                try
+                {
+                    decryptedTokenBytes = this.cbcIvIsKeyManager.DecryptCbc(encryptedTokenBytes, seed);
+                }
+                catch (Exception)
+                {
+                    return $"Invalid token format! Can not decrypt token!";
+                }
 
-            if (!TokenHelper.ValidateTokenString(token))
-            {
-                return $"Invalid token format! Received token [{token}] contains invalid characters!. Raw token is [{BitConverter.ToString(decryptedTokenBytes).Replace("-", "")}]";
+                var token = Encoding.ASCII.GetString(decryptedTokenBytes);
+
+                if (!TokenHelper.ValidateTokenString(token))
+                {
+                    return $"Invalid token format! Received token [{token}] contains invalid characters!. Raw token is [{BitConverter.ToString(decryptedTokenBytes).Replace("-", "")}]";
+                }
+
+                if (!TokenHelper.ValidateTokenUser(token, seed))
+                {
+                    return "Access denied";
+                }
+
+                return $"Wellcome {userId}!";
             }
-
-            if (!TokenHelper.ValidateTokenUser(token, seed))
-            {
-                return "Access denied";
-            }
-
-            return $"Wellcome {userId}!";
         }
 
         [HttpGet]
@@ -124,24 +127,26 @@
             [FromRoute] string challengeId,
             [FromRoute] string encryptedToken)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
-
-            var encryptedTokenBytes = HexHelper.StringToByteArray(encryptedToken);
-            var decryptedTokenBytes = this.cbcIvIsKeyManager.DecryptCbc(encryptedTokenBytes, seed);
-            var token = Encoding.ASCII.GetString(decryptedTokenBytes);
-
-            if (!TokenHelper.ValidateTokenString(token))
+            using (var hash = SHA256.Create())
             {
-                return $"Invalid token format! Received token [{token}] contains invalid characters! Raw token is [{BitConverter.ToString(decryptedTokenBytes).Replace("-", "")}]";
-            }
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
-            if (!TokenHelper.ValidateTokenAdmin(token, seed))
-            {
-                return "Access denied";
-            }
+                var encryptedTokenBytes = HexHelper.StringToByteArray(encryptedToken);
+                var decryptedTokenBytes = this.cbcIvIsKeyManager.DecryptCbc(encryptedTokenBytes, seed);
+                var token = Encoding.ASCII.GetString(decryptedTokenBytes);
 
-            return $"Wellcome to secretNet!";
+                if (!TokenHelper.ValidateTokenString(token))
+                {
+                    return $"Invalid token format! Received token [{token}] contains invalid characters! Raw token is [{BitConverter.ToString(decryptedTokenBytes).Replace("-", "")}]";
+                }
+
+                if (!TokenHelper.ValidateTokenAdmin(token, seed))
+                {
+                    return "Access denied";
+                }
+
+                return $"Wellcome to secretNet!";
+            }
         }
     }
 }

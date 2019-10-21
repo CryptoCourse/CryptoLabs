@@ -37,14 +37,16 @@
             [FromRoute] string userId,
             [FromRoute] string challengeId)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+            using (var hash = SHA256.Create())
+            {
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
-            var ciphertext = this.streamCipherIntegrityManager.EncryptCrt(
-                Encoding.ASCII.GetBytes(this.stringData),
-                seed,
-                true);
-            return Convert.ToBase64String(ciphertext);
+                var ciphertext = this.streamCipherIntegrityManager.EncryptCrt(
+                    Encoding.ASCII.GetBytes(this.stringData),
+                    seed,
+                    true);
+                return Convert.ToBase64String(ciphertext);
+            }
         }
 
 
@@ -54,14 +56,16 @@
             [FromRoute] string userId,
             [FromRoute] string challengeId)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+            using (var hash = SHA256.Create())
+            {
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
-            var ciphertext = this.streamCipherIntegrityManager.EncryptCrt(
-                Encoding.ASCII.GetBytes(this.stringData),
-                seed,
-                false);
-            return Convert.ToBase64String(ciphertext);
+                var ciphertext = this.streamCipherIntegrityManager.EncryptCrt(
+                    Encoding.ASCII.GetBytes(this.stringData),
+                    seed,
+                    false);
+                return Convert.ToBase64String(ciphertext);
+            }
         }
 
         [HttpPost]
@@ -71,29 +75,31 @@
             [FromRoute] string challengeId,
             [FromBody] string value)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
-
-            var ciphertext = Convert.FromBase64String(value);
-            if (ciphertext.Length < 16)
+            using (var hash = SHA256.Create())
             {
-                throw new Exception("invalid ct len");
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+
+                var ciphertext = Convert.FromBase64String(value);
+                if (ciphertext.Length < 16)
+                {
+                    throw new Exception("invalid ct len");
+                }
+
+                var plaintext = this.streamCipherIntegrityManager.DecryptCtr(
+                    ciphertext,
+                    seed);
+
+                var secretHash = hash.ComputeHash(Encoding.ASCII.GetBytes(this.secretToken));
+                var paintextHash = hash.ComputeHash(plaintext);
+
+                //comparing hashes of inputed value, no need in const time cmp here
+                if (paintextHash.SequenceEqual(secretHash))
+                {
+                    return "Wellcome to secretNet!";
+                }
+
+                return $"Your decryptedData is [{Encoding.ASCII.GetString(plaintext)}]";
             }
-
-            var plaintext = this.streamCipherIntegrityManager.DecryptCtr(
-                ciphertext,
-                seed);
-
-            var secretHash = hash.ComputeHash(Encoding.ASCII.GetBytes(this.secretToken));
-            var paintextHash = hash.ComputeHash(plaintext);
-
-            //comparing hashes of inputed value, no need in const time cmp here
-            if (paintextHash.SequenceEqual(secretHash))
-            {
-                return "Wellcome to secretNet!";
-            }
-
-            return $"Your decryptedData is [{Encoding.ASCII.GetString(plaintext)}]";
         }
     }
 }

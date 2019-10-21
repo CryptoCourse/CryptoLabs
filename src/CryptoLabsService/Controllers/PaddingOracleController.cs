@@ -38,22 +38,24 @@
             [FromRoute] string userId,
             [FromRoute] string challengeId)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId + "GetEncryptedToken"));
+            using (var hash = SHA256.Create())
+            {
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId + "GetEncryptedToken"));
 
-            var plainText = Encoding.ASCII.GetBytes(TokenHelper.GetSecretTokenUser(seed));
+                var plainText = Encoding.ASCII.GetBytes(TokenHelper.GetSecretTokenUser(seed));
 
-            var plainTextWithMac = this.paddingOracleManger.ApplyMac(
-                plainText,
-                seed);
+                var plainTextWithMac = this.paddingOracleManger.ApplyMac(
+                    plainText,
+                    seed);
 
-            // change seed to make independant encryption key
-            seed[0] ^= 255;
-            var ciphertext = this.paddingOracleManger.EncryptCbc(
-                plainTextWithMac,
-                seed,
-                true);
-            return Convert.ToBase64String(ciphertext);
+                // change seed to make independant encryption key
+                seed[0] ^= 255;
+                var ciphertext = this.paddingOracleManger.EncryptCbc(
+                    plainTextWithMac,
+                    seed,
+                    true);
+                return Convert.ToBase64String(ciphertext);
+            }
         }
 
 
@@ -64,32 +66,34 @@
             [FromRoute] string challengeId,
             [FromRoute] string encryptedToken)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId + "GetEncryptedToken"));
-            var encryptedTokenBytes = HexHelper.StringToByteArray(encryptedToken);
-
-            // change seed to make independant encryption key
-            seed[0] ^= 255;
-            try
+            using (var hash = SHA256.Create())
             {
-                var plainTextWithMac = this.paddingOracleManger.DecryptCbc(encryptedTokenBytes, seed);
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId + "GetEncryptedToken"));
+                var encryptedTokenBytes = HexHelper.StringToByteArray(encryptedToken);
 
-                // change it back
+                // change seed to make independant encryption key
                 seed[0] ^= 255;
-                var plainText = this.paddingOracleManger.VerifyMac(
-                    plainTextWithMac,
-                    seed);
-                var stringToken = Encoding.ASCII.GetString(plainText);
-
-                if (TokenHelper.ValidateTokenString(stringToken) && TokenHelper.ValidateTokenUser(stringToken, seed))
+                try
                 {
-                    return Convert.ToBase64String(Encoding.ASCII.GetBytes("Token decoded and validated"));
+                    var plainTextWithMac = this.paddingOracleManger.DecryptCbc(encryptedTokenBytes, seed);
+
+                    // change it back
+                    seed[0] ^= 255;
+                    var plainText = this.paddingOracleManger.VerifyMac(
+                        plainTextWithMac,
+                        seed);
+                    var stringToken = Encoding.ASCII.GetString(plainText);
+
+                    if (TokenHelper.ValidateTokenString(stringToken) && TokenHelper.ValidateTokenUser(stringToken, seed))
+                    {
+                        return Convert.ToBase64String(Encoding.ASCII.GetBytes("Token decoded and validated"));
+                    }
+                    return Convert.ToBase64String(Encoding.ASCII.GetBytes("Token is incorrect"));
                 }
-                return Convert.ToBase64String(Encoding.ASCII.GetBytes("Token is incorrect"));
-            }
-            catch (Exception ex)
-            {
-                return Convert.ToBase64String(Encoding.ASCII.GetBytes(ex.ToString()));
+                catch (Exception ex)
+                {
+                    return Convert.ToBase64String(Encoding.ASCII.GetBytes(ex.ToString()));
+                }
             }
         }
 
@@ -100,12 +104,14 @@
             [FromRoute] string challengeId,
             [FromRoute] string rawToken)
         {
-            var hash = SHA256.Create();
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId + "GetEncryptedToken"));
-            
-            if (TokenHelper.ValidateTokenString(rawToken) && TokenHelper.ValidateTokenUser(rawToken, seed))
+            using (var hash = SHA256.Create())
             {
-                return Convert.ToBase64String(Encoding.ASCII.GetBytes("Raw Token decoded and validated"));
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId + "GetEncryptedToken"));
+
+                if (TokenHelper.ValidateTokenString(rawToken) && TokenHelper.ValidateTokenUser(rawToken, seed))
+                {
+                    return Convert.ToBase64String(Encoding.ASCII.GetBytes("Raw Token decoded and validated"));
+                }
             }
             return Convert.ToBase64String(Encoding.ASCII.GetBytes("Token is incorrect"));
         }

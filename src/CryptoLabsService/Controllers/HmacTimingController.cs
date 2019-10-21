@@ -39,18 +39,20 @@
         {
             delay = delay > 1000 ? 1000 : delay;
 
-            var hash = SHA256.Create();
-
-            var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
-
-            var macHash = new HMACSHA256(seed);
-            var targetHash = macHash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId + data));
-            if (!CompareHelper.InsecureCompareArrays(targetHash.Take(8).ToArray(), HexHelper.StringToByteArray(mac), delay))
+            using (var hash = SHA256.Create())
             {
-                return "INVALID_MAC";
-            }
 
-            return "Wellcome to secretNet!";
+                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+
+                var macHash = new HMACSHA256(seed);
+                var targetHash = macHash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId + data));
+                if (!CompareHelper.InsecureCompareArrays(targetHash.Take(8).ToArray(), HexHelper.StringToByteArray(mac), delay))
+                {
+                    return "INVALID_MAC";
+                }
+
+                return "Wellcome to secretNet!";
+            }
         }        
     }
 }
