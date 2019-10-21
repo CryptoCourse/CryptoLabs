@@ -33,6 +33,7 @@ namespace CryptoLabsService
             services.AddTransient<CbcIvIsTimeManager>();
             services.AddTransient<CbcIvIsKeyManager>();
             services.AddTransient<CbcMacManager>();
+            services.AddTransient<PaddingOracleManger>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
