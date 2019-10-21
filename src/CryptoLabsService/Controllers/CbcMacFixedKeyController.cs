@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Security.Cryptography;
     using System.Text;
+    using CryptoLabsService.Helpers;
     using CryptoLabsService.Managers;
 
     using Microsoft.AspNetCore.Mvc;
@@ -41,13 +42,13 @@
             var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
             var decodedData = Convert.FromBase64String(data);
-            var decodedMac = this.StringToByteArray(mac);
+            var decodedMac = HexHelper.StringToByteArray(mac);
 
             var targetMac = this.cbcMacManager.ConputeMacWithKey(decodedData, seed)
                 .Skip(AesBlockSize / 2)
                 .ToArray();
 
-            if (this.CompareArrays(targetMac, decodedMac))
+            if (CompareHelper.CompareArrays(targetMac, decodedMac))
             {
                 return Convert.ToBase64String(
                     Encoding.ASCII.GetBytes(
@@ -100,30 +101,6 @@
             var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
             return Convert.ToBase64String(this.cbcMacManager.GetKey(seed));
-        }
-
-        private bool CompareArrays(byte[] first, byte[] second)
-        {
-            byte result = 0;
-            if (first.Length != second.Length)
-            {
-                return false;
-            }
-
-            for (int i = 0; i < first.Length; i++)
-            {
-                result |= (byte)(first[i] ^ second[i]);
-            }
-
-            return result == 0;
-        }
-
-        private byte[] StringToByteArray(string hex)
-        {
-            return Enumerable.Range(0, hex.Length)
-                .Where(x => x % 2 == 0)
-                .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
-                .ToArray();
         }
     }
 }
