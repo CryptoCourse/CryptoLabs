@@ -16,6 +16,8 @@
 
         private readonly BlockCipherOracleManager blockCipherOracleManager;
 
+        private const int MacSize = 8;
+
         public HmacTimingController(BlockCipherOracleManager blockCipherOracleManager)
         {
             this.blockCipherOracleManager = blockCipherOracleManager;
@@ -44,14 +46,18 @@
 
                 var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
-                var macHash = new HMACSHA256(seed);
-                var targetHash = macHash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId + data));
-                if (!CompareHelper.InsecureCompareArrays(targetHash.Take(8).ToArray(), HexHelper.StringToByteArray(mac), delay))
+                using (var macHash = new HMACSHA256(seed))
                 {
-                    return "INVALID_MAC";
-                }
+                    var targetHash = macHash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId + data));
+                    if (!CompareHelper.InsecureCompareArrays(
+                        targetHash.Take(HmacTimingController.MacSize).ToArray(), 
+                        HexHelper.StringToByteArray(mac), delay))
+                    {
+                        return "INVALID_MAC";
+                    }
 
-                return "Wellcome to secretNet!";
+                    return "Wellcome to secretNet!";
+                }
             }
         }        
     }

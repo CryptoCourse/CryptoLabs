@@ -8,6 +8,7 @@ namespace CryptoLabsService.Managers
     public class PaddingOracleManger
     {
         private const int AesKeySize = 128;
+        private const int HmacKeyLen = 32;
 
         public byte[] EncryptCbc(byte[] data, byte[] seed, bool includeIv = true)
         {
@@ -58,11 +59,15 @@ namespace CryptoLabsService.Managers
                 byte[] iv;
                 using (var aesAlg = Aes.Create())
                 {
+                    if (ciphertext.Length < aesAlg.BlockSize * 2 / 8)
+                    {
+                        throw new Exception("Invalid CT len, expecting at least 2 blocks");
+                    }
                     aesAlg.KeySize = AesKeySize;
                     var keyBytes = new byte[aesAlg.KeySize / 8];
                     rand.GetBytes(keyBytes, 0, aesAlg.KeySize / 8);
-                    iv = ciphertext.Take(aesAlg.BlockSize).ToArray();
-                    ciphertext = ciphertext.Skip(aesAlg.BlockSize).ToArray();
+                    iv = ciphertext.Take(aesAlg.BlockSize / 8).ToArray();
+                    ciphertext = ciphertext.Skip(aesAlg.BlockSize / 8).ToArray();
 
                     aesAlg.Key = keyBytes;
 
@@ -73,10 +78,10 @@ namespace CryptoLabsService.Managers
                     // Create the streams used for encryption. 
                     // Open a new memory stream to write the encrypted data to
                     // Create a crypto stream to perform encryption
-                    using (var ecryptor = aesAlg.CreateDecryptor())
+                    using (var decryptor = aesAlg.CreateDecryptor())
                     {
                         // write encrypted bytes to memory
-                        return TransformHelper.PerformCryptography(ecryptor, ciphertext);
+                        return TransformHelper.PerformCryptography(decryptor, ciphertext);
                     }
                 }
             }
@@ -86,13 +91,14 @@ namespace CryptoLabsService.Managers
         {
             using (var rand = new DeterministicCryptoRandomGenerator(seed, false))
             {
-                using (HMAC hmac = HMAC.Create())
+                var hmacKey = new byte[PaddingOracleManger.HmacKeyLen];
+                rand.GetBytes(hmacKey, 0, hmacKey.Length);
+                using (HMAC hmac = new HMACSHA256(hmacKey))
                 {
-                    rand.GetBytes(hmac.Key, 0, hmac.Key.Length);
                     var mac = hmac.ComputeHash(data);
-                    var result = new byte[data.Length + hmac.HashSize];
+                    var result = new byte[data.Length + hmac.HashSize/8];
                     Array.Copy(data, 0, result, 0, data.Length);
-                    Array.Copy(mac, 0, result, data.Length, hmac.HashSize);
+                    Array.Copy(mac, 0, result, data.Length, hmac.HashSize / 8);
                     return result;
                 }
             }
@@ -102,12 +108,12 @@ namespace CryptoLabsService.Managers
         {
             using (var rand = new DeterministicCryptoRandomGenerator(seed, false))
             {
-                using (HMAC hmac = HMAC.Create())
+                var hmacKey = new byte[PaddingOracleManger.HmacKeyLen];
+                rand.GetBytes(hmacKey, 0, hmacKey.Length);
+                using (HMAC hmac = new HMACSHA256(hmacKey))
                 {
-                    rand.GetBytes(hmac.Key, 0, hmac.Key.Length);
-
-                    var mac = data.Skip(hmac.HashSize).ToArray();
-                    var dataToCheck = data.Take(data.Length - hmac.HashSize).ToArray();
+                    var dataToCheck = data.Take(data.Length - (hmac.HashSize / 8)).ToArray();
+                    var mac = data.Skip(dataToCheck.Length).ToArray();
                     var computedMac = hmac.ComputeHash(dataToCheck);
                     if (!CompareHelper.CompareArrays(mac, computedMac))
                     {

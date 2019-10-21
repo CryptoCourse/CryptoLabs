@@ -76,10 +76,10 @@
                     // Create the streams used for encryption. 
                     // Open a new memory stream to write the encrypted data to
                     // Create a crypto stream to perform encryption
-                    using (var ecryptor = aesAlg.CreateDecryptor())
+                    using (var decryptor = aesAlg.CreateDecryptor())
                     {
                         // write encrypted bytes to memory
-                        return TransformHelper.PerformCryptography(ecryptor, ciphertext);
+                        return TransformHelper.PerformCryptography(decryptor, ciphertext);
                     }
                 }
             }

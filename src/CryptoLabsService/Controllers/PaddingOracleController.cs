@@ -54,7 +54,7 @@
                     plainTextWithMac,
                     seed,
                     true);
-                return Convert.ToBase64String(ciphertext);
+                return HexHelper.HexFromByteArray(ciphertext);
             }
         }
 
@@ -86,13 +86,13 @@
 
                     if (TokenHelper.ValidateTokenString(stringToken) && TokenHelper.ValidateTokenUser(stringToken, seed))
                     {
-                        return Convert.ToBase64String(Encoding.ASCII.GetBytes("Token decoded and validated"));
+                        return "Token have been decoded and validated";
                     }
-                    return Convert.ToBase64String(Encoding.ASCII.GetBytes("Token is incorrect"));
+                    return "Token is incorrect";
                 }
                 catch (Exception ex)
                 {
-                    return Convert.ToBase64String(Encoding.ASCII.GetBytes(ex.ToString()));
+                    return ex.ToString();
                 }
             }
         }
