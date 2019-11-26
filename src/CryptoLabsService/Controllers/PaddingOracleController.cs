@@ -20,6 +20,8 @@
 
         private readonly PaddingOracleManger paddingOracleManger;
 
+        private readonly static string debugFlag = "debug";
+
         public PaddingOracleController(PaddingOracleManger paddingOracleManger)
         {
             this.paddingOracleManger = paddingOracleManger;
@@ -43,6 +45,11 @@
                 var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId + "GetEncryptedToken"));
 
                 var plainText = Encoding.ASCII.GetBytes(TokenHelper.GetSecretTokenUser(seed));
+                //#Q_
+                if (challengeId == PaddingOracleController.debugFlag)
+                {
+                    plainText = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, };
+                }
 
                 var plainTextWithMac = this.paddingOracleManger.ApplyMac(
                     plainText,
@@ -75,7 +82,16 @@
                 seed[0] ^= 255;
                 try
                 {
-                    var plainTextWithMac = this.paddingOracleManger.DecryptCbc(encryptedTokenBytes, seed);
+                    byte[] plainTextWithMac;
+                    try
+                    {
+                        plainTextWithMac = this.paddingOracleManger.DecryptCbc(encryptedTokenBytes, seed);
+                    }
+                    catch (Exception ex)
+                    {
+                        var debug = this.paddingOracleManger.DecryptCbc(encryptedTokenBytes, seed, PaddingMode.None);
+                        throw;
+                    }
 
                     // change it back
                     seed[0] ^= 255;
@@ -110,7 +126,7 @@
 
                 if (TokenHelper.ValidateTokenString(rawToken) && TokenHelper.ValidateTokenUser(rawToken, seed))
                 {
-                    return Convert.ToBase64String(Encoding.ASCII.GetBytes("Raw Token decoded and validated"));
+                    return Convert.ToBase64String(Encoding.ASCII.GetBytes("Raw Token decoded and validated. Wellcome to secretNet!"));
                 }
             }
             return Convert.ToBase64String(Encoding.ASCII.GetBytes("Token is incorrect"));

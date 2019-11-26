@@ -20,11 +20,11 @@ namespace CryptoLabsService.Managers
                     aesAlg.KeySize = AesKeySize;
                     var keyBytes = new byte[aesAlg.KeySize / 8];
                     rand.GetBytes(keyBytes, 0, aesAlg.KeySize / 8);
-
-                    rand.GetBytes(aesAlg.IV, 0, aesAlg.BlockSize / 8);
+                    var ivBytes = new byte[aesAlg.KeySize / 8]; 
+                    rand.GetBytes(ivBytes, 0, aesAlg.BlockSize / 8);
 
                     aesAlg.Key = keyBytes;
-                    aesAlg.Padding = PaddingMode.None;
+                    aesAlg.IV = ivBytes;
 
                     aesAlg.Mode = CipherMode.CBC;
                     aesAlg.Padding = PaddingMode.PKCS7;
@@ -52,7 +52,7 @@ namespace CryptoLabsService.Managers
             }
         }
 
-        public byte[] DecryptCbc(byte[] ciphertext, byte[] seed)
+        public byte[] DecryptCbc(byte[] ciphertext, byte[] seed, PaddingMode paddingMode = PaddingMode.PKCS7)
         {
             using (var rand = new DeterministicCryptoRandomGenerator(seed, false))
             {
@@ -73,7 +73,7 @@ namespace CryptoLabsService.Managers
 
                     aesAlg.IV = iv;
                     aesAlg.Mode = CipherMode.CBC;
-                    aesAlg.Padding = PaddingMode.PKCS7;
+                    aesAlg.Padding = paddingMode;
 
                     // Create the streams used for encryption. 
                     // Open a new memory stream to write the encrypted data to
