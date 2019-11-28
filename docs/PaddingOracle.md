@@ -10,6 +10,8 @@
 
 Задача - вызвав метод ValidateRawToken, получить сообщение `"Raw Token decoded and validated. Wellcome to secretNet!"`.
 
+![img](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX4z5lwmoUFkg9VuiJu0saTIbCorr-2RWeWb0Lf76wpIlIu7fQ&s)
+
 Шифрование токенов производится в решиме Mac-Then-Encrypt, CBC-AES, HMAC.
 
 **ВАЖНО!** Все передаваемые сообщения должны быть предварительно закодированы с помощью BASE64, если не указано иное.
