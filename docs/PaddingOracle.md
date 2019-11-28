@@ -91,7 +91,7 @@ Rest запросы, в заголовке выстален Content-Type: applic
 | `<host>` | имя хоста веб службы
 | `<userId>` | идентификатор студента
 | `<challengeId>` | идентификатор задания
-| `<encryptedToken>' | зашифрованный токен, в виде hex строки
+| `<encryptedToken>` | зашифрованный токен, в виде hex строки
 
 ## `GET <host>/api/PaddingOracle/{userId}/{challengeId}/ValidateRawToken/{rawToken}`
 
