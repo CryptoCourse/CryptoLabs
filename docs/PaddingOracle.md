@@ -61,7 +61,7 @@ Rest запросы, в заголовке выставлен Content-Type: appl
 | `<host>` | имя хоста веб службы
 
 
-## `POST <host>/api/PaddingOracle/{userId}/{challengeId}/GetEncryptedToken`
+## `GET <host>/api/PaddingOracle/{userId}/{challengeId}/GetEncryptedToken`
 
 Генерирует, подписывает с помощью MAC, и зашифровывает токен в режиме CBC на фиксированном для задания для задания ключе.
 Ответ не кодируется в BASE64.
