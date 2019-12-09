@@ -132,10 +132,10 @@
 
                 if (TokenHelper.ValidateTokenString(rawToken) && TokenHelper.ValidateTokenUser(rawToken, seed))
                 {
-                    return Convert.ToBase64String(Encoding.ASCII.GetBytes("Raw Token decoded and validated. Wellcome to secretNet!"));
+                    return "Raw Token decoded and validated. Wellcome to secretNet!";
                 }
             }
-            return Convert.ToBase64String(Encoding.ASCII.GetBytes("Token is incorrect"));
+            return "Token is incorrect";
         }
     }
 }
