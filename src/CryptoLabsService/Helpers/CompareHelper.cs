@@ -1,18 +1,33 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace CryptoLabsService.Helpers
 {
     public static class CompareHelper
     {
+        /// <summary>
+        /// based on CryptographicOperations.FixedTimeEquals
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         public static bool CompareArrays(byte[] first, byte[] second)
         {
-            byte result = 0;
+            // NoOptimization because we want this method to be exactly as non-short-circuiting
+            // as written.
+            //
+            // NoInlining because the NoOptimization would get lost if the method got inlined.
+
             if (first.Length != second.Length)
             {
                 return false;
             }
 
-            for (int i = 0; i < first.Length; i++)
+            int length = first.Length;
+            byte result = 0;
+
+            for (int i = 0; i < length; i++)
             {
                 result |= (byte)(first[i] ^ second[i]);
             }
