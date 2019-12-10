@@ -130,6 +130,8 @@
             {
                 var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId + "GetEncryptedToken"));
 
+                // converting hex -> byte -> ascii string
+                rawToken = Encoding.ASCII.GetString(HexHelper.StringToByteArray(rawToken));
                 if (TokenHelper.ValidateTokenString(rawToken) && TokenHelper.ValidateTokenUser(rawToken, seed))
                 {
                     return "Raw Token decoded and validated. Wellcome to secretNet!";
