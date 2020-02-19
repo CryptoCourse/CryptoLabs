@@ -87,7 +87,7 @@ K = T_1 || T_len
 ## Дополнительные ссылки
 https://github.com/CryptoCourse/CryptoLectures/blob/master/Lectures/Lecture11.pdf (стр 33-46)
 
-file:///C:/git/CryptoLectures/Lectures/Lecture3.pdf (стр 33-35)
+https://github.com/CryptoCourse/CryptoLectures/blob/master/Lectures/Lecture3.pdf (стр 33-35)
 
 https://en.wikipedia.org/wiki/HMAC
 
