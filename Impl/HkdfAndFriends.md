@@ -12,6 +12,8 @@
 
 KDF состоит их двух подфункций: извлечения (extract) и расширения (expand).
 
+![img](https://www.researchgate.net/profile/Chai_Wen_Chuah/publication/287478235/figure/download/fig2/AS:485409286299648@1492742000050/Extract-then-expand-model-for-KDFs.png)
+
 Функция извлечения получает равномерно распределённый случайный ключ, используя неравномерно распределённый ключевой материал.
 
 Функция расширения формирует последовательность ключей на основе одного случайного равномерно распределённого ключа.
@@ -24,7 +26,15 @@ HKDF - KDF на основе кода аутентичности HMAC.
 
 1. На основе файла [weather.json](https://github.com/CryptoCourse/CryptoLabs/blob/master/Impl/weather.json) построить гистограммы температуры, влажности, скорости ветра, облачности и озонового слоя. Выбрать одну из указанных величин (или комбинацию величин) в качестве ключевого материала.
 
-2. Реализовать HMAC на основе хэш функции SHA-256. В качестве SHA-256 использовать криптографически стойкую реализацию из общераспространённой библиотеке на вашем языке.
+2. Реализовать [HMAC](https://en.wikipedia.org/wiki/HMAC) на основе хэш функции SHA-256. В качестве SHA-256 использовать криптографически стойкую реализацию из общераспространённой библиотеке на вашем языке.
+
+![img](https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR45Fu58KVP7gP_YF4SnuWl0kR5hYwawtMpiIpVBqUHU4RtYmGa)
+
+`HMAC(K,C) = H((K + opad) || H((K + ipad) || m))`
+
+`opad = 0x5c, ..., 0x5c`
+
+`ipad = 0x36, ..., 0x36`
 
 3. Интерфейс функции: byte[] HmacSha256(byte[] key, byte[] data)
 
@@ -46,6 +56,8 @@ PRK <- HkdfExtract(XTS, data)
 K_i = HkdfExpand(PRK, CTX, i)
 ```
 
+![img](https://webee.technion.ac.il/~hugo/kdf/hkdf-fig.jpg)
+
 7. Убедиться в равномерной распределённости первых 5 бит ключей, построив гистограмму.
 
 ## PBKDF2
@@ -62,13 +74,19 @@ T_i = F(P, S, c, i)
 K = T_1 || T_len
 ```
 
+![img](https://upload.wikimedia.org/wikipedia/commons/7/70/Pbkdf2_nist.png)
+
 1. На основе файла [passwords.json](https://github.com/CryptoCourse/CryptoLabs/blob/master/Impl/passwords.json) построить гистограмму распределения первых 5 бит паролей (кодировка ASCII).
 2. Реализовать PBKDF2 с использованием HMAC в качестве PRF, с использованием случайного seed. Число итераций 10000.
-3. Получить симметричный ключ для каждого пароля.
+3. Получить симметричный ключ для каждого пароля длины 512 бит.
 4. Убедиться в равномерной распределённости первых 5 бит ключей, построив гистограмму.
 
 ## Дополнительные ссылки
 https://github.com/CryptoCourse/CryptoLectures/blob/master/Lectures/Lecture11.pdf (стр 33-46)
+
+https://en.wikipedia.org/wiki/HMAC
+
+https://tools.ietf.org/html/rfc2104
 
 https://en.wikipedia.org/wiki/PBKDF2
 
