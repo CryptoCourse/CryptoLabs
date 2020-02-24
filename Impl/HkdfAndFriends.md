@@ -68,7 +68,7 @@ P - пароль пользователя (ключевой материал), S
 
 ```
 U_1 = HMAC(P, S||i)
-U_c = HMAC(U_{c-1})
+U_c = HMAC(P, U_{c-1})
 F(P,S, c, i) = U_1 + .... + U_c, '+' = XOR
 T_i = F(P, S, c, i)
 K = T_1 || T_len
