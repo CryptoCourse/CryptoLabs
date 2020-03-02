@@ -98,5 +98,7 @@ FOUND:
 
 Доп литература:
 https://iamaaditya.github.io/2012/07/the-birthday-paradox-proof/
+
 https://crypto.stackexchange.com/questions/52231/what-is-the-best-and-fastest-algorithm-to-generate-a-hash-collision
+
 https://cr.yp.to/hash/collisioncost-20090517.pdf (стр 9-10)
