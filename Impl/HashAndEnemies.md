@@ -97,6 +97,8 @@ FOUND:
 Результат работы: код, коллизии для хэш-функций, графики.
 
 Доп литература:
+https://github.com/CryptoCourse/CryptoLectures/blob/master/Lectures/Lecture11.pdf (стр 7-8, 26-29, 43-46)
+
 https://iamaaditya.github.io/2012/07/the-birthday-paradox-proof/
 
 https://crypto.stackexchange.com/questions/52231/what-is-the-best-and-fastest-algorithm-to-generate-a-hash-collision
