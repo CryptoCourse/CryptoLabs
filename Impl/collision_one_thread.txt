@@ -1,0 +1,660 @@
+﻿this.ThreadInit(new byte[] { 94, 36 });
+this.ThreadInit(new byte[] { 166, 201 });
+
+Iteration 0: 0 : 225 - 226
+Iteration 0: 1 : 27 - 213
+Iteration 1: 0 : 11 - 160
+Iteration 1: 1 : 212 - 210
+Iteration 2: 0 : 218 - 135
+Iteration 2: 1 : 52 - 98
+Iteration 3: 0 : 28 - 4
+Iteration 3: 1 : 199 - 96
+Iteration 4: 0 : 173 - 2
+Iteration 4: 1 : 54 - 28
+Iteration 5: 0 : 126 - 12
+Iteration 5: 1 : 70 - 144
+Iteration 6: 0 : 122 - 117
+Iteration 6: 1 : 233 - 119
+Iteration 7: 0 : 33 - 242
+Iteration 7: 1 : 121 - 183
+Iteration 8: 0 : 50 - 143
+Iteration 8: 1 : 10 - 126
+Iteration 9: 0 : 85 - 47
+Iteration 9: 1 : 208 - 167
+Iteration 10: 0 : 79 - 171
+Iteration 10: 1 : 97 - 207
+Iteration 11: 0 : 207 - 7
+Iteration 11: 1 : 111 - 6
+Iteration 12: 0 : 25 - 151
+Iteration 12: 1 : 169 - 179
+Iteration 13: 0 : 207 - 125
+Iteration 13: 1 : 17 - 88
+Iteration 14: 0 : 157 - 104
+Iteration 14: 1 : 210 - 137
+Iteration 15: 0 : 46 - 112
+Iteration 15: 1 : 107 - 54
+Iteration 16: 0 : 99 - 160
+Iteration 16: 1 : 253 - 127
+Iteration 17: 0 : 73 - 74
+Iteration 17: 1 : 218 - 230
+Iteration 18: 0 : 135 - 202
+Iteration 18: 1 : 120 - 38
+Iteration 19: 0 : 108 - 66
+Iteration 19: 1 : 165 - 71
+Iteration 20: 0 : 26 - 98
+Iteration 20: 1 : 8 - 130
+Iteration 21: 0 : 59 - 176
+Iteration 21: 1 : 241 - 103
+Iteration 22: 0 : 58 - 56
+Iteration 22: 1 : 183 - 176
+Iteration 23: 0 : 29 - 13
+Iteration 23: 1 : 15 - 218
+Iteration 24: 0 : 248 - 65
+Iteration 24: 1 : 68 - 91
+Iteration 25: 0 : 51 - 218
+Iteration 25: 1 : 152 - 4
+Iteration 26: 0 : 13 - 89
+Iteration 26: 1 : 180 - 155
+Iteration 27: 0 : 83 - 20
+Iteration 27: 1 : 202 - 130
+Iteration 28: 0 : 252 - 208
+Iteration 28: 1 : 209 - 154
+Iteration 29: 0 : 254 - 49
+Iteration 29: 1 : 143 - 212
+Iteration 30: 0 : 209 - 102
+Iteration 30: 1 : 35 - 163
+Iteration 31: 0 : 70 - 28
+Iteration 31: 1 : 223 - 67
+Iteration 32: 0 : 251 - 141
+Iteration 32: 1 : 0 - 167
+Iteration 33: 0 : 228 - 83
+Iteration 33: 1 : 199 - 54
+Iteration 34: 0 : 119 - 124
+Iteration 34: 1 : 239 - 189
+Iteration 35: 0 : 20 - 185
+Iteration 35: 1 : 7 - 167
+Iteration 36: 0 : 195 - 137
+Iteration 36: 1 : 218 - 127
+Iteration 37: 0 : 0 - 236
+Iteration 37: 1 : 185 - 125
+Iteration 38: 0 : 67 - 50
+Iteration 38: 1 : 9 - 193
+Iteration 39: 0 : 34 - 230
+Iteration 39: 1 : 221 - 62
+Iteration 40: 0 : 69 - 140
+Iteration 40: 1 : 118 - 66
+Iteration 41: 0 : 230 - 245
+Iteration 41: 1 : 222 - 214
+Iteration 42: 0 : 2 - 134
+Iteration 42: 1 : 32 - 51
+Iteration 43: 0 : 222 - 12
+Iteration 43: 1 : 35 - 103
+Iteration 44: 0 : 198 - 240
+Iteration 44: 1 : 246 - 129
+Iteration 45: 0 : 101 - 60
+Iteration 45: 1 : 82 - 52
+Iteration 46: 0 : 249 - 52
+Iteration 46: 1 : 51 - 4
+Iteration 47: 0 : 74 - 85
+Iteration 47: 1 : 69 - 148
+Iteration 48: 0 : 194 - 113
+Iteration 48: 1 : 56 - 160
+Iteration 49: 0 : 71 - 81
+Iteration 49: 1 : 52 - 27
+Iteration 50: 0 : 199 - 219
+Iteration 50: 1 : 166 - 240
+Iteration 51: 0 : 19 - 35
+Iteration 51: 1 : 110 - 239
+Iteration 52: 0 : 227 - 242
+Iteration 52: 1 : 195 - 6
+Iteration 53: 0 : 4 - 187
+Iteration 53: 1 : 10 - 19
+Iteration 54: 0 : 80 - 160
+Iteration 54: 1 : 10 - 64
+Iteration 55: 0 : 246 - 237
+Iteration 55: 1 : 106 - 22
+Iteration 56: 0 : 243 - 213
+Iteration 56: 1 : 182 - 51
+Iteration 57: 0 : 145 - 238
+Iteration 57: 1 : 141 - 212
+Iteration 58: 0 : 151 - 175
+Iteration 58: 1 : 181 - 45
+Iteration 59: 0 : 39 - 157
+Iteration 59: 1 : 138 - 238
+Iteration 60: 0 : 184 - 201
+Iteration 60: 1 : 205 - 35
+Iteration 61: 0 : 228 - 176
+Iteration 61: 1 : 158 - 117
+Iteration 62: 0 : 254 - 57
+Iteration 62: 1 : 69 - 107
+Iteration 63: 0 : 172 - 217
+Iteration 63: 1 : 250 - 244
+Iteration 64: 0 : 47 - 236
+Iteration 64: 1 : 206 - 94
+Iteration 65: 0 : 150 - 46
+Iteration 65: 1 : 25 - 201
+Iteration 66: 0 : 92 - 164
+Iteration 66: 1 : 222 - 6
+Iteration 67: 0 : 141 - 133
+Iteration 67: 1 : 211 - 204
+Iteration 68: 0 : 198 - 150
+Iteration 68: 1 : 203 - 61
+Iteration 69: 0 : 134 - 150
+Iteration 69: 1 : 217 - 178
+Iteration 70: 0 : 25 - 69
+Iteration 70: 1 : 159 - 216
+Iteration 71: 0 : 55 - 48
+Iteration 71: 1 : 155 - 176
+Iteration 72: 0 : 160 - 106
+Iteration 72: 1 : 248 - 38
+Iteration 73: 0 : 217 - 153
+Iteration 73: 1 : 171 - 169
+Iteration 74: 0 : 0 - 12
+Iteration 74: 1 : 33 - 35
+Iteration 75: 0 : 115 - 250
+Iteration 75: 1 : 114 - 27
+Iteration 76: 0 : 200 - 38
+Iteration 76: 1 : 160 - 248
+Iteration 77: 0 : 244 - 98
+Iteration 77: 1 : 60 - 209
+Iteration 78: 0 : 252 - 150
+Iteration 78: 1 : 125 - 3
+Iteration 79: 0 : 100 - 169
+Iteration 79: 1 : 109 - 46
+Iteration 80: 0 : 53 - 58
+Iteration 80: 1 : 190 - 176
+Iteration 81: 0 : 114 - 32
+Iteration 81: 1 : 83 - 6
+Iteration 82: 0 : 83 - 176
+Iteration 82: 1 : 19 - 114
+Iteration 83: 0 : 51 - 97
+Iteration 83: 1 : 138 - 97
+Iteration 84: 0 : 187 - 42
+Iteration 84: 1 : 69 - 137
+Iteration 85: 0 : 162 - 105
+Iteration 85: 1 : 248 - 73
+Iteration 86: 0 : 46 - 201
+Iteration 86: 1 : 89 - 168
+Iteration 87: 0 : 18 - 191
+Iteration 87: 1 : 242 - 39
+Iteration 88: 0 : 103 - 58
+Iteration 88: 1 : 33 - 185
+Iteration 89: 0 : 79 - 117
+Iteration 89: 1 : 61 - 44
+Iteration 90: 0 : 127 - 149
+Iteration 90: 1 : 6 - 230
+Iteration 91: 0 : 67 - 239
+Iteration 91: 1 : 227 - 8
+Iteration 92: 0 : 92 - 137
+Iteration 92: 1 : 196 - 106
+Iteration 93: 0 : 47 - 152
+Iteration 93: 1 : 64 - 32
+Iteration 94: 0 : 0 - 33
+Iteration 94: 1 : 103 - 156
+Iteration 95: 0 : 40 - 207
+Iteration 95: 1 : 205 - 167
+Iteration 96: 0 : 126 - 238
+Iteration 96: 1 : 75 - 142
+Iteration 97: 0 : 93 - 111
+Iteration 97: 1 : 157 - 182
+Iteration 98: 0 : 55 - 82
+Iteration 98: 1 : 42 - 238
+Iteration 99: 0 : 42 - 202
+Iteration 99: 1 : 87 - 232
+Iteration 100: 0 : 210 - 124
+Iteration 100: 1 : 59 - 210
+Iteration 101: 0 : 48 - 224
+Iteration 101: 1 : 62 - 163
+Iteration 102: 0 : 126 - 207
+Iteration 102: 1 : 30 - 136
+Iteration 103: 0 : 100 - 121
+Iteration 103: 1 : 70 - 50
+Iteration 104: 0 : 15 - 199
+Iteration 104: 1 : 103 - 59
+Iteration 105: 0 : 6 - 43
+Iteration 105: 1 : 2 - 161
+Iteration 106: 0 : 240 - 186
+Iteration 106: 1 : 172 - 81
+Iteration 107: 0 : 186 - 5
+Iteration 107: 1 : 20 - 52
+Iteration 108: 0 : 153 - 103
+Iteration 108: 1 : 84 - 151
+Iteration 109: 0 : 193 - 232
+Iteration 109: 1 : 64 - 123
+Iteration 110: 0 : 49 - 116
+Iteration 110: 1 : 42 - 46
+Iteration 111: 0 : 237 - 43
+Iteration 111: 1 : 62 - 245
+Iteration 112: 0 : 75 - 66
+Iteration 112: 1 : 29 - 223
+Iteration 113: 0 : 84 - 43
+Iteration 113: 1 : 51 - 110
+Iteration 114: 0 : 203 - 202
+Iteration 114: 1 : 225 - 228
+Iteration 115: 0 : 164 - 64
+Iteration 115: 1 : 187 - 232
+Iteration 116: 0 : 175 - 96
+Iteration 116: 1 : 17 - 36
+Iteration 117: 0 : 12 - 24
+Iteration 117: 1 : 111 - 41
+Iteration 118: 0 : 247 - 192
+Iteration 118: 1 : 241 - 247
+Iteration 119: 0 : 209 - 106
+Iteration 119: 1 : 131 - 114
+Iteration 120: 0 : 179 - 48
+Iteration 120: 1 : 9 - 245
+Iteration 121: 0 : 40 - 8
+Iteration 121: 1 : 29 - 36
+Iteration 122: 0 : 207 - 41
+Iteration 122: 1 : 40 - 217
+Iteration 123: 0 : 79 - 24
+Iteration 123: 1 : 135 - 44
+Iteration 124: 0 : 197 - 82
+Iteration 124: 1 : 101 - 198
+Iteration 125: 0 : 242 - 35
+Iteration 125: 1 : 184 - 160
+Iteration 126: 0 : 64 - 214
+Iteration 126: 1 : 143 - 67
+Iteration 127: 0 : 213 - 235
+Iteration 127: 1 : 243 - 181
+Iteration 128: 0 : 237 - 183
+Iteration 128: 1 : 46 - 94
+Iteration 129: 0 : 39 - 208
+Iteration 129: 1 : 49 - 155
+Iteration 130: 0 : 28 - 53
+Iteration 130: 1 : 168 - 152
+Iteration 131: 0 : 86 - 170
+Iteration 131: 1 : 232 - 93
+Iteration 132: 0 : 203 - 19
+Iteration 132: 1 : 76 - 107
+Iteration 133: 0 : 211 - 112
+Iteration 133: 1 : 182 - 255
+Iteration 134: 0 : 7 - 19
+Iteration 134: 1 : 42 - 225
+Iteration 135: 0 : 175 - 183
+Iteration 135: 1 : 46 - 186
+Iteration 136: 0 : 159 - 117
+Iteration 136: 1 : 22 - 210
+Iteration 137: 0 : 181 - 200
+Iteration 137: 1 : 121 - 40
+Iteration 138: 0 : 58 - 190
+Iteration 138: 1 : 28 - 250
+Iteration 139: 0 : 208 - 230
+Iteration 139: 1 : 17 - 72
+Iteration 140: 0 : 85 - 228
+Iteration 140: 1 : 216 - 72
+Iteration 141: 0 : 173 - 108
+Iteration 141: 1 : 232 - 229
+Iteration 142: 0 : 226 - 64
+Iteration 142: 1 : 219 - 196
+Iteration 143: 0 : 34 - 135
+Iteration 143: 1 : 32 - 25
+Iteration 144: 0 : 78 - 54
+Iteration 144: 1 : 73 - 209
+Iteration 145: 0 : 138 - 145
+Iteration 145: 1 : 166 - 45
+Iteration 146: 0 : 153 - 77
+Iteration 146: 1 : 182 - 159
+Iteration 147: 0 : 18 - 171
+Iteration 147: 1 : 75 - 130
+Iteration 148: 0 : 108 - 112
+Iteration 148: 1 : 50 - 93
+Iteration 149: 0 : 224 - 59
+Iteration 149: 1 : 240 - 214
+Iteration 150: 0 : 149 - 4
+Iteration 150: 1 : 178 - 254
+Iteration 151: 0 : 48 - 65
+Iteration 151: 1 : 87 - 249
+Iteration 152: 0 : 156 - 107
+Iteration 152: 1 : 156 - 30
+Iteration 153: 0 : 7 - 64
+Iteration 153: 1 : 105 - 191
+Iteration 154: 0 : 49 - 58
+Iteration 154: 1 : 250 - 205
+Iteration 155: 0 : 253 - 191
+Iteration 155: 1 : 28 - 163
+Iteration 156: 0 : 158 - 8
+Iteration 156: 1 : 222 - 75
+Iteration 157: 0 : 71 - 246
+Iteration 157: 1 : 210 - 175
+Iteration 158: 0 : 226 - 208
+Iteration 158: 1 : 63 - 141
+Iteration 159: 0 : 179 - 194
+Iteration 159: 1 : 232 - 18
+Iteration 160: 0 : 75 - 154
+Iteration 160: 1 : 140 - 246
+Iteration 161: 0 : 237 - 53
+Iteration 161: 1 : 153 - 99
+Iteration 162: 0 : 106 - 176
+Iteration 162: 1 : 76 - 157
+Iteration 163: 0 : 25 - 186
+Iteration 163: 1 : 86 - 204
+Iteration 164: 0 : 149 - 155
+Iteration 164: 1 : 91 - 101
+Iteration 165: 0 : 229 - 2
+Iteration 165: 1 : 153 - 233
+Iteration 166: 0 : 71 - 175
+Iteration 166: 1 : 202 - 3
+Iteration 167: 0 : 218 - 159
+Iteration 167: 1 : 199 - 192
+Iteration 168: 0 : 248 - 4
+Iteration 168: 1 : 244 - 115
+Iteration 169: 0 : 252 - 61
+Iteration 169: 1 : 244 - 230
+Iteration 170: 0 : 222 - 105
+Iteration 170: 1 : 200 - 135
+Iteration 171: 0 : 94 - 129
+Iteration 171: 1 : 63 - 163
+Iteration 172: 0 : 190 - 54
+Iteration 172: 1 : 150 - 207
+Iteration 173: 0 : 45 - 245
+Iteration 173: 1 : 31 - 48
+Iteration 174: 0 : 91 - 114
+Iteration 174: 1 : 125 - 85
+Iteration 175: 0 : 38 - 184
+Iteration 175: 1 : 158 - 41
+Iteration 176: 0 : 130 - 118
+Iteration 176: 1 : 69 - 130
+Iteration 177: 0 : 37 - 199
+Iteration 177: 1 : 224 - 179
+Iteration 178: 0 : 80 - 10
+Iteration 178: 1 : 16 - 127
+Iteration 179: 0 : 61 - 143
+Iteration 179: 1 : 168 - 221
+Iteration 180: 0 : 29 - 244
+Iteration 180: 1 : 103 - 33
+Iteration 181: 0 : 244 - 98
+Iteration 181: 1 : 149 - 136
+Iteration 182: 0 : 252 - 150
+Iteration 182: 1 : 92 - 170
+Iteration 183: 0 : 100 - 169
+Iteration 183: 1 : 82 - 208
+Iteration 184: 0 : 53 - 58
+Iteration 184: 1 : 127 - 1
+Iteration 185: 0 : 114 - 32
+Iteration 185: 1 : 164 - 222
+Iteration 186: 0 : 83 - 176
+Iteration 186: 1 : 6 - 42
+Iteration 187: 0 : 51 - 97
+Iteration 187: 1 : 50 - 234
+Iteration 188: 0 : 187 - 42
+Iteration 188: 1 : 118 - 220
+Iteration 189: 0 : 162 - 105
+Iteration 189: 1 : 239 - 104
+Iteration 190: 0 : 46 - 201
+Iteration 190: 1 : 136 - 152
+Iteration 191: 0 : 18 - 191
+Iteration 191: 1 : 216 - 34
+Iteration 192: 0 : 103 - 58
+Iteration 192: 1 : 53 - 220
+Iteration 193: 0 : 79 - 117
+Iteration 193: 1 : 117 - 57
+Iteration 194: 0 : 127 - 149
+Iteration 194: 1 : 69 - 249
+Iteration 195: 0 : 67 - 239
+Iteration 195: 1 : 232 - 163
+Iteration 196: 0 : 92 - 137
+Iteration 196: 1 : 163 - 253
+Iteration 197: 0 : 47 - 152
+Iteration 197: 1 : 239 - 15
+Iteration 198: 0 : 0 - 33
+Q Iteration 0: 0 : 225 - 226
+Q Iteration 1: 0 : 11 - 160
+Q Iteration 2: 0 : 218 - 135
+Q Iteration 3: 0 : 28 - 4
+Q Iteration 4: 0 : 173 - 2
+Q Iteration 5: 0 : 126 - 12
+Q Iteration 6: 0 : 122 - 117
+Q Iteration 7: 0 : 33 - 242
+Q Iteration 8: 0 : 50 - 143
+Q Iteration 9: 0 : 85 - 47
+Q Iteration 10: 0 : 79 - 171
+Q Iteration 11: 0 : 207 - 7
+Q Iteration 12: 0 : 25 - 151
+Q Iteration 13: 0 : 207 - 125
+Q Iteration 14: 0 : 157 - 104
+Q Iteration 15: 0 : 46 - 112
+Q Iteration 16: 0 : 99 - 160
+Q Iteration 17: 0 : 73 - 74
+Q Iteration 18: 0 : 135 - 202
+Q Iteration 19: 0 : 108 - 66
+Q Iteration 20: 0 : 26 - 98
+Q Iteration 21: 0 : 59 - 176
+Q Iteration 22: 0 : 58 - 56
+Q Iteration 23: 0 : 29 - 13
+Q Iteration 24: 0 : 248 - 65
+Q Iteration 25: 0 : 51 - 218
+Q Iteration 26: 0 : 13 - 89
+Q Iteration 27: 0 : 83 - 20
+Q Iteration 28: 0 : 252 - 208
+Q Iteration 29: 0 : 254 - 49
+Q Iteration 30: 0 : 209 - 102
+Q Iteration 31: 0 : 70 - 28
+Q Iteration 32: 0 : 251 - 141
+Q Iteration 33: 0 : 228 - 83
+Q Iteration 34: 0 : 119 - 124
+Q Iteration 35: 0 : 20 - 185
+Q Iteration 36: 0 : 195 - 137
+Q Iteration 37: 0 : 0 - 236
+Q Iteration 38: 0 : 67 - 50
+Q Iteration 39: 0 : 34 - 230
+Q Iteration 40: 0 : 69 - 140
+Q Iteration 41: 0 : 230 - 245
+Q Iteration 42: 0 : 2 - 134
+Q Iteration 43: 0 : 222 - 12
+Q Iteration 44: 0 : 198 - 240
+Q Iteration 45: 0 : 101 - 60
+Q Iteration 46: 0 : 249 - 52
+Q Iteration 47: 0 : 74 - 85
+Q Iteration 48: 0 : 194 - 113
+Q Iteration 49: 0 : 71 - 81
+Q Iteration 50: 0 : 199 - 219
+Q Iteration 51: 0 : 19 - 35
+Q Iteration 52: 0 : 227 - 242
+Q Iteration 53: 0 : 4 - 187
+Q Iteration 54: 0 : 80 - 160
+Q Iteration 55: 0 : 246 - 237
+Q Iteration 56: 0 : 243 - 213
+Q Iteration 57: 0 : 145 - 238
+Q Iteration 58: 0 : 151 - 175
+Q Iteration 59: 0 : 39 - 157
+Q Iteration 60: 0 : 184 - 201
+Q Iteration 61: 0 : 228 - 176
+Q Iteration 62: 0 : 254 - 57
+Q Iteration 63: 0 : 172 - 217
+Q Iteration 64: 0 : 47 - 236
+Q Iteration 65: 0 : 150 - 46
+Q Iteration 66: 0 : 92 - 164
+Q Iteration 67: 0 : 141 - 133
+Q Iteration 68: 0 : 198 - 150
+Q Iteration 69: 0 : 134 - 150
+Q Iteration 70: 0 : 25 - 69
+Q Iteration 71: 0 : 55 - 48
+Q Iteration 72: 0 : 160 - 106
+Q Iteration 73: 0 : 217 - 153
+Q Iteration 74: 0 : 0 - 12
+Q Iteration 75: 0 : 115 - 250
+Q Iteration 76: 0 : 200 - 38
+Q Iteration 77: 0 : 244 - 98
+Q Iteration 78: 0 : 252 - 150
+Q Iteration 79: 0 : 100 - 169
+Q Iteration 80: 0 : 53 - 58
+Q Iteration 81: 0 : 114 - 32
+Q Iteration 82: 0 : 83 - 176
+Q Iteration 83: 0 : 51 - 97
+Q Iteration 84: 0 : 187 - 42
+Q Iteration 85: 0 : 162 - 105
+Q Iteration 86: 0 : 46 - 201
+Q Iteration 87: 0 : 18 - 191
+Q Iteration 88: 0 : 103 - 58
+Q Iteration 89: 0 : 79 - 117
+Q Iteration 90: 0 : 127 - 149
+Q Iteration 91: 0 : 67 - 239
+Q Iteration 92: 0 : 92 - 137
+Q Iteration 93: 0 : 47 - 152
+Q Iteration 94: 0 : 0 - 33
+Q Iteration 95: 0 : 40 - 207
+Q Iteration 96: 0 : 126 - 238
+Q Iteration 97: 0 : 93 - 111
+Q Iteration 98: 0 : 55 - 82
+Q Iteration 99: 0 : 42 - 202
+Q Iteration 100: 0 : 210 - 124
+Q Iteration 101: 0 : 48 - 224
+Q Iteration 102: 0 : 126 - 207
+Q Iteration 103: 0 : 100 - 121
+Q Iteration 104: 0 : 15 - 199
+Q Iteration 0: 1 : 225 - 226
+Q Iteration 105: 0 : 6 - 43
+Q Iteration 1: 1 : 11 - 160
+Q Iteration 106: 0 : 240 - 186
+Q Iteration 2: 1 : 218 - 135
+Q Iteration 107: 0 : 186 - 5
+Q Iteration 3: 1 : 28 - 4
+Q Iteration 108: 0 : 153 - 103
+Q Iteration 4: 1 : 173 - 2
+Q Iteration 109: 0 : 193 - 232
+Q Iteration 5: 1 : 126 - 12
+Q Iteration 110: 0 : 49 - 116
+Q Iteration 6: 1 : 122 - 117
+Q Iteration 111: 0 : 237 - 43
+Q Iteration 7: 1 : 33 - 242
+Q Iteration 112: 0 : 75 - 66
+Q Iteration 8: 1 : 50 - 143
+Q Iteration 113: 0 : 84 - 43
+Q Iteration 9: 1 : 85 - 47
+Q Iteration 114: 0 : 203 - 202
+Q Iteration 10: 1 : 79 - 171
+Q Iteration 115: 0 : 164 - 64
+Q Iteration 11: 1 : 207 - 7
+Q Iteration 116: 0 : 175 - 96
+Q Iteration 12: 1 : 25 - 151
+Q Iteration 117: 0 : 12 - 24
+Q Iteration 13: 1 : 207 - 125
+Q Iteration 118: 0 : 247 - 192
+Q Iteration 14: 1 : 157 - 104
+Q Iteration 119: 0 : 209 - 106
+Q Iteration 15: 1 : 46 - 112
+Q Iteration 120: 0 : 179 - 48
+Q Iteration 16: 1 : 99 - 160
+Q Iteration 121: 0 : 40 - 8
+Q Iteration 17: 1 : 73 - 74
+Q Iteration 122: 0 : 207 - 41
+Q Iteration 18: 1 : 135 - 202
+Q Iteration 123: 0 : 79 - 24
+Q Iteration 19: 1 : 108 - 66
+Q Iteration 124: 0 : 197 - 82
+Q Iteration 20: 1 : 26 - 98
+Q Iteration 125: 0 : 242 - 35
+Q Iteration 21: 1 : 59 - 176
+Q Iteration 126: 0 : 64 - 214
+Q Iteration 22: 1 : 58 - 56
+Q Iteration 127: 0 : 213 - 235
+Q Iteration 23: 1 : 29 - 13
+Q Iteration 128: 0 : 237 - 183
+Q Iteration 24: 1 : 248 - 65
+Q Iteration 129: 0 : 39 - 208
+Q Iteration 25: 1 : 51 - 218
+Q Iteration 130: 0 : 28 - 53
+Q Iteration 26: 1 : 13 - 89
+Q Iteration 131: 0 : 86 - 170
+Q Iteration 27: 1 : 83 - 20
+Q Iteration 132: 0 : 203 - 19
+Q Iteration 28: 1 : 252 - 208
+Q Iteration 133: 0 : 211 - 112
+Q Iteration 29: 1 : 254 - 49
+Q Iteration 134: 0 : 7 - 19
+Q Iteration 30: 1 : 209 - 102
+Q Iteration 135: 0 : 175 - 183
+Q Iteration 31: 1 : 70 - 28
+Q Iteration 136: 0 : 159 - 117
+Q Iteration 32: 1 : 251 - 141
+Q Iteration 137: 0 : 181 - 200
+Q Iteration 33: 1 : 228 - 83
+Q Iteration 138: 0 : 58 - 190
+Q Iteration 34: 1 : 119 - 124
+Q Iteration 139: 0 : 208 - 230
+Q Iteration 35: 1 : 20 - 185
+Q Iteration 140: 0 : 85 - 228
+Q Iteration 36: 1 : 195 - 137
+Q Iteration 141: 0 : 173 - 108
+Q Iteration 37: 1 : 0 - 236
+Q Iteration 142: 0 : 226 - 64
+Q Iteration 38: 1 : 67 - 50
+Q Iteration 143: 0 : 34 - 135
+Q Iteration 39: 1 : 34 - 230
+Q Iteration 144: 0 : 78 - 54
+Q Iteration 40: 1 : 69 - 140
+Q Iteration 145: 0 : 138 - 145
+Q Iteration 41: 1 : 230 - 245
+Q Iteration 146: 0 : 153 - 77
+Q Iteration 42: 1 : 2 - 134
+Q Iteration 147: 0 : 18 - 171
+Q Iteration 43: 1 : 222 - 12
+Q Iteration 148: 0 : 108 - 112
+Q Iteration 44: 1 : 198 - 240
+Q Iteration 149: 0 : 224 - 59
+Q Iteration 45: 1 : 101 - 60
+Q Iteration 150: 0 : 149 - 4
+Q Iteration 46: 1 : 249 - 52
+Q Iteration 151: 0 : 48 - 65
+Q Iteration 47: 1 : 74 - 85
+Q Iteration 152: 0 : 156 - 107
+Q Iteration 48: 1 : 194 - 113
+Q Iteration 153: 0 : 7 - 64
+Q Iteration 49: 1 : 71 - 81
+Q Iteration 154: 0 : 49 - 58
+Q Iteration 50: 1 : 199 - 219
+Q Iteration 155: 0 : 253 - 191
+Q Iteration 51: 1 : 19 - 35
+Q Iteration 156: 0 : 158 - 8
+Q Iteration 52: 1 : 227 - 242
+Q Iteration 157: 0 : 71 - 246
+Q Iteration 53: 1 : 4 - 187
+Q Iteration 158: 0 : 226 - 208
+Q Iteration 54: 1 : 80 - 160
+Q Iteration 159: 0 : 179 - 194
+Q Iteration 55: 1 : 246 - 237
+Q Iteration 160: 0 : 75 - 154
+Q Iteration 56: 1 : 243 - 213
+Q Iteration 161: 0 : 237 - 53
+Q Iteration 57: 1 : 145 - 238
+Q Iteration 162: 0 : 106 - 176
+Q Iteration 58: 1 : 151 - 175
+Q Iteration 163: 0 : 25 - 186
+Q Iteration 59: 1 : 39 - 157
+Q Iteration 164: 0 : 149 - 155
+Q Iteration 60: 1 : 184 - 201
+Q Iteration 165: 0 : 229 - 2
+Q Iteration 61: 1 : 228 - 176
+Q Iteration 166: 0 : 71 - 175
+Q Iteration 62: 1 : 254 - 57
+Q Iteration 167: 0 : 218 - 159
+Q Iteration 63: 1 : 172 - 217
+Q Iteration 168: 0 : 248 - 4
+Q Iteration 64: 1 : 47 - 236
+Q Iteration 169: 0 : 252 - 61
+Q Iteration 65: 1 : 150 - 46
+Q Iteration 170: 0 : 222 - 105
+Q Iteration 66: 1 : 92 - 164
+Q Iteration 171: 0 : 94 - 129
+Q Iteration 67: 1 : 141 - 133
+Q Iteration 172: 0 : 190 - 54
+Q Iteration 68: 1 : 198 - 150
+Q Iteration 173: 0 : 45 - 245
+Q Iteration 69: 1 : 134 - 150
+Q Iteration 174: 0 : 91 - 114
+Q Iteration 70: 1 : 25 - 69
+Q Iteration 175: 0 : 38 - 184
+Q Iteration 71: 1 : 55 - 48
+Q Iteration 176: 0 : 130 - 118
+Q Iteration 72: 1 : 160 - 106
+Q Iteration 177: 0 : 37 - 199
+Q Iteration 73: 1 : 217 - 153
+Q Iteration 178: 0 : 80 - 10
+Q Iteration 74: 1 : 0 - 12
+Q Iteration 179: 0 : 61 - 143
+Q Iteration 75: 1 : 115 - 250
+Q Iteration 180: 0 : 29 - 244
+Q Iteration 76: 1 : 200 - 38
+Q Iteration 181: 0 : 244 - 98
+Q Iteration 77: 1 : 244 - 98
