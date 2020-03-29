@@ -132,7 +132,7 @@ cipher.encrypt(b'sixteen-byte-msg').hex()
 
 ## 3. Расшифровать следующие шифртексты:
 
-Режим CBC и CTR. IV = 16 байт. IV добавлен к зашифрованному тексту в начале. PKCS5 padding
+Режим CBC и CTR. IV = 16 байт. IV добавлен к зашифрованному тексту в начале. PKCS7(PKCS5) padding
 
 
     CBC key: 140b41b22a29beb4061bda66b6747e14
