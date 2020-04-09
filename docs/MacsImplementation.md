@@ -127,3 +127,6 @@ cipher.encrypt(b'sixteen-byte-msg').hex()
 
 ## 4. Замерить производительность OMAC и HMAC для сообщений, длины 0.1, 1, 10, 1024 KB (не менее 1000 сообщений). 
 Построить график зависимости среднего времени выполнения от размера сообщений (2 графика).
+
+#### Доп материалы
+Ссылка OMAC (CMAC) https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-38b.pdf (пункт 6)
