@@ -9,11 +9,11 @@
 
 `VER_X(m, s)` - функция проверки подписи `s` для сообщения `m` с использованием открытого ключа пользователя `X`.
 
-Пусть ECDH состоит из пары алгоритмов - `(GEN, GET_X(Y_PK))`, где
+Пусть ECDH состоит из пары алгоритмов - `(GEN, GET(X_SK, Y_PK))`, где
 
 `GEN` - функция генерации ключевой пары 
 
-`GET_X(Y_PK)` - функция выработки общего секрета из открытого ключа `Y` и закрытого ключа `X`
+`GET(X_SK, Y_PK)` - функция выработки общего секрета из открытого ключа `Y` и закрытого ключа `X`
 
 #### 0. Предварительный обмен ключами (выполняется вне протокола)
 ```
@@ -26,9 +26,9 @@ B: (ECDSA_PK_B, ECDSA_SK_B) <- ECDSA.GEN; ECDSA_PK_B -> A
 ```
 A: (DH_PK_A, DH_SK_A) <- ECDH.GEN; r_A <-^r {0,1}^R; (DH_PK_A, r_A) -> B
 
-B: (DH_PK_B, DH_SK_B) <- ECDH.GEN; r_B <-^r {0,1}^R; (k_m, k_e) <- PRF_(r_A||r_B)(DH_PK_A, DH_PK_B); (DH_PK_A, B, ECDSA.SIGN_B(DH_PK_A, DH_PK_B), MAC_k_m(B)) -> A
+B: (DH_PK_B, DH_SK_B) <- ECDH.GEN; r_B <-^r {0,1}^R; (k_m, k_e) <- PRF_(r_A||r_B)(ECDH.GET(DH_SK_B, DH_PK_A)); (DH_PK_A, B, ECDSA.SIGN_B(DH_PK_A, DH_PK_B), MAC_k_m(B)) -> A
 
-A: (k_m, k_e) <- PRF_(r_A||r_B)(DH_PK_A, DH_PK_B); (A ECDSA.SIGN_A(DH_PK_A, DH_PK_B), MAC_k_m(A)) -> B
+A: (k_m, k_e) <- PRF_(r_A||r_B)(ECDH.GET(DH_SK_A, DH_PK_B)); (A ECDSA.SIGN_A(DH_PK_A, DH_PK_B), MAC_k_m(A)) -> B
 ```
 
 #### 2. Отправка зашифрованных данных
