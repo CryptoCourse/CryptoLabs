@@ -33,11 +33,11 @@ B:
 (DH_PK_B, DH_SK_B) <- ECDH.GEN; 
 r_B <-^r {0,1}^R; 
 (k_m, k_e) <- PRF_(r_A||r_B)(ECDH.GET(DH_SK_B, DH_PK_A)); 
-(DH_PK_B, B, ECDSA.SIGN_B(DH_PK_A, DH_PK_B), MAC_k_m(B)) -> A
+(DH_PK_B, r_B, B, ECDSA.SIGN_B(DH_PK_A, DH_PK_B), MAC_k_m(B)) -> A
 
 A: 
 (k_m, k_e) <- PRF_(r_A||r_B)(ECDH.GET(DH_SK_A, DH_PK_B)); 
-(A ECDSA.SIGN_A(DH_PK_A, DH_PK_B), MAC_k_m(A)) -> B
+(A, ECDSA.SIGN_A(DH_PK_A, DH_PK_B), MAC_k_m(A)) -> B
 ```
 
 где `<-^r Q` - выбор случайного элемента из `Q` (равномерное распределение);
