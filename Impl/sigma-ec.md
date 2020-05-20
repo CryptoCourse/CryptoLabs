@@ -37,7 +37,7 @@ r_B <-^r {0,1}^R;
 
 A: 
 (k_m, k_e) <- PRF_(r_A||r_B)(ECDH.GET(DH_SK_A, DH_PK_B)); 
-(A, ECDSA.SIGN_A(DH_PK_A, DH_PK_B), MAC_k_m(A)) -> B
+(A, ECDSA.SIGN_A(DH_PK_B, DH_PK_A), MAC_k_m(A)) -> B
 ```
 
 где `<-^r Q` - выбор случайного элемента из `Q` (равномерное распределение);
