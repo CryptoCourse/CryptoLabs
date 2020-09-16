@@ -1,4 +1,4 @@
-Дана REST служба с API указанным ниже.
+﻿Дана REST служба с API указанным ниже.
 
 Задача - построить эффективный распознаватель режимов шифрования (ECB, CBC).
 
@@ -24,7 +24,7 @@
 2. Получить зашифрованное сообщение с помощью метода `POST <host>/api/EncryptionModeOracle/<userId>/<challengeId>/noentropy`
 3. Определить режим шифрования
 4. Проверить верность ответа использовав метод `GET <host>/api/EncryptionModeOracle/<userId>/<challengeId>/verify`
-5. Проверить корреиность программы для `<challengeId>` = 1..10
+5. Проверить корректность программы для `<challengeId>` = 1..10
 
 ### Сдача лабы
 шаги 1 - 3 этапа тестирования аналогично, но использование метода `POST <host>/api/EncryptionModeOracle/<userId>/<challengeId>` на шаге 2.
@@ -32,7 +32,7 @@
 
 ## Описание API
 
-Rest запросы, в заголовке выстален Content-Type: application/json; charset=utf-8.
+Rest запросы, в заголовке выставлен Content-Type: application/json; charset=utf-8.
 
 ### Описание методов
 

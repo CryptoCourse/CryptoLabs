@@ -1,9 +1,9 @@
-**ВАЖНО!** Перед данной работы рекомендуется выполнить 
+﻿**ВАЖНО!** Перед данной работы рекомендуется выполнить 
 [лабораторную на распознание режимов шифрования.](https://github.com/CryptoCourse/CryptoLabs/blob/master/docs/labEncryptionModeDist.md)
 
 Дана REST служба с API указанным ниже.
 
-Служба шифует указанный пользователем открытый текст, следующим образом:
+Служба шифрует указанный пользователем открытый текст, следующим образом:
 
 `E(k, random_padding || user_data || target_data||)`
 
@@ -39,14 +39,14 @@
 4. Используя метод `POST <host>/api/EcbDecryption/<userId>/<challengeId>/noentropy` получить необходимые шифртексты.
 5. Расшифровать target_data
 6. Проверить верность ответа использовав метод `GET <host>/api/EcbDecryption/<userId>/<challengeId>/verify`
-7. Проверить корреиность программы для `<challengeId>` = 1..10
+7. Проверить курёзность программы для `<challengeId>` = 1..10
 
 ### Сдача лабы
 шаги 1 - 7 этапа тестирования аналогично, но для 15 различных `<challengeId>`.
 
 ## Описание API
 
-Rest запросы, в заголовке выстален Content-Type: application/json; charset=utf-8.
+Rest запросы, в заголовке выставлен Content-Type: application/json; charset=utf-8.
 
 ### Описание методов
 
