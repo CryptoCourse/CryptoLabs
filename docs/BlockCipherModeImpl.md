@@ -150,3 +150,26 @@ cipher.encrypt(b'sixteen-byte-msg').hex()
     CTR Ciphertext 2: 770b80259ec33beb2561358a9f2dc617e46218c0a53cbeca695ae45faa8952aa0e311bde9d4e01726d3184c34451
     
 ## 4. Для каждого режима шифрования зашифровать и расшифровать произвольный текст длины 2,5 блока.
+
+
+
+## PS. Небольшие спойлеры по лабе в части CTR, если очень сложно читать rfc
+
+ * `nonce` - уникально в рамках одного соединения
+
+ * `IV` уникально для каждого сообщения
+
+ * `Block Counter` уникальность для каждого блока
+
+```
+The encryptor can generate the IV in any
+manner that ensures uniqueness. Common approaches to IV generation
+include incrementing a counter for each packet and linear feedback
+shift registers (LFSRs).
+```
+
+ * если для `IV` и `counter` использовать счётчики - всё будет хорошо в плане безопасности
+
+ * `nonce` нужно генерить случано, если следовать rfc, но один раз для одного соединения
+
+ * пара `nonce`-`iv` действительно должна быть уникальной для всех сообщений при фиксированном ключе
