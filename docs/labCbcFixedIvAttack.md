@@ -15,7 +15,7 @@
 он зашифровал пин-код, и захостил его на своём сайте вместе с зашифрованным пин-кодом 
 (что может пойти не так, ведь CBC семантически стойкий, а в книге В.М. Фомичёва что попало не напишут).
 
-![img](http://donthatethegeek.com/wp-content/uploads/2014/10/aMbKWKW_460s.jpg)
+![img](https://images.baklol.com/You-Literally-Have-No-Power-Here-0665785331499770141.jpg)
 
 ## Задание
 
