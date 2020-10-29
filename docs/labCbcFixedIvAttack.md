@@ -45,8 +45,8 @@
 
 
 1. Проверить работоспособность контроллера с помощью метода `GET <host>/api/IvIsTime`
-2. Получить зашифрованный пин-код с помощью метода `GET <host>/api/EncryptionModeOracle/<userId>/<challengeId>/encryptedpin`
-3. Получить пин-код, используя метод `POST <host>/api/EncryptionModeOracle/<userId>/<challengeId>/noentropy`
+2. Получить зашифрованный пин-код с помощью метода `GET <host>/api/IvIsTime/<userId>/<challengeId>/encryptedpin`
+3. Получить пин-код, используя метод `POST <host>/api/IvIsTime/<userId>/<challengeId>/noentropy`
 4. Проверить пин-код, используя метод `GET <host>/api/IvIsTime/<userId>/<challengeId>/validate`
 
 ### Сдача лабы
