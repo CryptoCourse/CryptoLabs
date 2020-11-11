@@ -15,7 +15,7 @@
 он зашифровал пин-код, и захостил его на своём сайте вместе с зашифрованным пин-кодом 
 (что может пойти не так, ведь CBC семантически стойкий, а в книге В.М. Фомичёва что попало не напишут).
 
-![img](http://donthatethegeek.com/wp-content/uploads/2014/10/aMbKWKW_460s.jpg)
+![img](https://images.baklol.com/You-Literally-Have-No-Power-Here-0665785331499770141.jpg)
 
 ## Задание
 
@@ -45,8 +45,8 @@
 
 
 1. Проверить работоспособность контроллера с помощью метода `GET <host>/api/IvIsTime`
-2. Получить зашифрованный пин-код с помощью метода `GET <host>/api/EncryptionModeOracle/<userId>/<challengeId>/encryptedpin`
-3. Получить пин-код, используя метод `POST <host>/api/EncryptionModeOracle/<userId>/<challengeId>/noentropy`
+2. Получить зашифрованный пин-код с помощью метода `GET <host>/api/IvIsTime/<userId>/<challengeId>/encryptedpin`
+3. Получить пин-код, используя метод `POST <host>/api/IvIsTime/<userId>/<challengeId>/noentropy`
 4. Проверить пин-код, используя метод `GET <host>/api/IvIsTime/<userId>/<challengeId>/validate`
 
 ### Сдача лабы
