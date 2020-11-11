@@ -1,4 +1,4 @@
-Дана REST служба с API указанным ниже.
+﻿Дана REST служба с API указанным ниже.
 
 В качестве MAC используется следующая функция: `MAC(k,x) = SHA-1(k || x)`
 
@@ -24,12 +24,16 @@
 1. Проверить работоспособность контроллера с помощью метода `GET <host>/api/Sha1Mac`
 2. Получить зашифрованное MAC для строки `"user=<userId>;` с помощью метода `GET <host>/api/Sha1Mac/<userId>/<challengeId>/mac`
 3. Получить сообщение содержащее текст `;admin=true` и MAC для него
-4. Получить ответ от метода `POST <host>/api/Sha1Mac/<userId>/<challengeId>/<mac>/verify`, убедиться что текст соотвествует строке "Wellcome to secretNet!".
+4. Получить ответ от метода `POST <host>/api/Sha1Mac/<userId>/<challengeId>/<mac>/verify`, убедиться, что текст соотвествует строке "Wellcome to secretNet!".
 
 ### Сдача лабы
 шаги 1 - 4 этапа тестирования аналогично для 5 различных `<challengeId>`
 
 ## Описание API
+
+Rest запросы, в заголовке выставлен Content-Type: application/json; charset=utf-8.
+
+### Описание методов
 
 ## `GET <host>/api/Sha1Mac`
 
@@ -41,7 +45,7 @@
 
 ## `GET <host>/api/Sha1Mac/<userId>/<challengeId>/mac`
 
-Возаращает строковое hex представление MAC для строки `$"user=<userId>;"` Ответ не кодируется в BASE64.
+Возвращает строковое hex представление MAC для строки `$"user=<userId>;"` Ответ не кодируется в BASE64.
 
 | Параметр| Описание| 
 | --- | --- 
