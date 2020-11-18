@@ -71,7 +71,7 @@ Rest запросы, в заголовке выставлен Content-Type: appl
 | `<userId>` | идентификатор студента
 | `<challengeId>` | идентификатор задания
 
-## `GET <host>/api/EncryptionModeOracle/<userId>/<challengeId>/verify`
+## `GET <host>/api/EcbDecryption/<userId>/<challengeId>/verify`
 
 Возвращает target_data для указанного задания
 
