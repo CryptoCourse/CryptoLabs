@@ -52,7 +52,7 @@
 
             var key = this.GetSecretKey(userId, challengeId);
 
-            byte[] message = null;
+            byte[] message;
             try
             {
                 message = Convert.FromBase64String(messageBase64);
@@ -71,7 +71,7 @@
 
             return Encoding.ASCII.GetString(message).Contains(";admin=true")
                        ? "Wellcome to SecretNet!"
-                       : "You are not admin! Good bye!";
+                       : "You are not admin! Goodbye!";
         }
 
         private byte[] GetSecretKey(string userId, string challengeId)
@@ -80,15 +80,16 @@
             {
                 var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
-                var prg = new DeterministicCryptoRandomGenerator(seed, false);
+                using (var generator = new DeterministicCryptoRandomGenerator(seed, false))
+                {
+                    var keyLengthBytes = new byte[4];
+                    generator.GetBytes(keyLengthBytes);
+                    var keyLength = BitConverter.ToUInt32(keyLengthBytes, 0) % 64 + 1;
 
-                var keyLengthBytes = new byte[4];
-                prg.GetBytes(keyLengthBytes);
-                var keyLength = BitConverter.ToUInt32(keyLengthBytes, 0) % 64 + 1;
-
-                var key = new byte[keyLength];
-                prg.GetBytes(key);
-                return key;
+                    var key = new byte[keyLength];
+                    generator.GetBytes(key);
+                    return key;
+                }
             }
         }
     }
