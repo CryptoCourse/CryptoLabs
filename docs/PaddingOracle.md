@@ -12,7 +12,7 @@
 
 ![img](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX4z5lwmoUFkg9VuiJu0saTIbCorr-2RWeWb0Lf76wpIlIu7fQ&s)
 
-Шифрование токенов производится в режиме Mac-Then-Encrypt, CBC-AES, HMAC.
+Шифрование токенов производится в режиме Mac-Then-Encrypt, CBC-AES, HMAC. Паддинг - PKCS7.
 
 ## Ход работы.
 
