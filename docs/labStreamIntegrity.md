@@ -86,9 +86,10 @@ Rest запросы, в заголовке выставлен Content-Type: appl
 import json
 import requests
 
-r = requests.post("http://192.168.130.133/api/values", data=json.dumps("HereIsSomeStringData"), headers = {'Content-Type': 'application/json'})
-print(r.status_code, r.reason)
-print(r.text)
+with requests.Session() as session:
+  r = session.post("http://192.168.130.133/api/values", data=json.dumps("HereIsSomeStringData"), headers = {'Content-Type': 'application/json'})
+  print(r.status_code, r.reason)
+  print(r.text)
 ```
 
 ### Пример post запроса
