@@ -1,6 +1,8 @@
 ﻿Здесь и далее используется AES с длиной ключа 128 бит.
 
 ## 1. Реализовать функцию на вашем языке программирования со следующим интерфейсом:
+`void SetKey(byte[] key)` - установка ключа шифрования\расшифрования`, где
+
 `byte[] AesBlockEncrypt(byte[] key, byte[] data, bool isFinalBLock, string padding)`, где
 
 `key` - байтовое представление ключа блочного шифра
@@ -110,7 +112,6 @@ cipher.encrypt(b'sixteen-byte-msg').hex()
 ## 2. Реализовать режимы ECB, CBC, CFB, OFB, CTR с использованием функции `AesBlockEncrypt`.
 
 Реализовать интерфейс
-`void SetKey(byte[] key)` - установка ключа шифрования\расшифрования
 
 `byte[] Encrypt(byte[] data, string mode, byte[] iv = null)` - ф-я шифрование на заданном ключе
 
