@@ -3,7 +3,7 @@
 ## 1. Реализовать функцию на вашем языке программирования со следующим интерфейсом:
 `void SetKey(byte[] key)` - установка ключа шифрования\расшифрования`, где
 
-`byte[] AesBlockEncrypt(byte[] key, byte[] data, bool isFinalBLock, string padding)`, где
+`byte[] AesBlockEncrypt(byte[] data, bool isFinalBLock, string padding)`, где
 
 `key` - байтовое представление ключа блочного шифра
 
