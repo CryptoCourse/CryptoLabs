@@ -1,11 +1,11 @@
 ﻿Здесь и далее используется AES с длиной ключа 128 бит.
 
 ## 1. Реализовать функцию на вашем языке программирования со следующим интерфейсом:
-`void SetKey(byte[] key)` - установка ключа шифрования\расшифрования`,
-
-`byte[] AesBlockEncrypt(byte[] data, bool isFinalBLock, string padding)`, где
+`void SetKey(byte[] key)` - установка ключа шифрования\расшифрования`, где
 
 `key` - байтовое представление ключа блочного шифра
+
+`byte[] AesBlockEncrypt(byte[] data, bool isFinalBLock, string padding)`, где
 
 `data` - блок для шифрования
 
