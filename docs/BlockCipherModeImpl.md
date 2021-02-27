@@ -117,8 +117,6 @@ cipher.encrypt(b'sixteen-byte-msg').hex()
 
 `byte[] Decrypt(byte[] data, string mode, byte[] iv = null)` - ф-я шифрование на заданном ключе, где
 
-`key` - байтовое представление ключа блочного шифра. 
-
 `data` - массив байт для шифрования
 
 `mode` - режим шифрования, допустимые значения ECB, CBC, CFB, OFB, CTR. Может быть задан через `Enum` на c#.
