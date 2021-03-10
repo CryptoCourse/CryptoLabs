@@ -111,7 +111,7 @@ FOUND:
 
 Доп литература:
 
-https://github.com/CryptoCourse/CryptoLectures/blob/master/Lectures/Lecture11.pdf (стр 7-8, 26-29, 43-46)
+https://github.com/CryptoCourse/CryptoLectures/blob/master/Lectures/HashFunctionsLite.pdf
 
 https://iamaaditya.github.io/2012/07/the-birthday-paradox-proof/
 
