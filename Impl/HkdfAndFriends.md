@@ -58,7 +58,7 @@ K_i = HkdfExpand(PRK, K_{i-1} CTX, i)
 
 ![img](https://webee.technion.ac.il/~hugo/kdf/hkdf-fig.jpg)
 
-7. Убедиться в равномерной распределённости первых 5 бит ключей, построив гистограмму.
+7. Убедиться в равномерной распределённости первых 10 бит ключей, построив гистограмму.
 
 ## PBKDF2
 
@@ -79,7 +79,7 @@ K = T_1 || T_len
 1. На основе файла [passwords.json](https://github.com/CryptoCourse/CryptoLabs/blob/master/Impl/passwords.json) построить гистограмму распределения первых 5 бит паролей (кодировка ASCII).
 2. Реализовать PBKDF2 с использованием HMAC в качестве PRF, с использованием случайного `S`. Число итераций 10000.
 3. Получить симметричный ключ для каждого пароля длины 512 бит.
-4. Убедиться в равномерной распределённости первых 5 бит ключей, построив гистограмму.
+4. Убедиться в равномерной распределённости первых 10 бит ключей, построив гистограмму.
 
 ## Результат работы
 **HKDF** Гистограммы (любой из: jpg, pdf, png, xlsx), обоснование выбора данных для ключевого материала, код.
@@ -87,9 +87,8 @@ K = T_1 || T_len
 **PBKDF** Гистограмма (любой из: jpg, pdf, png, xlsx), код.
 
 ## Дополнительные ссылки
-https://github.com/CryptoCourse/CryptoLectures/blob/master/Lectures/Lecture11.pdf (стр 33-46)
 
-https://github.com/CryptoCourse/CryptoLectures/blob/master/Lectures/Lecture3.pdf (стр 33-35)
+https://github.com/CryptoCourse/CryptoLectures/blob/master/Lectures/KdfLite.pdf
 
 https://en.wikipedia.org/wiki/HMAC
 
