@@ -10,6 +10,7 @@
 
     using Microsoft.AspNetCore.Mvc;
 
+    [ApiController]
     [Route("api/Sha1Mac")]
     public class Sha1MacController : Controller
     {

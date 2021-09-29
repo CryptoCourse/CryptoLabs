@@ -9,6 +9,7 @@
 
     using Microsoft.AspNetCore.Mvc;
 
+    [ApiController]
     [Route("api/IvIsTime")]
     public class IvIsTimeController : Controller
     {

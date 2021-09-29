@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 namespace CryptoLabsService
 {
     using CryptoLabsService.Managers;
+    using Microsoft.Extensions.Hosting;
 
     public class Startup
     {
@@ -26,29 +27,35 @@ namespace CryptoLabsService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddControllers()
+                // ignore nulls in json
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.IgnoreNullValues = true;
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                });
 
-            services.AddTransient<BlockCipherOracleManager>();
-            services.AddTransient<StreamCipherIntegrityManager>();
-            services.AddTransient<CbcIvIsTimeManager>();
-            services.AddTransient<CbcIvIsKeyManager>();
-            services.AddTransient<CbcMacManager>();
-            services.AddTransient<PaddingOracleManger>();
+            services.AddScoped<BlockCipherOracleManager>();
+            services.AddScoped<StreamCipherIntegrityManager>();
+            services.AddScoped<CbcIvIsTimeManager>();
+            services.AddScoped<CbcIvIsKeyManager>();
+            services.AddScoped<CbcMacManager>();
+            services.AddScoped<PaddingOracleManger>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }

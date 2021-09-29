@@ -9,6 +9,7 @@
 
     using Microsoft.AspNetCore.Mvc;
 
+    [ApiController]
     [Route("api/StreamIntegrity")]
     public class StreamIntegrityController : Controller
     {

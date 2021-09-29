@@ -10,6 +10,7 @@
 
     using Microsoft.AspNetCore.Mvc;
 
+    [ApiController]
     [Route("api/IvIsKey")]
     public class IvIsKeyController : Controller
     {
