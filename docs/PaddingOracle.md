@@ -23,7 +23,7 @@
 `<challengeId>` = debug
 
 
-1. Проверить работоспособность контроллера с помощью метода `GET <host>/api/IvIsTime`
+1. Проверить работоспособность контроллера с помощью метода `GET <host>/api/PaddingOracle`
 2. Получить зашифрованный дебаговый токен токен с помощью метода `GET <host>/api/PaddingOracle/<userId>/debug/GetEncryptedToken`
 3. Восстановить дебаговый токен используя вызовы метода `GET <host>/api/PaddingOracle/<userId>/debug//ValidateEncryptedToken/{encryptedToken}`
 4. Убедиться, что расшифрованный дебаговый токен равен следующей последовательности байт: 
