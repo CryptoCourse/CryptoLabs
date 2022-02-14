@@ -65,11 +65,10 @@ namespace AesExample
                 aes.Mode = CipherMode.ECB;
 
                 // Create encryptor with your key and zero IV
-                using (var aesEncryptor = aes.CreateEncryptor(key, new byte[16]))
-                {
-                    // Transform one block
-                    aesEncryptor.TransformBlock(pt, 0, 16, ct, 0);
-                }
+                var aesEncryptor = aes.CreateEncryptor(key, new byte[16])
+                
+                // Transform one block
+                aesEncryptor.TransformBlock(pt, 0, 16, ct, 0);
 
                 // Get hex-string representation of Ciphertext
                 string hex = BitConverter.ToString(ct);
