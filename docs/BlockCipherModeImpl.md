@@ -63,12 +63,13 @@ namespace AesExample
             {
                 // Select Encryption mode
                 aes.Mode = CipherMode.ECB;
+                aes.Padding = PaddingMode.None;
 
                 // Create encryptor with your key and zero IV
-                var aesEncryptor = aes.CreateEncryptor(key, new byte[16])
+                var aesEncryptor = aes.CreateEncryptor(key, new byte[16]);
                 
                 // Transform one block
-                aesEncryptor.TransformBlock(pt, 0, 16, ct, 0);
+                aesEncryptor.TransformFinalBlock(pt, 0, 16);
 
                 // Get hex-string representation of Ciphertext
                 string hex = BitConverter.ToString(ct);
