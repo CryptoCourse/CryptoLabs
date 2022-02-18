@@ -69,7 +69,7 @@ namespace AesExample
                 var aesEncryptor = aes.CreateEncryptor(key, new byte[16]);
                 
                 // Transform one block
-                aesEncryptor.TransformFinalBlock(pt, 0, 16);
+                ct = aesEncryptor.TransformFinalBlock(pt, 0, 16);
 
                 // Get hex-string representation of Ciphertext
                 string hex = BitConverter.ToString(ct);
