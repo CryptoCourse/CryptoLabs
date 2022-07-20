@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using CryptoLabsService.Labs.PaddingOracle;
 using CryptoLabsService.Labs.StreamCipherIntegrity;
-using Microsoft.Extensions.Hosting;
 using System.Text.Json.Serialization;
 using CryptoLabsService.Labs.CbcIvIsKey;
 using CryptoLabsService.Labs.CbcIvIsTime;
@@ -51,13 +50,13 @@ namespace CryptoLabsService
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
+            //if (env.IsDevelopment())
+            //{
                 app.UseDeveloperExceptionPage();
 
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            }
+            //}
 
             app.UseRouting();
 
