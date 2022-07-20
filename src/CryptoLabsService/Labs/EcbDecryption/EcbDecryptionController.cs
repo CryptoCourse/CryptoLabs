@@ -1,13 +1,12 @@
-﻿namespace CryptoLabsService.Controllers
+﻿using System;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using CryptoLabsService.Labs.EncryptionModeOracle;
+using Microsoft.AspNetCore.Mvc;
+
+namespace CryptoLabsService.Labs.EcbDecryption
 {
-    using System;
-    using System.Linq;
-    using System.Security.Cryptography;
-    using System.Text;
-    using CryptoLabsService.Managers;
-
-    using Microsoft.AspNetCore.Mvc;
-
     [ApiController]
     [Route("api/EcbDecryption")]
     public class EcbDecryptionController : Controller

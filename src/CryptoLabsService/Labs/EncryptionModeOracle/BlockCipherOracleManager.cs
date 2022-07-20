@@ -1,11 +1,11 @@
-﻿namespace CryptoLabsService.Managers
+﻿using System;
+using System.Security.Cryptography;
+
+using CryptoLabsService.Helpers;
+
+namespace CryptoLabsService.Labs.EncryptionModeOracle
 {
-    using System;
-    using System.Security.Cryptography;
-
-    using CryptoLabsService.Helpers;
-
-    public class BlockCipherOracleManager 
+    public class BlockCipherOracleManager
     {
         private const int AesBlockSize = 16;
 

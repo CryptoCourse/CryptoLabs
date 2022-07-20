@@ -1,15 +1,15 @@
-﻿namespace CryptoLabsService.Controllers
+﻿using System;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
+
+using CryptoLabsService.Helpers;
+
+using Microsoft.AspNetCore.Mvc;
+
+namespace CryptoLabsService.Labs.Sha1Mac
 {
-    using System;
-    using System.Linq;
-    using System.Security.Cryptography;
-    using System.Text;
-    using System.Text.RegularExpressions;
-
-    using CryptoLabsService.Helpers;
-
-    using Microsoft.AspNetCore.Mvc;
-
     [ApiController]
     [Route("api/Sha1Mac")]
     public class Sha1MacController : Controller

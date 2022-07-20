@@ -1,14 +1,13 @@
-﻿namespace CryptoLabsService.Controllers
+﻿using System;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using CryptoLabsService.Helpers;
+
+using Microsoft.AspNetCore.Mvc;
+
+namespace CryptoLabsService.Labs.PaddingOracle
 {
-    using System;
-    using System.Linq;
-    using System.Security.Cryptography;
-    using System.Text;
-    using CryptoLabsService.Helpers;
-    using CryptoLabsService.Managers;
-
-    using Microsoft.AspNetCore.Mvc;
-
     [ApiController]
     [Route("api/PaddingOracle")]
     public class PaddingOracleController : Controller
@@ -47,13 +46,13 @@
 
                 var plainText = Encoding.ASCII.GetBytes(TokenHelper.GetSecretTokenUser(seed));
                 //#Q_
-                if (challengeId == PaddingOracleController.debugFlag)
+                if (challengeId == debugFlag)
                 {
                     plainText = new byte[]
                         {
-                            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
-                            17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 
-                            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
+                            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+                            17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+                            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
                             17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
                         };
                 }

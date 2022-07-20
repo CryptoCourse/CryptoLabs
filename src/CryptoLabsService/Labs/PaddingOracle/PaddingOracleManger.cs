@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace CryptoLabsService.Managers
+namespace CryptoLabsService.Labs.PaddingOracle
 {
     public class PaddingOracleManger
     {
@@ -20,7 +20,7 @@ namespace CryptoLabsService.Managers
                     aesAlg.KeySize = AesKeySize;
                     var keyBytes = new byte[aesAlg.KeySize / 8];
                     rand.GetBytes(keyBytes, 0, aesAlg.KeySize / 8);
-                    var ivBytes = new byte[aesAlg.KeySize / 8]; 
+                    var ivBytes = new byte[aesAlg.KeySize / 8];
                     rand.GetBytes(ivBytes, 0, aesAlg.BlockSize / 8);
 
                     aesAlg.Key = keyBytes;
@@ -91,12 +91,12 @@ namespace CryptoLabsService.Managers
         {
             using (var rand = new DeterministicCryptoRandomGenerator(seed, false))
             {
-                var hmacKey = new byte[PaddingOracleManger.HmacKeyLen];
+                var hmacKey = new byte[HmacKeyLen];
                 rand.GetBytes(hmacKey, 0, hmacKey.Length);
                 using (HMAC hmac = new HMACSHA256(hmacKey))
                 {
                     var mac = hmac.ComputeHash(data);
-                    var result = new byte[data.Length + hmac.HashSize/8];
+                    var result = new byte[data.Length + hmac.HashSize / 8];
                     Array.Copy(data, 0, result, 0, data.Length);
                     Array.Copy(mac, 0, result, data.Length, hmac.HashSize / 8);
                     return result;
@@ -108,11 +108,11 @@ namespace CryptoLabsService.Managers
         {
             using (var rand = new DeterministicCryptoRandomGenerator(seed, false))
             {
-                var hmacKey = new byte[PaddingOracleManger.HmacKeyLen];
+                var hmacKey = new byte[HmacKeyLen];
                 rand.GetBytes(hmacKey, 0, hmacKey.Length);
                 using (HMAC hmac = new HMACSHA256(hmacKey))
                 {
-                    var dataToCheck = data.Take(data.Length - (hmac.HashSize / 8)).ToArray();
+                    var dataToCheck = data.Take(data.Length - hmac.HashSize / 8).ToArray();
                     var mac = data.Skip(dataToCheck.Length).ToArray();
                     var computedMac = hmac.ComputeHash(dataToCheck);
                     if (!CompareHelper.CompareArrays(mac, computedMac))

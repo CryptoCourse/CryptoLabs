@@ -1,4 +1,4 @@
-﻿namespace CryptoLabsService.Controllers
+﻿namespace CryptoLabsService.Labs
 {
     using System.Collections.Generic;
 

@@ -1,25 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
+using CryptoLabsService.Labs.PaddingOracle;
+using CryptoLabsService.Labs.StreamCipherIntegrity;
+using Microsoft.Extensions.Hosting;
+using System.Text.Json.Serialization;
+using CryptoLabsService.Labs.CbcIvIsKey;
+using CryptoLabsService.Labs.CbcIvIsTime;
+using CryptoLabsService.Labs.CmcMacFixedKey;
+using CryptoLabsService.Labs.EncryptionModeOracle;
 
 namespace CryptoLabsService
 {
-    using CryptoLabsService.Managers;
-    using Microsoft.Extensions.Hosting;
-
     public class Startup
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -31,7 +30,7 @@ namespace CryptoLabsService
                 // ignore nulls in json
                 .AddJsonOptions(options =>
                 {
-                    options.JsonSerializerOptions.IgnoreNullValues = true;
+                    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
                     options.JsonSerializerOptions.PropertyNamingPolicy = null;
                 });
 
@@ -41,6 +40,12 @@ namespace CryptoLabsService
             services.AddScoped<CbcIvIsKeyManager>();
             services.AddScoped<CbcMacManager>();
             services.AddScoped<PaddingOracleManger>();
+
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CryptoLabs API", Version = "v3" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +54,9 @@ namespace CryptoLabsService
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             app.UseRouting();

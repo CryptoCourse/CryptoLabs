@@ -1,10 +1,10 @@
-﻿namespace CryptoLabsService.Managers
+﻿using System.Linq;
+using System.Security.Cryptography;
+
+using CryptoLabsService.Helpers;
+
+namespace CryptoLabsService.Labs.CmcMacFixedKey
 {
-    using System.Linq;
-    using System.Security.Cryptography;
-
-    using CryptoLabsService.Helpers;
-
     public class CbcMacManager
     {
         private const int AesKeySize = 128;

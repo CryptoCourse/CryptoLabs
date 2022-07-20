@@ -1,15 +1,13 @@
-﻿namespace CryptoLabsService.Controllers
+﻿using System;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+
+using CryptoLabsService.Helpers;
+using Microsoft.AspNetCore.Mvc;
+
+namespace CryptoLabsService.Labs.CbcIvIsKey
 {
-    using System;
-    using System.Linq;
-    using System.Security.Cryptography;
-    using System.Text;
-
-    using CryptoLabsService.Helpers;
-    using CryptoLabsService.Managers;
-
-    using Microsoft.AspNetCore.Mvc;
-
     [ApiController]
     [Route("api/IvIsKey")]
     public class IvIsKeyController : Controller

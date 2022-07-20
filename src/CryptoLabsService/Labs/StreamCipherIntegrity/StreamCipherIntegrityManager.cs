@@ -1,4 +1,4 @@
-﻿namespace CryptoLabsService.Managers
+﻿namespace CryptoLabsService.Labs.StreamCipherIntegrity
 {
     using System;
     using System.IO;
@@ -8,7 +8,7 @@
     using CryptoLabsService.Crypto;
     using CryptoLabsService.Helpers;
 
-    public class StreamCipherIntegrityManager 
+    public class StreamCipherIntegrityManager
     {
         private const int AesBlockSize = 16;
 

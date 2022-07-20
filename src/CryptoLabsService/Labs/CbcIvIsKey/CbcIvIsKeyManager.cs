@@ -1,10 +1,10 @@
-﻿namespace CryptoLabsService.Managers
+﻿using System;
+using System.Security.Cryptography;
+
+using CryptoLabsService.Helpers;
+
+namespace CryptoLabsService.Labs.CbcIvIsKey
 {
-    using System;
-    using System.Security.Cryptography;
-
-    using CryptoLabsService.Helpers;
-
     public class CbcIvIsKeyManager
     {
         private const int AesKeySize = 128;

@@ -1,11 +1,9 @@
-﻿namespace CryptoLabsService.Controllers
+﻿namespace CryptoLabsService.Labs.StreamCipherIntegrity
 {
     using System;
     using System.Linq;
     using System.Security.Cryptography;
     using System.Text;
-
-    using CryptoLabsService.Managers;
 
     using Microsoft.AspNetCore.Mvc;
 

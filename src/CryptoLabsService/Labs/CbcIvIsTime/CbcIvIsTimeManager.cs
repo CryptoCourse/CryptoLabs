@@ -1,10 +1,10 @@
-﻿namespace CryptoLabsService.Managers
+﻿using System;
+using System.Security.Cryptography;
+
+using CryptoLabsService.Helpers;
+
+namespace CryptoLabsService.Labs.CbcIvIsTime
 {
-    using System;
-    using System.Security.Cryptography;
-
-    using CryptoLabsService.Helpers;
-
     public class CbcIvIsTimeManager
     {
         public byte[] EncryptCbc(byte[] data, byte[] seed, bool useEntropy = true, bool includeIv = true)

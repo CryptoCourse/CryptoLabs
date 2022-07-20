@@ -1,12 +1,11 @@
-﻿namespace CryptoLabsService.Controllers
+﻿namespace CryptoLabsService.Labs.HmacTiming
 {
     using System;
     using System.Linq;
     using System.Security.Cryptography;
     using System.Text;
     using CryptoLabsService.Helpers;
-    using CryptoLabsService.Managers;
-
+    using CryptoLabsService.Labs.EncryptionModeOracle;
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
@@ -51,7 +50,7 @@
                 {
                     var targetHash = macHash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId + data));
                     if (!CompareHelper.InsecureCompareArrays(
-                        targetHash.Take(HmacTimingController.MacSize).ToArray(), 
+                        targetHash.Take(MacSize).ToArray(),
                         HexHelper.StringToByteArray(mac), delay))
                     {
                         return "INVALID_MAC";
@@ -60,6 +59,6 @@
                     return "Wellcome to secretNet!";
                 }
             }
-        }        
+        }
     }
 }
