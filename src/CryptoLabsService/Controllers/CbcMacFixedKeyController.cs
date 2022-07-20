@@ -9,6 +9,7 @@
 
     using Microsoft.AspNetCore.Mvc;
 
+    [ApiController]
     [Route("api/CbcMacFixedKey")]
     public class CbcMacFixedKeyController : Controller
     {

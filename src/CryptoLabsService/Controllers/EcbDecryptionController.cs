@@ -8,6 +8,7 @@
 
     using Microsoft.AspNetCore.Mvc;
 
+    [ApiController]
     [Route("api/EcbDecryption")]
     public class EcbDecryptionController : Controller
     {

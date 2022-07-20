@@ -9,6 +9,7 @@
 
     using Microsoft.AspNetCore.Mvc;
 
+    [ApiController]
     [Route("api/PaddingOracle")]
     public class PaddingOracleController : Controller
     {
