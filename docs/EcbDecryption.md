@@ -39,7 +39,7 @@
 4. Используя метод `POST <host>/api/EcbDecryption/<userId>/<challengeId>/noentropy` получить необходимые шифртексты.
 5. Расшифровать target_data
 6. Проверить верность ответа использовав метод `GET <host>/api/EcbDecryption/<userId>/<challengeId>/verify`
-7. Проверить курёзность программы для `<challengeId>` = 1..10
+7. Проверить корректность программы для `<challengeId>` = 1..10
 
 ### Сдача лабы
 шаги 1 - 7 этапа тестирования аналогично, но для 15 различных `<challengeId>`.
