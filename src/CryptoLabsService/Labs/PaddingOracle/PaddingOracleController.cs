@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using CryptoLabsService.Helpers;
-
 using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoLabsService.Labs.PaddingOracle
@@ -21,6 +19,14 @@ namespace CryptoLabsService.Labs.PaddingOracle
         private readonly PaddingOracleManger paddingOracleManger;
 
         private readonly static string debugFlag = "debug";
+
+        private readonly static byte[] DebugToken = new byte[]
+            {
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+                17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+                17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+            };
 
         public PaddingOracleController(PaddingOracleManger paddingOracleManger)
         {
@@ -44,18 +50,9 @@ namespace CryptoLabsService.Labs.PaddingOracle
             {
                 var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId + "GetEncryptedToken"));
 
-                var plainText = Encoding.ASCII.GetBytes(TokenHelper.GetSecretTokenUser(seed));
-                //#Q_
-                if (challengeId == debugFlag)
-                {
-                    plainText = new byte[]
-                        {
-                            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
-                            17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
-                            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
-                            17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
-                        };
-                }
+                var plainText = challengeId != debugFlag 
+                    ? Encoding.ASCII.GetBytes(TokenHelper.GetSecretTokenUser(seed))
+                    : PaddingOracleController.DebugToken;
 
                 var plainTextWithMac = this.paddingOracleManger.ApplyMac(
                     plainText,
@@ -104,8 +101,17 @@ namespace CryptoLabsService.Labs.PaddingOracle
                     var plainText = this.paddingOracleManger.VerifyMac(
                         plainTextWithMac,
                         seed);
-                    var stringToken = Encoding.ASCII.GetString(plainText);
 
+                    if (challengeId == debugFlag)
+                    {
+                        if (CompareHelper.CompareArrays(plainText, PaddingOracleController.DebugToken))
+                        {
+                            return "Token have been decoded and validated";
+                        }
+                        return "Token is incorrect";
+                    }
+
+                    var stringToken = Encoding.ASCII.GetString(plainText);
                     if (TokenHelper.ValidateTokenString(stringToken) && TokenHelper.ValidateTokenUser(stringToken, seed))
                     {
                         return "Token have been decoded and validated";
@@ -130,8 +136,19 @@ namespace CryptoLabsService.Labs.PaddingOracle
             {
                 var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId + "GetEncryptedToken"));
 
+                var rawTokenBytes = HexHelper.StringToByteArray(rawToken);
+
+                if (challengeId == debugFlag)
+                {
+                    if (CompareHelper.CompareArrays(rawTokenBytes, PaddingOracleController.DebugToken))
+                    {
+                        return "Raw Token decoded and validated. Wellcome to secretNet!";
+                    }
+                    return "Token is incorrect";
+                }
+
                 // converting hex -> byte -> ascii string
-                rawToken = Encoding.ASCII.GetString(HexHelper.StringToByteArray(rawToken));
+                rawToken = Encoding.ASCII.GetString(rawTokenBytes);
                 if (TokenHelper.ValidateTokenString(rawToken) && TokenHelper.ValidateTokenUser(rawToken, seed))
                 {
                     return "Raw Token decoded and validated. Wellcome to secretNet!";
