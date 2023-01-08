@@ -4,7 +4,7 @@
 
 Гениально! Что может пойти не так?
 
-![img](https://software.intel.com/sites/default/files/race.jpg)
+![img](img/labCbcIvIsKeyAttack.jpg)
 
 ## Задание
 
