@@ -196,5 +196,5 @@ shift registers (LFSRs).
 
 
 Страшная непонятная картинка с лекции:
-![изображение](https://user-images.githubusercontent.com/15075638/216041613-336e499b-f829-4e1a-a113-f2b075ee5f20.png)
+![изображение](https://user-images.githubusercontent.com/15075638/216041949-94dba95d-e8ee-49c1-99f3-baafc6d64f89.png)
 
