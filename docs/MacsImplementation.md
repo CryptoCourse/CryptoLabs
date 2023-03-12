@@ -129,4 +129,9 @@ cipher.encrypt(b'sixteen-byte-msg').hex()
 Построить график зависимости среднего времени выполнения от размера сообщений (2 графика).
 
 #### Доп материалы
-Ссылка OMAC (CMAC) https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-38b.pdf (пункт 6)
+Стандарт OMAC (CMAC) https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-38b.pdf (пункт 6)
+RFC HMAC https://www.rfc-editor.org/rfc/rfc2104
+Статья Truncated MAC aka TMAC https://eprint.iacr.org/2015/053.pdf (пункт 3)
+
+ps. Не путать TMAC с TrMac, который оказался не стойким: https://eprint.iacr.org/2022/476.pdf
+
