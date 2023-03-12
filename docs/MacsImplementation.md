@@ -133,6 +133,6 @@ cipher.encrypt(b'sixteen-byte-msg').hex()
 
 RFC HMAC https://www.rfc-editor.org/rfc/rfc2104
 
-Статья Truncated MAC aka TMAC https://eprint.iacr.org/2015/053.pdf (пункт 3)
+Статья Truncated MAC aka TCBC https://eprint.iacr.org/2015/053.pdf (пункт 3)
 
-ps. Не путать TMAC с TrMac, который оказался нестойким: https://eprint.iacr.org/2022/476.pdf
+ps. Не путать TCBC с TrCBC, который оказался нестойким: https://eprint.iacr.org/2022/476.pdf
