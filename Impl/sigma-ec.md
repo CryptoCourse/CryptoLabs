@@ -69,5 +69,5 @@ A: c <- AES_k_e(m); (c, MAC_k_m(c)) -> B
 
 
 #### Дополнительные ссылки
-https://webee.technion.ac.il/~hugo/sigma-pdf.pdf (стр 17-18)
+https://web.archive.org/web/20220303175328/https://webee.technion.ac.il/~hugo/sigma-pdf.pdf (стр 17-18)
 
