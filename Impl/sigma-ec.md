@@ -1,4 +1,4 @@
-В рамках данной работы необходимо реализовать протокол [Sigma](https://webee.technion.ac.il/~hugo/sigma-pdf.pdf), используя в качестве примитивов схемы 
+В рамках данной работы необходимо реализовать протокол [Sigma](https://web.archive.org/web/20220303175328/https://webee.technion.ac.il/~hugo/sigma-pdf.pdf), используя в качестве примитивов схемы 
 
 * `ECDSA` в качестве схемы формирования электронных подписей, 
 
@@ -69,5 +69,5 @@ A: c <- AES_k_e(m); (c, MAC_k_m(c)) -> B
 
 
 #### Дополнительные ссылки
-https://webee.technion.ac.il/~hugo/sigma-pdf.pdf (стр 17-18)
+https://web.archive.org/web/20220303175328/https://webee.technion.ac.il/~hugo/sigma-pdf.pdf (стр 17-18)
 
