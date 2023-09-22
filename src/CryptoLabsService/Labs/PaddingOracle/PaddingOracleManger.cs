@@ -1,7 +1,7 @@
-﻿using CryptoLabsService.Helpers;
-using System;
+﻿using System;
 using System.Linq;
 using System.Security.Cryptography;
+using CryptoLabsService.Helpers;
 
 namespace CryptoLabsService.Labs.PaddingOracle
 {
@@ -29,7 +29,7 @@ namespace CryptoLabsService.Labs.PaddingOracle
                     aesAlg.Mode = CipherMode.CBC;
                     aesAlg.Padding = PaddingMode.PKCS7;
 
-                    // Create the streams used for encryption. 
+                    // Create the streams used for encryption.
                     // Open a new memory stream to write the encrypted data to
                     // Create a crypto stream to perform encryption
                     using (var ecryptor = aesAlg.CreateEncryptor())
@@ -46,7 +46,7 @@ namespace CryptoLabsService.Labs.PaddingOracle
                     Array.Copy(aesAlg.IV, 0, result, 0, aesAlg.IV.Length);
                     Array.Copy(ciphertext, 0, result, aesAlg.IV.Length, ciphertext.Length);
 
-                    // Return the encrypted bytes from the memory stream. 
+                    // Return the encrypted bytes from the memory stream.
                     return result;
                 }
             }
@@ -75,7 +75,7 @@ namespace CryptoLabsService.Labs.PaddingOracle
                     aesAlg.Mode = CipherMode.CBC;
                     aesAlg.Padding = paddingMode;
 
-                    // Create the streams used for encryption. 
+                    // Create the streams used for encryption.
                     // Open a new memory stream to write the encrypted data to
                     // Create a crypto stream to perform encryption
                     using (var decryptor = aesAlg.CreateDecryptor())

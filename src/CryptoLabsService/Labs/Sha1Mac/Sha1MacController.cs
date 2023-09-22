@@ -3,9 +3,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-
 using CryptoLabsService.Helpers;
-
 using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoLabsService.Labs.Sha1Mac

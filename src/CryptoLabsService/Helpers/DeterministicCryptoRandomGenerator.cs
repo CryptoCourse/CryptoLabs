@@ -92,6 +92,7 @@ namespace CryptoLabsService.Helpers
         {
             this.GetBytes(data, 0, data.Length);
         }
+
         public override void GetNonZeroBytes(byte[] data)
         {
             throw new NotSupportedException();

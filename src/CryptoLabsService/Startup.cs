@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
-using CryptoLabsService.Labs.PaddingOracle;
-using CryptoLabsService.Labs.StreamCipherIntegrity;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 using CryptoLabsService.Labs.CbcIvIsKey;
 using CryptoLabsService.Labs.CbcIvIsTime;
 using CryptoLabsService.Labs.CmcMacFixedKey;
 using CryptoLabsService.Labs.EncryptionModeOracle;
+using CryptoLabsService.Labs.PaddingOracle;
+using CryptoLabsService.Labs.StreamCipherIntegrity;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 namespace CryptoLabsService
 {
@@ -40,7 +40,6 @@ namespace CryptoLabsService
             services.AddScoped<CbcMacManager>();
             services.AddScoped<PaddingOracleManger>();
 
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CryptoLabs API", Version = "v3" });
@@ -52,10 +51,10 @@ namespace CryptoLabsService
         {
             //if (env.IsDevelopment())
             //{
-                app.UseDeveloperExceptionPage();
+            app.UseDeveloperExceptionPage();
 
-                app.UseSwagger();
-                app.UseSwaggerUI();
+            app.UseSwagger();
+            app.UseSwaggerUI();
             //}
 
             app.UseRouting();

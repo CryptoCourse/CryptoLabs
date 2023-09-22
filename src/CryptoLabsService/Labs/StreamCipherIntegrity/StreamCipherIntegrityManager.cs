@@ -1,10 +1,8 @@
 ﻿namespace CryptoLabsService.Labs.StreamCipherIntegrity
 {
     using System;
-    using System.IO;
     using System.Linq;
     using System.Security.Cryptography;
-
     using CryptoLabsService.Crypto;
     using CryptoLabsService.Helpers;
 
@@ -47,7 +45,7 @@
                     Array.Copy(ctrInit, 0, result, 0, ctrInit.Length);
                     Array.Copy(ciphertext, 0, result, ctrInit.Length, ciphertext.Length);
 
-                    // Return the encrypted bytes from the memory stream. 
+                    // Return the encrypted bytes from the memory stream.
                     return result;
                 }
             }

@@ -47,7 +47,6 @@ namespace CryptoLabsService.Labs.EncryptionModeOracle
         {
             using (var hash = SHA256.Create())
             {
-
                 var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
                 if (seed[seed.Length - 1] % 2 == 0)
                 {
@@ -56,8 +55,6 @@ namespace CryptoLabsService.Labs.EncryptionModeOracle
                 return "CBC";
             }
         }
-
-
 
         [HttpPost]
         [Route("{userId}/{challengeId}/noentropy")]

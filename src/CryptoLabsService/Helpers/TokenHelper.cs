@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CryptoLabsService.Helpers
 {
@@ -18,7 +15,6 @@ namespace CryptoLabsService.Helpers
 
         public static string GetSecretTokenUser(byte[] seed)
         {
-
             using (var generator = new DeterministicCryptoRandomGenerator(seed, false))
             {
                 var bytes = new byte[AesBlockSize * BlockCount];

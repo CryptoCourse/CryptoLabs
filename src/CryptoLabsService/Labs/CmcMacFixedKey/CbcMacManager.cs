@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Security.Cryptography;
-
 using CryptoLabsService.Helpers;
 
 namespace CryptoLabsService.Labs.CmcMacFixedKey
@@ -32,7 +31,7 @@ namespace CryptoLabsService.Labs.CmcMacFixedKey
                     aesAlg.IV = iv;
                     aesAlg.Mode = CipherMode.CBC;
 
-                    // Create the streams used for encryption. 
+                    // Create the streams used for encryption.
                     // Open a new memory stream to write the encrypted data to
                     // Create a crypto stream to perform encryption
                     using (var ecryptor = aesAlg.CreateEncryptor())

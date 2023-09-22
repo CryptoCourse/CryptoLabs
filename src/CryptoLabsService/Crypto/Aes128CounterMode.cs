@@ -30,7 +30,7 @@
     {
         private const int AesBlockSize = 16;
 
-        private readonly AesManaged aes;
+        private readonly Aes aes;
 
         private readonly byte[] counter;
 
@@ -50,7 +50,9 @@
                         AesBlockSize));
             }
 
-            this.aes = new AesManaged { Mode = CipherMode.ECB, Padding = PaddingMode.None };
+            this.aes = Aes.Create();
+            this.aes.Mode = CipherMode.ECB;
+            this.aes.Padding = PaddingMode.None;
 
             this.counter = counter;
         }

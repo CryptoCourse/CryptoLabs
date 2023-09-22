@@ -1,7 +1,6 @@
 ﻿namespace CryptoLabsService.Labs
 {
     using System.Collections.Generic;
-
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]

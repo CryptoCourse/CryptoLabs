@@ -3,7 +3,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using CryptoLabsService.Helpers;
-
 using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoLabsService.Labs.CmcMacFixedKey
@@ -36,7 +35,6 @@ namespace CryptoLabsService.Labs.CmcMacFixedKey
             [FromBody] string data,
             [FromRoute] string mac)
         {
-
             using (var hash = SHA256.Create())
             {
                 var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
@@ -68,7 +66,6 @@ namespace CryptoLabsService.Labs.CmcMacFixedKey
         //    [FromRoute] string challengeId,
         //    [FromBody] string data)
         //{
-
         //    var hash = SHA256.Create();
 
         //    var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));

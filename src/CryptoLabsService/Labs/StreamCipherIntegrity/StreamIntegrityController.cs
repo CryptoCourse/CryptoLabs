@@ -4,14 +4,12 @@
     using System.Linq;
     using System.Security.Cryptography;
     using System.Text;
-
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
     [Route("api/StreamIntegrity")]
     public class StreamIntegrityController : Controller
     {
-
         private readonly string stringData = "Here is some data to encrypt for you";
 
         private readonly string secretToken = "Token: 8ce08ad2d48d7d356db43";
@@ -47,7 +45,6 @@
                 return Convert.ToBase64String(ciphertext);
             }
         }
-
 
         [HttpGet]
         [Route("{userId}/{challengeId}/noentropy")]

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CryptoLabsService.Helpers
 {
@@ -9,7 +7,7 @@ namespace CryptoLabsService.Helpers
     {
         public static string HexFromByteArray(byte[] ba)
         {
-            return BitConverter.ToString(ba).Replace("-", "");
+            return Convert.ToBase64String(ba);
         }
 
         private static bool IsHexValid(string source)
@@ -26,10 +24,7 @@ namespace CryptoLabsService.Helpers
 
         public static byte[] StringToByteArray(string hex)
         {
-            return Enumerable.Range(0, hex.Length)
-                .Where(x => x % 2 == 0)
-                .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
-                .ToArray();
+            return Convert.FromBase64String(hex);
         }
     }
 }

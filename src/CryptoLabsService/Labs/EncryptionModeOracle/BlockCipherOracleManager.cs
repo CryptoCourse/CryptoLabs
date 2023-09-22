@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Security.Cryptography;
-
 using CryptoLabsService.Helpers;
 
 namespace CryptoLabsService.Labs.EncryptionModeOracle
@@ -11,7 +10,6 @@ namespace CryptoLabsService.Labs.EncryptionModeOracle
 
         public byte[] EncryptCbc(byte[] data, byte[] seed, bool useEntropy = true, bool includeIv = true)
         {
-
             byte[] iv = new byte[AesBlockSize];
             using (var rand = new DeterministicCryptoRandomGenerator(seed, useEntropy))
             {
@@ -28,7 +26,7 @@ namespace CryptoLabsService.Labs.EncryptionModeOracle
                     aesAlg.Mode = CipherMode.CBC;
                     aesAlg.Padding = PaddingMode.Zeros;
 
-                    // Create the streams used for encryption. 
+                    // Create the streams used for encryption.
                     // Open a new memory stream to write the encrypted data to
                     // Create a crypto stream to perform encryption
                     using (ICryptoTransform ecryptor = aesAlg.CreateEncryptor())
@@ -47,7 +45,7 @@ namespace CryptoLabsService.Labs.EncryptionModeOracle
                 Array.Copy(iv, 0, result, 0, iv.Length);
                 Array.Copy(ciphertext, 0, result, iv.Length, ciphertext.Length);
 
-                // Return the encrypted bytes from the memory stream. 
+                // Return the encrypted bytes from the memory stream.
                 return result;
             }
         }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Security.Cryptography;
-
 using CryptoLabsService.Helpers;
 
 namespace CryptoLabsService.Labs.CbcIvIsKey
@@ -30,7 +29,7 @@ namespace CryptoLabsService.Labs.CbcIvIsKey
                     aesAlg.Mode = CipherMode.CBC;
                     aesAlg.Padding = PaddingMode.Zeros;
 
-                    // Create the streams used for encryption. 
+                    // Create the streams used for encryption.
                     // Open a new memory stream to write the encrypted data to
                     // Create a crypto stream to perform encryption
                     using (var ecryptor = aesAlg.CreateEncryptor())
@@ -49,7 +48,7 @@ namespace CryptoLabsService.Labs.CbcIvIsKey
                 Array.Copy(iv, 0, result, 0, iv.Length);
                 Array.Copy(ciphertext, 0, result, iv.Length, ciphertext.Length);
 
-                // Return the encrypted bytes from the memory stream. 
+                // Return the encrypted bytes from the memory stream.
                 return result;
             }
         }
@@ -73,7 +72,7 @@ namespace CryptoLabsService.Labs.CbcIvIsKey
                     aesAlg.Mode = CipherMode.CBC;
                     aesAlg.Padding = PaddingMode.Zeros;
 
-                    // Create the streams used for encryption. 
+                    // Create the streams used for encryption.
                     // Open a new memory stream to write the encrypted data to
                     // Create a crypto stream to perform encryption
                     using (var decryptor = aesAlg.CreateDecryptor())

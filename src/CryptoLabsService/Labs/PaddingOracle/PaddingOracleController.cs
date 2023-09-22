@@ -14,13 +14,13 @@ namespace CryptoLabsService.Labs.PaddingOracle
 
         private const int BlockCount = 4;
 
-        const string AvailableTokenChars = "0123456789abcdef";
+        private const string AvailableTokenChars = "0123456789abcdef";
 
         private readonly PaddingOracleManger paddingOracleManger;
 
-        private readonly static string debugFlag = "debug";
+        private static readonly string debugFlag = "debug";
 
-        private readonly static byte[] DebugToken = new byte[]
+        private static readonly byte[] DebugToken = new byte[]
             {
                 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
                 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
@@ -50,7 +50,7 @@ namespace CryptoLabsService.Labs.PaddingOracle
             {
                 var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId + "GetEncryptedToken"));
 
-                var plainText = challengeId != debugFlag 
+                var plainText = challengeId != debugFlag
                     ? Encoding.ASCII.GetBytes(TokenHelper.GetSecretTokenUser(seed))
                     : PaddingOracleController.DebugToken;
 
@@ -67,7 +67,6 @@ namespace CryptoLabsService.Labs.PaddingOracle
                 return HexHelper.HexFromByteArray(ciphertext);
             }
         }
-
 
         [HttpGet]
         [Route("{userId}/{challengeId}/ValidateEncryptedToken/{encryptedToken}")]
@@ -90,7 +89,7 @@ namespace CryptoLabsService.Labs.PaddingOracle
                     {
                         plainTextWithMac = this.paddingOracleManger.DecryptCbc(encryptedTokenBytes, seed);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         var debug = this.paddingOracleManger.DecryptCbc(encryptedTokenBytes, seed, PaddingMode.None);
                         throw;

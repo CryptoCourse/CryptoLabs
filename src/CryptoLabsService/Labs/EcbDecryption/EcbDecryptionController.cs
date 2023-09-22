@@ -88,7 +88,6 @@ namespace CryptoLabsService.Labs.EcbDecryption
             }
         }
 
-
         private byte[] GetTargetData(byte[] seed)
         {
             var baseB = new byte[]

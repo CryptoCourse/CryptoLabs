@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-
 using CryptoLabsService.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -70,7 +69,6 @@ namespace CryptoLabsService.Labs.CbcIvIsKey
                 return BitConverter.ToString(result).Replace("-", "");
             }
         }
-
 
         [HttpGet]
         [Route("{userId}/{challengeId}/authenticate/user/encryptedtoken={encryptedToken}")]

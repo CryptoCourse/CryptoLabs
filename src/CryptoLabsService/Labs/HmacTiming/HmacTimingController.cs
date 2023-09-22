@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using CryptoLabsService.Helpers;
@@ -39,11 +38,10 @@ namespace CryptoLabsService.Labs.HmacTiming
             [FromRoute] string mac,
             [FromRoute] int delay)
         {
-            delay = delay > 1000 ? 1000 : delay;
+            delay = (delay < 1 || delay > 1000) ? 1000 : delay;
 
             using (var hash = SHA256.Create())
             {
-
                 var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
                 using (var macHash = new HMACSHA256(seed))
