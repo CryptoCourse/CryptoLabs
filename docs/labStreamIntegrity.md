@@ -70,7 +70,7 @@ Rest запросы, в заголовке выставлен Content-Type: appl
 ## `POST <host>/api/StreamIntegrity/<userId>/<challengeId>`
 
 Расшифровывает строку на фиксированном для пары (userId, challengeId) ключе.
-Если строка расширована как "Token: 8ce08ad2d48d7d356db43", возвращает строку "Wellcome to secretNet!".
+Если строка расширована как "Token: 8ce08ad2d48d7d356db43", возвращает строку "Wellcome to secretNet!". Ответ не кодируется в BASE64. 
 
 | Параметр| Описание| 
 | --- | --- 
