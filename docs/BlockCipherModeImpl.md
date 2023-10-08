@@ -124,7 +124,7 @@ cipher = AES.new(b'sixteen-byte-key',AES.MODE_ECB)
 cipher.encrypt(b'sixteen-byte-msg').hex()
 ```
 
-## 2. Реализовать режимы ECB, CBC, CFB, OFB, CTR с использованием функции `ProcessBlock`.
+## 2. Реализовать режимы ECB, CBC, CFB, OFB, CTR с использованием функции ` ProcessBlockEncrypt\ProcessBlockDecrypt`.
 
 Реализовать интерфейс
 
