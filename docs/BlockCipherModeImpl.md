@@ -124,7 +124,7 @@ cipher = AES.new(b'sixteen-byte-key',AES.MODE_ECB)
 cipher.encrypt(b'sixteen-byte-msg').hex()
 ```
 
-## 2. Реализовать режимы ECB, CBC, CFB, OFB, CTR с использованием функции `ProcessBlock`.
+## 2. Реализовать режимы ECB, CBC, CFB, OFB, CTR с использованием функции ` ProcessBlockEncrypt\ProcessBlockDecrypt`.
 
 Реализовать интерфейс
 
@@ -223,6 +223,6 @@ m_2 = unpad(D(c_2)) = unpad(abc1 | 4444) = abc1
 m_2 != m_1
 ```
 
-Страшная непонятная картинка с лекции:
+Страшная непонятная картинка с лекции (CBC шифрование):
 ![изображение](https://user-images.githubusercontent.com/15075638/216041949-94dba95d-e8ee-49c1-99f3-baafc6d64f89.png)
 
