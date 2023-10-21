@@ -66,7 +66,7 @@ namespace CryptoLabsService.Labs.CbcIvIsKey
                     data.Concat(new byte[TokenHelper.BlockCount * TokenHelper.AesBlockSize - data.Length]).ToArray(),
                     seed,
                     false);
-                return BitConverter.ToString(result).Replace("-", "");
+                return HexHelper.HexFromByteArray(result);
             }
         }
 
@@ -105,7 +105,7 @@ namespace CryptoLabsService.Labs.CbcIvIsKey
 
                 if (!TokenHelper.ValidateTokenString(token))
                 {
-                    return $"Invalid token format! Received token [{token}] contains invalid characters!. Raw token is [{BitConverter.ToString(decryptedTokenBytes).Replace("-", "")}]";
+                    return $"Invalid token format! Received token [{token}] contains invalid characters!. Raw token is [{HexHelper.HexFromByteArray(decryptedTokenBytes)}]";
                 }
 
                 if (!TokenHelper.ValidateTokenUser(token, seed))
@@ -134,7 +134,7 @@ namespace CryptoLabsService.Labs.CbcIvIsKey
 
                 if (!TokenHelper.ValidateTokenString(token))
                 {
-                    return $"Invalid token format! Received token [{token}] contains invalid characters! Raw token is [{BitConverter.ToString(decryptedTokenBytes).Replace("-", "")}]";
+                    return $"Invalid token format! Received token [{token}] contains invalid characters! Raw token is [{HexHelper.HexFromByteArray(decryptedTokenBytes)}]";
                 }
 
                 if (!TokenHelper.ValidateTokenAdmin(token, seed))

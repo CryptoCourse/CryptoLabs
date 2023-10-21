@@ -37,7 +37,7 @@ namespace CryptoLabsService.Helpers
 
         public static bool InsecureCompareArrays(byte[] source, byte[] target, int delay)
         {
-            var toSend = BitConverter.ToString(source).Replace("-", "");
+            var toSend = HexHelper.HexFromByteArray(source);
 
             if (source.Length != target.Length)
             {

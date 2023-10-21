@@ -50,7 +50,7 @@ namespace CryptoLabsService.Labs.CmcMacFixedKey
                 {
                     return Convert.ToBase64String(
                         Encoding.ASCII.GetBytes(
-                            $"{Encoding.ASCII.GetString(decodedData)} have valid mac = {BitConverter.ToString(decodedMac).Replace("-", "")}"));
+                            $"{Encoding.ASCII.GetString(decodedData)} have valid mac = {HexHelper.HexFromByteArray(decodedMac)}"));
                 }
                 else
                 {

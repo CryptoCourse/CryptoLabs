@@ -7,7 +7,7 @@ namespace CryptoLabsService.Helpers
     {
         public static string HexFromByteArray(byte[] ba)
         {
-            return Convert.ToBase64String(ba);
+            return Convert.ToHexString(ba);
         }
 
         private static bool IsHexValid(string source)
@@ -24,7 +24,7 @@ namespace CryptoLabsService.Helpers
 
         public static byte[] StringToByteArray(string hex)
         {
-            return Convert.FromBase64String(hex);
+            return Convert.FromHexString(hex);
         }
     }
 }
