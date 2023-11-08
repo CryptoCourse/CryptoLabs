@@ -5,7 +5,7 @@
 
 Служба шифрует указанный пользователем открытый текст, следующим образом:
 
-`E(k, random_padding || user_data || target_data||)`
+`E(k, random_padding || user_data || target_data)`
 
 `random_padding` - случайное дополнение, фиксированное для пары `<userId>`, `<challengeId>`
 
