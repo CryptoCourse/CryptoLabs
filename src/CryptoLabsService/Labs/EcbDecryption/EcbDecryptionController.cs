@@ -27,26 +27,26 @@ namespace CryptoLabsService.Labs.EcbDecryption
             return "operating";
         }
 
-        [HttpPost]
-        [Route("{userId1}/{challengeId}")]
-        public string Post(
-            [FromRoute] string userId,
-            [FromRoute] string challengeId,
-            [FromBody] string value)
-        {
-            using (var hash = SHA256.Create())
-            {
-                var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
+        // [HttpPost]
+        // [Route("{userId1}/{challengeId}")]
+        // public string Post(
+        //     [FromRoute] string userId,
+        //     [FromRoute] string challengeId,
+        //     [FromBody] string value)
+        // {
+        //     using (var hash = SHA256.Create())
+        //     {
+        //         var seed = hash.ComputeHash(Encoding.ASCII.GetBytes(userId + challengeId));
 
-                var userData = Convert.FromBase64String(value);
-                var targetData = this.GetTargetData(seed);
-                var paddingData = this.GetPaddingData(seed, targetData);
-                var dataToEncrypt = paddingData.Concat(userData).Concat(targetData).ToArray();
+        //         var userData = Convert.FromBase64String(value);
+        //         var targetData = this.GetTargetData(seed);
+        //         var paddingData = this.GetPaddingData(seed, targetData);
+        //         var dataToEncrypt = paddingData.Concat(userData).Concat(targetData).ToArray();
 
-                var result = this.blockCipherOracleManager.EncryptOracle(dataToEncrypt, seed, true, false);
-                return Convert.ToBase64String(result);
-            }
-        }
+        //         var result = this.blockCipherOracleManager.EncryptOracle(dataToEncrypt, seed, true, false);
+        //         return Convert.ToBase64String(result);
+        //     }
+        // }
 
         [HttpPost]
         [Route("{userId}/{challengeId}/noentropy")]
