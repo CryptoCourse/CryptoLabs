@@ -229,7 +229,7 @@ Enc(m_0) -> { c_0 = E(CTR) + m_0; INC_BLOCK(CTR); }
 Enc(m_1) -> { c_1 = E(CTR) + m_1; INC_BLOCK(CTR); }
 // CTR = 1234 || 0000 || 0002
 Enc(m_2) -> { c_3 = E(CTR) + m_2; INC_BLOCK(CTR); }
-// CTR = 1234 || 0000 || 0002
+// CTR = 1234 || 0000 || 0003
 Enc(m_3, FINAL) -> { c_3 = E(CTR) + m_3; INC_MSG(CTR); }
 // CTR = 1234 || 0001 || 0000
 
