@@ -1,13 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   
    <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
       <PackageReference Include="System.Runtime.Serialization.Json" Version="4.3.0" />
    </ItemGroup> 
   
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>CryptoLabsClient</AssemblyName>
     <RootNamespace>CryptoLabsClient</RootNamespace>
   </PropertyGroup>

@@ -1,17 +1,20 @@
-﻿namespace CryptoLabsClient
+﻿using System;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Threading.Tasks;
+
+namespace CryptoLabsClient
 {
-    using System;
-    using System.Net;
-    using System.Net.Http;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-
-    class RestClient
+    class RestClient : IDisposable
     {
         private readonly HttpClient client;
+
+        private readonly JsonSerializerOptions options = new() { WriteIndented = true };
+
+        private bool disposedValue;
 
         public RestClient()
         {
@@ -20,7 +23,12 @@
 
         public async Task<T> PostObject<T>(string uri, object obj)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(obj, Formatting.Indented), Encoding.UTF8, "application/json");
+            var content = new StringContent(
+                JsonSerializer.Serialize(
+                    obj, 
+                    options: this.options), 
+                Encoding.UTF8, 
+                "application/json");
 
             var result = await this.client.PostAsync(uri, content);
 
@@ -41,13 +49,18 @@
                 return (T)(object)resultedContent;
             }
 
-            var resultedObject = JsonConvert.DeserializeObject<T>(resultedContent);
+            var resultedObject = JsonSerializer.Deserialize<T>(resultedContent);
             return resultedObject;
         }
 
         public async Task PostObject(string uri, object obj)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(obj, Formatting.Indented), Encoding.UTF8, "application/json");
+            StringContent content = new(
+                JsonSerializer.Serialize(
+                    obj,
+                    options: this.options),
+                Encoding.UTF8, 
+                "application/json");
 
             var result = await this.client.PostAsync(uri, content);
 
@@ -79,7 +92,7 @@
                 return (T)(object)resultedContent;
             }
 
-            var resultedObject = JsonConvert.DeserializeObject<T>(resultedContent);
+            var resultedObject = JsonSerializer.Deserialize<T>(resultedContent);
             return resultedObject;
         }
 
@@ -124,7 +137,7 @@
                     try
                     {
                         result = await response.Content.ReadAsStringAsync();
-                        var message = JObject.Parse(result).GetValue("Message").Value<string>();
+                        var message = JsonObject.Parse(result)["Message"].GetValue<string>();
                         return new Exception($"Произошла ошибка при работе с Сервером: {message}");
                     }
                     catch (Exception)
@@ -137,6 +150,25 @@
                     return new Exception($"Произошла ошибка при работе с Сервером: {response.StatusCode}");
                 }
             }
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposedValue)
+            {
+                if (disposing)
+                {
+                    this.client?.Dispose();
+                }
+                this.disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            this.Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }
