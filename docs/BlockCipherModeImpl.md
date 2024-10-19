@@ -33,7 +33,7 @@ byte[] ProcessBlockEncrypt(byte[] data, bool isFinalBLock, string padding)
 {
     # todo: необходимые проверки входов
     # считаем, что если `last_block` не задан, сдедовательно шифруем первый блок, генерируя IV
-    IF last_block == NULL { last_block = GenRandomIv() }
+    IF last_block == NULL { last_block = GenRandomIv(); }
     # прочий код
 }
 ```
