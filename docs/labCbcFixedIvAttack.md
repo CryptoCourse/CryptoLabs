@@ -44,7 +44,7 @@
 `<challengeId>` = 1
 
 1. Проверить работоспособность контроллера с помощью метода `GET <host>/api/IvIsTime`
-2. Получить зашифрованный пин-код с помощью метода `GET <host>/api/IvIsTime/<userId>/<challengeId>/encryptedpin`
+2. Получить зашифрованный пин-код с помощью метода `GET <host>/api/IvIsTime/<userId>/<challengeId>/encryptedpin`. Запрос `encryptedpin` должен осуществляться только один раз для каждого `<challengeId>`.
 3. Получить пин-код, используя метод `POST <host>/api/IvIsTime/<userId>/<challengeId>/noentropy`
 4. Проверить пин-код, используя метод `GET <host>/api/IvIsTime/<userId>/<challengeId>/validate`
 
