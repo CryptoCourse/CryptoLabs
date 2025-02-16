@@ -293,6 +293,22 @@ m_2 = unpad(D(c_2)) = unpad(abc1 | 4444) = abc1
 m_2 != m_1
 ```
 
+## PS. Особенности реализций режимов OFB и CFB в ряде библиотек
+Формально режимы OFB и CFB могут быть определены в более общем виде, где в качестве обратной связи подаётся только часть бит (см. NIST SP 800-38A и ГОСТ Р 34.13-2015). 
+В рамках лабораторной работы необходимо использовать полный блок в качестве обратной связи. Если хочется проверить собственную реализацию на совместимость - рекомендуется 
+поискать в библиотечной реализации параметр, задающий размер обратной связи (например, `segment_size` для [python](https://pycryptodome.readthedocs.io/en/latest/src/cipher/aes.html)).
+В зависимости от реализации и языка параметр может задавать размер как в байтах, так и в битах.
+
+Подробнее:
+
+https://stackoverflow.com/questions/63172967/how-to-set-aes-cfb-feedback-segment-size-in-nodejs-crypto-lib
+
+https://security.stackexchange.com/questions/85727/what-is-the-segment-size-when-using-cipher-feedback-cfb-chaining-mode
+
+https://csrc.nist.gov/pubs/sp/800/38/a/final
+
+https://tc26.ru/standard/gost/GOST_R_3413-2015.pdf
+
 ## Чеклист лабораторной работы.
 - реализован поточный интерфейс `ProcessBlockEncrypt/ProcessBlockDecrypt`, результат его работы соответствует методу `Encrypt/Decrypt`
 - поточные режимы шифрования (OFB, CFB, CTR) корректно работают без добавления дополнения
