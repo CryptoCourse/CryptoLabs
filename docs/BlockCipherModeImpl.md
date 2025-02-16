@@ -305,6 +305,8 @@ https://stackoverflow.com/questions/63172967/how-to-set-aes-cfb-feedback-segment
 
 https://security.stackexchange.com/questions/85727/what-is-the-segment-size-when-using-cipher-feedback-cfb-chaining-mode
 
+https://stackoverflow.com/questions/59712935/pycryptodome-cryptography-inequality-with-aes-cfb-in-python
+
 https://csrc.nist.gov/pubs/sp/800/38/a/final
 
 https://tc26.ru/standard/gost/GOST_R_3413-2015.pdf
