@@ -250,22 +250,22 @@ shift registers (LFSRs).
 ```
 CTR = NONCE || CTR_MSG || CTR_BLOCK
 
-let CTR = 1234 || 0000 || 0000
+let CTR = 1234 || 0000 || 0001
 
 let m = m_0 || m_1 || m_2 || m_3
 
-// CTR = 1234 || 0000 || 0000
-Enc(m_0) -> { c_0 = E(CTR) + m_0; INC_BLOCK(CTR); }
 // CTR = 1234 || 0000 || 0001
-Enc(m_1) -> { c_1 = E(CTR) + m_1; INC_BLOCK(CTR); }
+Enc(m_0) -> { c_0 = E(CTR) + m_0; INC_BLOCK(CTR); }
 // CTR = 1234 || 0000 || 0002
-Enc(m_2) -> { c_3 = E(CTR) + m_2; INC_BLOCK(CTR); }
+Enc(m_1) -> { c_1 = E(CTR) + m_1; INC_BLOCK(CTR); }
 // CTR = 1234 || 0000 || 0003
+Enc(m_2) -> { c_3 = E(CTR) + m_2; INC_BLOCK(CTR); }
+// CTR = 1234 || 0000 || 0004
 Enc(m_3, FINAL) -> { c_3 = E(CTR) + m_3; INC_MSG(CTR); }
-// CTR = 1234 || 0001 || 0000
+// CTR = 1234 || 0001 || 0001
 
-let INC_BLOCK(CTR as X || Y || Z) -> { CTR = (X || Y || Z +1 }
-let INC_MSG(CTR as X || Y || Z) -> { CTR = (X || Y+1 || 0* }
+let INC_BLOCK(CTR as X || Y || Z) -> { CTR = (X || Y || Z+1 }
+let INC_MSG(CTR as X || Y || Z) -> { CTR = (X || Y+1 || 1* }
 ```
 
 ## PS. Небольшие спойлеры по лабе в части дополнения, если очень сложно читать wiki
