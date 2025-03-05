@@ -4,7 +4,7 @@
 
 Задача - получить ответ от службы с текстом "Wellcome to secretNet!"
 
-**NB**: в качестве спойлеров как сделать лабу рекомендуется прочитать [статейку](https://www.synopsys.com/blogs/software-security/forging-sha-1-mac-using-length-extension-attack-python/).
+**NB**: в качестве спойлеров как сделать лабу рекомендуется прочитать [статейку](https://github.com/CryptoCourse/CryptoLabs/blob/master/docs/pdf/Forging%20a%20SHA-1-mac.pdf).
 
 **ВАЖНО!** Все передаваемые сообщения должны быть предварительно закодированы с помощью BASE64. Полученные сообщения так же должны быть декодированы из BASE64 в указанный тип.
 
