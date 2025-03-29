@@ -140,7 +140,7 @@ K = T_1 || T_len
 
 ![img](https://upload.wikimedia.org/wikipedia/commons/7/70/Pbkdf2_nist.png)
 
-### 1. На основе файла [passwords.json](https://github.com/CryptoCourse/CryptoLabs/blob/master/Impl/passwords.json) построить гистограмму распределения первых 5 бит паролей (кодировка ASCII).
+### 1. На основе файла [passwords.json](https://github.com/CryptoCourse/CryptoLabs/blob/master/Impl/passwords.json) построить гистограмму распределения первых 10 бит паролей (кодировка ASCII).
 ### 2. Реализовать `PBKDF2` с использованием `HMAC` в качестве `PRF`, с использованием случайного `S`. Число итераций 10000.
 ### 3. Получить симметричный ключ для каждого пароля длины 512 бит.
 ### 4. Убедиться в равномерной распределённости первых 10 бит ключей, построив гистограмму.
