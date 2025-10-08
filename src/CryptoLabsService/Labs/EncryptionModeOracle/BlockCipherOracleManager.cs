@@ -110,6 +110,13 @@ namespace CryptoLabsService.Labs.EncryptionModeOracle
 
         private byte[] PadData(byte[] data, byte[] seed, bool useEntropy = true)
         {
+            if (data.Length < AesBlockSize)
+            {
+                var newData = new byte[AesBlockSize];
+                Array.Copy(data, 0, newData, 0, data.Length);
+                data = newData;
+            }
+            
             byte[] result;
             using (var rand = new DeterministicCryptoRandomGenerator(seed, useEntropy))
             {
