@@ -95,8 +95,6 @@ Rest запросы, в заголовке выставлен Content-Type: appl
 | Параметр| Описание| 
 | --- | --- 
 | `<host>` | имя хоста веб службы
-| `<userId>` | идентификатор студента
-| `<challengeId>` | идентификатор задания
 
 ## `GET <host>/api/IvIsTime/<userId>/<challengeId>/validate`
 
