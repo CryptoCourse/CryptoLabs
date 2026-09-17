@@ -1,5 +1,4 @@
 ARG DOTNET_VERSION=10.0
-ARG TARGET_FRAMEWORK=net10.0
 
 FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_VERSION} AS build-env
 WORKDIR /opt/cryptolabs
@@ -13,7 +12,9 @@ RUN dotnet publish -c Release
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:${DOTNET_VERSION}
-ARG TARGET_FRAMEWORK
+
+ENV TARGET_FRAMEWORK=net10.0
+
 WORKDIR /opt/cryptolabs
 COPY --from=build-env /opt/cryptolabs .
 
